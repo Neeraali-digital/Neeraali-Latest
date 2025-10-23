@@ -12,7 +12,7 @@
     <div class="relative overflow-hidden rounded-lg shadow-lg">
       <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
         <div *ngFor="let slide of slides; let i = index" class="flex-shrink-0 w-full">
-          <img [src]="slide" [alt]="'Slide ' + (i + 1)" class="w-full h-auto md:h-screen  object-cover">
+          <img [src]="slide" [alt]="'Slide ' + (i + 1)" class="w-full h-auto md:h-[90vh]  object-cover">
         </div>
       </div>
       <!-- Indicators -->
@@ -33,12 +33,12 @@
       <div class="relative">
         <div class="mb-8">
           <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-6"></div>
-          <h1 class="text-5xl md:text-7xl font-black mb-4 text-primary" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.1em;">NEERAALI DIGITAL</h1>
+          <h1 class="text-4xl md:text-7xl font-black mb-4 text-primary" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.1em;">NEERAALI DIGITAL</h1>
           <div class="w-32 h-0.5 bg-accent mx-auto mb-6"></div>
         </div>
-        <p class="text-2xl md:text-3xl mb-3 text-gray-900" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Crafting Brands Digitally</p>
-        <p class="text-xl md:text-2xl mb-8 text-gray-700" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Where Strategy is Smart, and Creativity is Wild.</p>
-        <p class="text-lg md:text-xl mb-10 max-w-4xl mx-auto text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+        <p class="text-2xl md:text-2xl mb-3 text-gray-900" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Crafting Brands Digitally</p>
+        <p class="text-xl md:text-xl mb-8 text-gray-700" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Where Strategy is Smart, and Creativity is Wild.</p>
+        <p class="text-md md:text-lg mb-10 max-w-4xl mx-auto text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
           We're Neeraali Digital — a full-service digital marketing agency in Bangalore helping brands grow, protect, and thrive in a fast-changing world.
           From identity to impact, we build bold digital experiences that drive results.
         </p>
