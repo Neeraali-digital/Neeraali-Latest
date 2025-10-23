@@ -6,6 +6,23 @@
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!-- Advertisement Section -->
+<section class=" bg-gray-100">
+  <div class="w-full mx-auto">
+    <div class="relative overflow-hidden rounded-lg shadow-lg">
+      <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+        <div *ngFor="let slide of slides; let i = index" class="flex-shrink-0 w-full">
+          <img [src]="slide" [alt]="'Slide ' + (i + 1)" class="w-full h-auto md:h-screen  object-cover">
+        </div>
+      </div>
+      <!-- Indicators -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div *ngFor="let slide of slides; let i = index" class="w-3 h-3 rounded-full cursor-pointer" [class.bg-primary]="i === currentSlide" [class.bg-gray-400]="i !== currentSlide" (click)="currentSlide = i"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Header Section -->
 <header class="bg-white py-20 px-4 relative">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
