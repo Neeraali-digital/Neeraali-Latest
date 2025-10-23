@@ -13,9 +13,9 @@ import { Component } from '@angular/core';
           We're Neeraali Digital — a full-service digital marketing agency in Bangalore helping brands grow, protect, and thrive in a fast-changing world.
           From identity to impact, we build bold digital experiences that drive results.
         </p>
-        <button class="bg-accent hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
+        <!-- <button class="bg-accent hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
           Let's Build Together
-        </button>
+        </button> -->
       </div>
     </header>
   `
