@@ -12,6 +12,76 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scroll-triggered animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in up animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide in from left */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+
+.slide-in-left.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide in from right */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out;
+}
+
+.slide-in-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Parallax background effect */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
 /* Custom animations */
 @keyframes fadeInUp {
   from {
@@ -89,6 +159,22 @@ html {
   animation: scaleIn 0.8s ease-out 0.1s both;
 }
 
+/* Staggered animation delays for grid items */
+.scroll-animate:nth-child(1) { transition-delay: 0.1s; }
+.scroll-animate:nth-child(2) { transition-delay: 0.2s; }
+.scroll-animate:nth-child(3) { transition-delay: 0.3s; }
+.scroll-animate:nth-child(4) { transition-delay: 0.4s; }
+.scroll-animate:nth-child(5) { transition-delay: 0.5s; }
+.scroll-animate:nth-child(6) { transition-delay: 0.6s; }
+.scroll-animate:nth-child(7) { transition-delay: 0.7s; }
+.scroll-animate:nth-child(8) { transition-delay: 0.8s; }
+
+/* Enhanced hover effects for scroll elements */
+.scroll-animate.animate-in:hover {
+  transform: translateY(-5px) scale(1.02);
+  transition: all 0.3s ease;
+}
+
 /* Responsive vertical text for mobile */
 @media (max-width: 768px) {
   .writing-mode-vertical-rl {
@@ -97,5 +183,15 @@ html {
   
   .lg\:transform {
     transform: none !important;
+  }
+  
+  /* Disable parallax on mobile for better performance */
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+  
+  /* Reduce animation complexity on mobile */
+  .scroll-animate {
+    transform: translateY(20px);
   }
 }

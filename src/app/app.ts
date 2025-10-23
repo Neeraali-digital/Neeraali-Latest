@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,19 +8,31 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'neeraali-digital';
   slides: string[] = ['../assets/slide1.png', '../assets/slide2.png'];
   currentSlide: number = 0;
   private slideInterval: any;
   loading: boolean = true;
+  clientLogos: string[] = [
+    '../assets/clientLogos/l1.jpeg',
+    '../assets/clientLogos/l2.jpeg',
+    '../assets/clientLogos/l3.jpeg',
+    '../assets/clientLogos/l4.jpeg',
+    '../assets/clientLogos/l5.jpeg',
+    '../assets/clientLogos/l6.jpeg',
+    '../assets/clientLogos/l7.jpeg'
+  ];
 
   ngOnInit() {
     this.startSlideShow();
-    // Simulate loading time
     setTimeout(() => {
       this.loading = false;
-    }, 3000); // Hide loading after 3 seconds
+    }, 3000);
+  }
+
+  ngAfterViewInit() {
+    this.initScrollAnimations();
   }
 
   ngOnDestroy() {
@@ -32,6 +44,20 @@ export class AppComponent implements OnInit, OnDestroy {
   private startSlideShow() {
     this.slideInterval = setInterval(() => {
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    }, 3000); // Change slide every 3 seconds
+    }, 3000);
+  }
+
+  private initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
   }
 }
