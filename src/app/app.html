@@ -6,6 +6,18 @@
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!-- Loading Screen -->
+<div *ngIf="loading" class="fixed inset-0 bg-gradient-to-br from-primary to-accent flex items-center justify-center z-50">
+  <div class="text-center">
+    <div class="relative mb-8 animate-scale-in">
+      <img src="../assets/logo4.png" alt="Neeraali Digital Logo" class="h-32 mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full animate-pulse"></div>
+    </div>
+    <h1 class="text-2xl font-black text-white mb-4 animate-slide-in-up" style="font-family: 'Oswald', sans-serif;">NEERAALI DIGITAL</h1>
+    <p class="text-md text-white/80 animate-fade-in-delay" style="font-family: 'Poppins', sans-serif;">Crafting Brands Digitally</p>
+  </div>
+</div>
+
 <!-- Advertisement Section -->
 <section class=" bg-gray-100">
   <div class="w-full mx-auto">
@@ -301,7 +313,7 @@
     
     <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden mb-8">
       <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/5 to-primary/5 rounded-bl-full"></div>
-      <div class="grid md:grid-cols-4 gap-8 relative">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
         <div class="group text-center hover:transform hover:scale-105 transition-all duration-300">
           <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
             <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">01</span>

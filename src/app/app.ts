@@ -13,9 +13,14 @@ export class AppComponent implements OnInit, OnDestroy {
   slides: string[] = ['../assets/slide1.png', '../assets/slide2.png'];
   currentSlide: number = 0;
   private slideInterval: any;
+  loading: boolean = true;
 
   ngOnInit() {
     this.startSlideShow();
+    // Simulate loading time
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000); // Hide loading after 3 seconds
   }
 
   ngOnDestroy() {
