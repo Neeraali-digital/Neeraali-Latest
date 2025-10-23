@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.startSlideShow();
     setTimeout(() => {
       this.loading = false;
-    }, 3000);
+    }, 1000);
   }
 
   ngAfterViewInit() {
