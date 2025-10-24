@@ -1,7 +1,7 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -38,7 +38,7 @@
 </section>
 
 <!-- Who We Are Section -->
-<section id="who-we-are" class="py-10 px-10 bg-white relative scroll-animate parallax-bg">
+<section id="who-we-are" class="py-7 px-10 bg-white relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -76,7 +76,7 @@
 </section>
 
 <!-- Header Section -->
-<header class="bg-white py-20 px-4 relative scroll-animate parallax-bg">
+<header class="bg-white py-7 px-4 relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
   <div class="max-w-7xl mx-auto text-center relative z-10">
     <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-3xl p-12 shadow-2xl relative overflow-hidden">
@@ -103,7 +103,7 @@
 </header>
 
 <!-- What We Do Section -->
-<section id="what-we-do" class="py-20 px-10 bg-gray-50 relative scroll-animate parallax-bg">
+<section id="what-we-do" class="py-7 px-10 bg-gray-50 relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
   <div class="mx-auto relative z-10 md:px-20">
     <div class="grid lg:grid-cols-12 gap-8">
@@ -199,7 +199,7 @@
         </div>
         <div class="text-center mt-8 p-6 bg-primary/5 rounded-2xl border border-primary/10 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
-          <p class="text-lg text-primary relative" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+          <p class="text-xl md:text-2xl text-primary relative" style="font-family: 'Dancing Script', cursive; font-weight: 600;">
             Neeraali Digital – your all-in-one digital growth partner.
           </p>
         </div>
@@ -209,7 +209,7 @@
 </section>
 
 <!-- The Neeraali Way Section -->
-<section class="py-20 px-10 bg-white relative scroll-animate parallax-bg">
+<section class="py-7 px-10 bg-white relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
   <div class="max-w-7xl mx-auto relative z-10">
     <div class="grid lg:grid-cols-12 gap-8">
@@ -288,7 +288,7 @@
 </section>
 
 <!-- Our Process Section -->
-<section class="py-20 px-10 bg-gray-50 relative scroll-animate parallax-bg">
+<section class="py-20 px-7 bg-gray-50 relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
   <div class="max-w-7xl mx-auto text-center relative z-10">
     <div class="mb-12">
@@ -346,7 +346,7 @@
 </section>
 
 <!-- Trusted By Section -->
-<section class="py-10 px-10 bg-white relative scroll-animate parallax-bg">
+<section class="py-7 px-10 bg-white relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
   <div class="max-w-3xl mx-auto text-center relative z-10">
     <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-6 shadow-lg relative overflow-hidden">
@@ -362,30 +362,43 @@
 
         <!-- Client Logos Pyramid -->
         <div class="scroll-animate fade-in-up" style="perspective: 1000px;">
-          <div class="flex flex-col items-center space-y-6">
-            <!-- Row 1: 1 logo -->
-            <div class="flex justify-center transform hover:rotate-y-12 transition-transform duration-500">
-              <div class="group shadow shadow-brand-400 relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80"
-                   style="animation-delay: 0s;">
-                <div class="absolute inset-0 shadow shadow-brand-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="clientLogos[0]" alt="Client Logo 1"
-                     class="w-20 h-20 md:w-28 md:h-28 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+          <!-- Grid for small screens -->
+          <div class="block md:hidden">
+            <div class="grid grid-cols-3 gap-4">
+              <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80">
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-16 h-16 md:w-20 md:h-20 object-contain filter group-hover:grayscale-0 transition-all duration-300 relative z-10">
               </div>
             </div>
+          </div>
 
-            <!-- Row 2: 2 logos -->
-            <div class="flex justify-center space-x-40 transform hover:rotate-y-6 transition-transform duration-500 ">
-              <div *ngFor="let logo of clientLogos.slice(1, 3); let i = index" class="group shadow shadow-brand-400 relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 1) * 0.1">
-                <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 2)" class="w-16 h-16 md:w-24 md:h-24 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+          <!-- Pyramid for larger screens -->
+          <div class="hidden md:block">
+            <div class="flex flex-col items-center space-y-6">
+              <!-- Row 1: 1 logo -->
+              <div class="flex justify-center transform hover:rotate-y-12 transition-transform duration-500">
+                <div class="group  relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80"
+                     style="animation-delay: 0s;">
+                  <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <img [src]="clientLogos[0]" alt="Client Logo 1"
+                       class="w-20 h-20 md:w-28 md:h-28 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+                </div>
               </div>
-            </div>
 
-            <!-- Row 3: 3 logos -->
-            <div class="flex justify-center space-x-40 transform hover:rotate-y-3 transition-transform duration-500">
-              <div *ngFor="let logo of clientLogos.slice(3, 6); let i = index" class="group shadow shadow-brand-400 relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 3) * 0.1">
-                <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 4)" class="w-14 h-14 md:w-20 md:h-20 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+              <!-- Row 2: 2 logos -->
+              <div class="flex justify-center space-x-40 transform hover:rotate-y-6 transition-transform duration-500 ">
+                <div *ngFor="let logo of clientLogos.slice(1, 3); let i = index" class="group  relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 1) * 0.1">
+                  <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <img [src]="logo" [alt]="'Client Logo ' + (i + 2)" class="w-16 h-16 md:w-24 md:h-24 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+                </div>
+              </div>
+
+              <!-- Row 3: 3 logos -->
+              <div class="flex justify-center space-x-40 transform hover:rotate-y-3 transition-transform duration-500">
+                <div *ngFor="let logo of clientLogos.slice(3, 6); let i = index" class="group  relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 3) * 0.1">
+                  <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <img [src]="logo" [alt]="'Client Logo ' + (i + 4)" class="w-14 h-14 md:w-20 md:h-20 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
+                </div>
               </div>
             </div>
           </div>
@@ -407,7 +420,7 @@
 </section>
 
 <!-- Why Choose Section -->
-<section class="py-24 px-10 bg-black text-white relative overflow-hidden scroll-animate parallax-bg">
+<section class="py-10 px-10 bg-black text-white relative overflow-hidden scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
   <div class="max-w-6xl mx-auto relative z-10">
     <div class="text-center mb-16">
@@ -497,7 +510,7 @@
         <h3 class="text-2xl md:text-3xl font-bold mb-8" style="font-family: 'Poppins', sans-serif;">Ready to Create Something Bold?</h3>
         <p class="text-xl mb-16" style="font-family: 'Poppins', sans-serif;">Your next big digital leap starts here.</p>
         
-        <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           <div class="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 hover:border-white/30 transition-all duration-300 hover:scale-105">
             <div class="flex flex-col items-center text-center space-y-3">
               <div class="w-16 h-16 bg-gradient-to-br from-white/20 to-white/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -505,7 +518,7 @@
               </div>
               <div>
                 <h4 class="text-sm font-medium text-white/80 mb-1" style="font-family: 'Poppins', sans-serif;">CALL US</h4>
-                <p class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">99458 83333</p>
+                <p class="text-sm md:text-xl  font-bold" style="font-family: 'Poppins', sans-serif;">99458 83333</p>
               </div>
             </div>
           </div>
@@ -517,7 +530,7 @@
               </div>
               <div>
                 <h4 class="text-sm font-medium text-white/80 mb-1" style="font-family: 'Poppins', sans-serif;">EMAIL US</h4>
-                <p class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">connect&#64;neeraali.com</p>
+                <p class="text-sm md:text-xl font-bold" style="font-family: 'Poppins', sans-serif;">connect&#64;neeraali.com</p>
               </div>
             </div>
           </div>
@@ -529,7 +542,7 @@
               </div>
               <div>
                 <h4 class="text-sm font-medium text-white/80 mb-1" style="font-family: 'Poppins', sans-serif;">VISIT US</h4>
-                <p class="text-lg font-bold leading-tight" style="font-family: 'Poppins', sans-serif;">Kirloskar Business Park,<br>Hebbal, Bengaluru 560024</p>
+                <p class="text-sm md:text-lg  font-bold leading-tight" style="font-family: 'Poppins', sans-serif;">Kirloskar Business Park,<br>Hebbal, Bengaluru 560024</p>
               </div>
             </div>
           </div>
