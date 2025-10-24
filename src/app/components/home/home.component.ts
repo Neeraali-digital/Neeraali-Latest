@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -21,15 +22,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/l4.jpeg',
     '../assets/clientLogos/l5.jpeg',
     '../assets/clientLogos/l6.jpeg',
-    '../assets/clientLogos/l7.jpeg',
-    '../assets/clientLogos/l5.jpeg'
+    // '../assets/clientLogos/l7.jpeg'
   ];
 
   ngOnInit() {
     this.startSlideShow();
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
+  }
+
+  onLoadingFinished() {
+    this.loading = false;
   }
 
   ngAfterViewInit() {
