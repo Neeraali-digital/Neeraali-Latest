@@ -346,9 +346,9 @@
 </section>
 
 <!-- Trusted By Section -->
-<section class="py-20 px-10 bg-white relative scroll-animate parallax-bg">
+<section class="py-10 px-10 bg-white relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
-  <div class="max-w-7xl mx-auto text-center relative z-10">
+  <div class="max-w-6xl mx-auto text-center relative z-10">
     <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-12 shadow-lg relative overflow-hidden">
       <div class="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-br-full"></div>
       <div class="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-accent/10 to-primary/10 rounded-tl-full"></div>
@@ -365,27 +365,27 @@
           <div class="flex flex-col items-center space-y-6">
             <!-- Row 1: 1 logo -->
             <div class="flex justify-center transform hover:rotate-y-12 transition-transform duration-500">
-              <div class="group relative overflow-hidden rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80"
+              <div class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80"
                    style="animation-delay: 0s;">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <img [src]="clientLogos[0]" alt="Client Logo 1"
-                     class="w-20 h-20 md:w-24 md:h-24 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 relative z-10">
+                     class="w-20 h-20 md:w-24 md:h-24 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
               </div>
             </div>
 
             <!-- Row 2: 2 logos -->
-            <div class="flex justify-center space-x-6 transform hover:rotate-y-6 transition-transform duration-500">
-              <div *ngFor="let logo of clientLogos.slice(1, 3); let i = index" class="group relative overflow-hidden rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 1) * 0.1">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 2)" class="w-16 h-16 md:w-20 md:h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 relative z-10">
+            <div class="flex justify-center space-x-40 transform hover:rotate-y-6 transition-transform duration-500">
+              <div *ngFor="let logo of clientLogos.slice(1, 3); let i = index" class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 1) * 0.1">
+                <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <img [src]="logo" [alt]="'Client Logo ' + (i + 2)" class="w-16 h-16 md:w-20 md:h-20 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
               </div>
             </div>
 
             <!-- Row 3: 3 logos -->
-            <div class="flex justify-center space-x-8 transform hover:rotate-y-3 transition-transform duration-500">
-              <div *ngFor="let logo of clientLogos.slice(3, 6); let i = index" class="group relative overflow-hidden rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 3) * 0.1">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 4)" class="w-14 h-14 md:w-16 md:h-16 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 relative z-10">
+            <div class="flex justify-center space-x-40 transform hover:rotate-y-3 transition-transform duration-500">
+              <div *ngFor="let logo of clientLogos.slice(3, 6); let i = index" class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80" [style.animation-delay.s]="(i + 3) * 0.1">
+                <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <img [src]="logo" [alt]="'Client Logo ' + (i + 4)" class="w-14 h-14 md:w-16 md:h-16 object-contain filter  group-hover:grayscale-0 transition-all duration-300 relative z-10">
               </div>
             </div>
           </div>

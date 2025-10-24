@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
   isScrolled = false;
   isMobileMenuOpen = false;
+  activeSection = '#home';
+  showNavbar = false;
 
   navItems = [
     { label: 'Home', href: '#home' },
@@ -26,7 +28,26 @@ export class NavbarComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 50;
+    const currentScrollY = window.scrollY;
+    this.isScrolled = currentScrollY > 50;
+    this.showNavbar = currentScrollY > 100;
+    this.updateActiveSection();
+  }
+
+  updateActiveSection() {
+    const sections = this.navItems.map(item => item.href);
+    const scrollPosition = window.scrollY + 100;
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = document.querySelector(sections[i]);
+      if (section) {
+        const offsetTop = (section as HTMLElement).offsetTop;
+        if (scrollPosition >= offsetTop) {
+          this.activeSection = sections[i];
+          break;
+        }
+      }
+    }
   }
 
   toggleMobileMenu() {

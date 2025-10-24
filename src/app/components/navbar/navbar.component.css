@@ -1,11 +1,32 @@
+/* Navbar visibility transitions */
+.navbar-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navbar-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
 /* Navigation link hover effects */
 .nav-link {
   position: relative;
   overflow: hidden;
+  color: #374151;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
   color: #f82a5d;
+  transform: translateY(-2px);
+  text-shadow: 0 2px 4px rgba(248, 42, 93, 0.2);
+}
+
+.nav-link.active {
+  color: #f82a5d;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(248, 42, 93, 0.2);
 }
 
 .nav-underline {
@@ -16,20 +37,54 @@
   height: 2px;
   background: linear-gradient(90deg, #f82a5d, #ff5a7d);
   transition: width 0.3s ease;
+  border-radius: 1px;
 }
 
-.nav-link:hover .nav-underline {
+.nav-link:hover .nav-underline,
+.nav-link.active .nav-underline {
   width: 100%;
 }
 
 /* Mobile menu animation */
 .lg\:hidden > div {
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-10px);
+}
+
+.lg\:hidden > div:not(.max-h-0) {
+  transform: translateY(0);
+}
+
+/* Mobile menu button hover */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(248, 42, 93, 0.1);
+  transform: scale(1.05);
+}
+
+button:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
 }
 
 /* Logo hover effect */
+.flex-shrink-0 {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.flex-shrink-0:hover {
+  background-color: rgba(248, 42, 93, 0.05);
+  transform: scale(1.05);
+}
+
 .flex-shrink-0:hover img {
   transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 /* Backdrop blur support */
