@@ -1,0 +1,60 @@
+/* Navigation link hover effects */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover {
+  color: #f82a5d;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f82a5d, #ff5a7d);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover .nav-underline {
+  width: 100%;
+}
+
+/* Mobile menu animation */
+.lg\:hidden > div {
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Logo hover effect */
+.flex-shrink-0:hover img {
+  transform: scale(1.05);
+}
+
+/* Backdrop blur support */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* Smooth mobile menu transition */
+@media (max-width: 1023px) {
+  .max-h-0 {
+    max-height: 0;
+    opacity: 0;
+  }
+  
+  .max-h-96 {
+    max-height: 24rem;
+    opacity: 1;
+  }
+}

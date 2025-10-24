@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent,HomeComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/l4.jpeg',
     '../assets/clientLogos/l5.jpeg',
     '../assets/clientLogos/l6.jpeg',
-    '../assets/clientLogos/l7.jpeg'
+    '../assets/clientLogos/l7.jpeg',
+    '../assets/clientLogos/l5.jpeg'
   ];
 
   ngOnInit() {

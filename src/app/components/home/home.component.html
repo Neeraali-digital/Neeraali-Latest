@@ -1,0 +1,466 @@
+ <!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div>
+<!-- Loading Screen -->
+<div *ngIf="loading" class="fixed inset-0 bg-gradient-to-br from-primary to-accent flex items-center justify-center z-50">
+  <div class="text-center">
+    <div class="relative mb-8 animate-scale-in">
+      <img src="../assets/logo4.png" alt="Neeraali Digital Logo" class="h-32 mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full animate-pulse"></div>
+    </div>
+    <h1 class="text-2xl font-black text-white mb-4 animate-slide-in-up" style="font-family: 'Oswald', sans-serif;">NEERAALI DIGITAL</h1>
+    <p class="text-md text-white/80 animate-fade-in-delay" style="font-family: 'Poppins', sans-serif;">Crafting Brands Digitally</p>
+  </div>
+</div>
+
+<!-- Advertisement Section -->
+<section class=" bg-gray-100">
+  <div class="w-full mx-auto">
+    <div class="relative overflow-hidden rounded-lg shadow-lg">
+      <div class="flex w-full transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+        <div *ngFor="let slide of slides; let i = index" class="flex-shrink-0 w-full">
+          <img [src]="slide" [alt]="'Slide ' + (i + 1)" class="w-full h-auto md:h-[90vh]  object-cover">
+        </div>
+      </div>
+      <!-- Indicators -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div *ngFor="let slide of slides; let i = index" class="w-3 h-3 rounded-full cursor-pointer" [class.bg-primary]="i === currentSlide" [class.bg-gray-400]="i !== currentSlide" (click)="currentSlide = i"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Who We Are Section -->
+<section class="py-20 px-10 bg-white relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-7 scroll-animate slide-in-left">
+        <div class="relative mb-8">
+          <div class="absolute -left-4 top-0 w-1 h-16 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+          <h2 class="text-3xl md:text-6xl text-gray-800" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.05em;">WHO WE ARE</h2>
+          <div class="w-20 h-0.5 bg-accent mt-2"></div>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8  transition-all duration-300 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/10 to-primary/10 rounded-bl-full"></div>
+          <h3 class="text-xl md:text-2xl mb-6 text-gray-900 relative" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Smart. Adaptable. Always Ahead.</h3>
+          <div class="space-y-4 relative">
+            <p class="text-gray-700 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+              Neeraali Digital is a creative-tech agency inspired by the octopus intelligent, flexible, and ever-evolving.
+            </p>
+            <p class="text-gray-700 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+              We help brands grow strategically, create fearlessly, and connect meaningfully.
+            </p>
+            <p class="text-gray-700 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+              Our mission is simple: to craft brands that stand out, stay relevant, and make an impact.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center items-end scroll-animate slide-in-right">
+        <div class="relative">
+          <div class="bg-gradient-to-br from-primary/10  py-10 md:py-28 to-accent/10 rounded-md shadow-brand-200 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300">
+            <img src="../assets/logo1.png" alt="logo" class="h-20 px-24 object-contain">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Header Section -->
+<header class="bg-white py-20 px-4 relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+  <div class="max-w-7xl mx-auto text-center relative z-10">
+    <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-3xl p-12 shadow-2xl relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-br-full"></div>
+      <div class="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-accent/10 to-primary/10 rounded-tl-full"></div>
+      <div class="relative">
+        <div class="mb-8">
+          <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-6"></div>
+          <h1 class="text-4xl md:text-6xl font-black mb-4 text-gray-800" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.1em;">NEERAALI DIGITAL</h1>
+          <div class="w-32 h-0.5 bg-accent mx-auto mb-6"></div>
+        </div>
+        <p class="text-2xl md:text-2xl mb-3 text-gray-900" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Crafting Brands Digitally</p>
+        <p class="text-xl md:text-xl mb-8 text-gray-700" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Where Strategy is Smart, and Creativity is Wild.</p>
+        <p class="text-md md:text-lg mb-10 max-w-4xl mx-auto text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+          We're Neeraali Digital — a full-service digital marketing agency in Bangalore helping brands grow, protect, and thrive in a fast-changing world.
+          From identity to impact, we build bold digital experiences that drive results.
+        </p>
+        <button class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+          Let's Build Together
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- What We Do Section -->
+<section class="py-20 px-10 bg-gray-50 relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-2 flex items-center justify-end">
+        <h2 class="text-3xl md:text-6xl text-gray-800 writing-mode-vertical-rl text-orientation-mixed lg:transform lg:rotate-180" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">
+          WHAT WE DO
+        </h2>
+      </div>
+      <div class="lg:col-span-10">
+        <div class="mb-8">
+          <div class="relative mb-6">
+            <div class="absolute -left-4 top-0 w-1 h-12 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+            <h3 class="text-2xl md:text-3xl" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.05em;">CREATIVE + STRATEGY = GROWTH</h3>
+            <div class="w-32 h-0.5 bg-accent mt-2"></div>
+          </div>
+          <p class="text-gray-700 text-lg leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">We don't just market. We build ecosystems where your brand can flourish.</p>
+        </div>
+
+        <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/5 to-primary/5 rounded-bl-full"></div>
+          <div class="relative mb-8">
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 bg-accent rounded-full"></div>
+              <h4 class="text-xl" style="font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.05em;">OUR CORE SERVICES</h4>
+              <div class="flex-1 h-0.5 bg-gradient-to-r from-accent to-transparent"></div>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-accent to-primary mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">BRAND IDENTITY</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Build recognition and trust with powerful brand systems.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-primary to-accent mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">DIGITAL MARKETING</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">SEO, PPC, Email & Content strategies that get you discovered.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-accent to-primary mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">WEB SOLUTIONS</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">High-performing, conversion-ready websites that work as your best sales tool.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-primary to-accent mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">SOCIAL MEDIA</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Creative storytelling that builds loyal communities.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-accent to-primary mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">CREATIVE DESIGN</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">From social creatives to campaigns that make people stop scrolling.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-primary to-accent mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">PERFORMANCE MARKETING</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">ROI-driven campaigns that convert and scale.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-accent to-primary mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">VIDEO PRODUCTION</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Visual stories that inspire, engage, and sell.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="mb-4">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-primary to-accent mb-3"></div>
+                <h5 class="text-gray-900 mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">INFLUENCER MARKETING</h5>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Real voices. Real impact. Real growth.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-8 p-6 bg-primary/5 rounded-2xl border border-primary/10 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
+          <p class="text-lg text-primary relative" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+            Neeraali Digital – your all-in-one digital growth partner.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Neeraali Way Section -->
+<section class="py-20 px-10 bg-white relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-10">
+        <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-accent/10 to-primary/10 rounded-bl-full"></div>
+          <div class="text-center mb-8 relative">
+            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mb-4"></div>
+            <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+              We believe great brands aren't built overnight — they're crafted with purpose and precision.
+            </p>
+            <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mt-4"></div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-6">
+              <div class="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border-l-4 border-transparent hover:border-accent">
+                <div class="flex items-start space-x-4">
+                  <div class="w-6 h-6 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                  <div>
+                    <h5 class="text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Identity with Purpose</h5>
+                    <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Every design tells a story.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                <div class="flex items-start space-x-4">
+                  <div class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                  <div>
+                    <h5 class="text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Growth with Strategy</h5>
+                    <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Every move is data-backed.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                <div class="flex items-start space-x-4">
+                  <div class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                  <div>
+                    <h5 class="text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Creativity with Connection</h5>
+                    <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Every campaign builds emotion.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border-l-4 border-transparent hover:border-accent">
+                <div class="flex items-start space-x-4">
+                  <div class="w-6 h-6 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                  <div>
+                    <h5 class="text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Strength in Competition</h5>
+                    <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Every result speaks for itself.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 flex justify-center lg:justify-end">
+        <div class="relative">
+          <div class="absolute -left-4 top-0 w-1 h-32 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+          <div class="text-2xl md:text-6xl text-gray-800 writing-mode-vertical-rl text-orientation-mixed lg:transform lg:rotate-180" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">
+            THE NEERAALI <br/> WAY
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Process Section -->
+<section class="py-20 px-10 bg-gray-50 relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
+  <div class="max-w-7xl mx-auto text-center relative z-10">
+    <div class="mb-12">
+      <div class="relative inline-block">
+        <div class="absolute -left-8 top-0 w-1 h-16 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+        <h2 class="text-4xl md:text-6xl text-gray-800 mb-4" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">OUR PROCESS</h2>
+        <div class="w-24 h-0.5 bg-accent mx-auto"></div>
+      </div>
+      <h3 class="text-2xl md:text-3xl text-gray-800 mt-6" style="font-family: 'Poppins', sans-serif; font-weight: 600;">The Way We Create</h3>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden mb-8">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/5 to-primary/5 rounded-bl-full"></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
+        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+          <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">01</span>
+          </div>
+          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Discover</h4>
+          <div class="w-8 h-0.5 bg-gradient-to-r from-primary to-accent mx-auto"></div>
+        </div>
+        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+          <div class="w-20 h-20 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">02</span>
+          </div>
+          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Strategize</h4>
+          <div class="w-8 h-0.5 bg-gradient-to-r from-accent to-primary mx-auto"></div>
+        </div>
+        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+          <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">03</span>
+          </div>
+          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Create</h4>
+          <div class="w-8 h-0.5 bg-gradient-to-r from-primary to-accent mx-auto"></div>
+        </div>
+        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+          <div class="w-20 h-20 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">04</span>
+          </div>
+          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Evolve</h4>
+          <div class="w-8 h-0.5 bg-gradient-to-r from-accent to-primary mx-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <p class="text-gray-700 text-lg leading-relaxed mb-4" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+        Every project begins with insight, grows with innovation, and evolves with impact.
+      </p>
+      <p class="text-gray-700 text-lg leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
+        We listen, we plan, we execute — and we continuously refine until your brand thrives digitally.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Trusted By Section -->
+<section class="py-20 px-10 bg-white relative scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+  <div class="max-w-7xl mx-auto text-center relative z-10">
+    <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-12 shadow-lg relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-br-full"></div>
+      <div class="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-accent/10 to-primary/10 rounded-tl-full"></div>
+      <div class="relative">
+        <div class="mb-8 scroll-animate fade-in-up">
+          <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-4"></div>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-800 mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">TRUSTED BY</h2>
+          <div class="w-20 h-0.5 bg-accent mx-auto"></div>
+        </div>
+        <p class="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12 scroll-animate fade-in-up" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Proud Partners in Growth</p>
+
+        <!-- Client Logos Grid -->
+        <div class="scroll-animate fade-in-up">
+          <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center justify-items-center">
+            <div *ngFor="let logo of clientLogos; let i = index"
+                 class="group relative overflow-hidden rounded-xl bg-white/50 backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80"
+                 [class]="(i + 1) % 3 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'"
+                 [style.animation-delay.s]="i * 0.1">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <img [src]="logo" [alt]="'Client Logo ' + (i + 1)"
+                   class="w-full h-16 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 relative z-10"
+                   [class]="(i + 1) % 3 === 0 ? 'h-20 md:h-24' : 'h-16'">
+            </div>
+          </div>
+
+          <!-- Floating Elements -->
+          <div class="mt-12 flex justify-center">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 bg-primary/60 rounded-full animate-float"></div>
+              <div class="w-3 h-3 bg-accent/60 rounded-full animate-float" style="animation-delay: 0.5s;"></div>
+              <div class="w-4 h-4 bg-gradient-to-r from-primary/60 to-accent/60 rounded-full animate-float" style="animation-delay: 1s;"></div>
+              <div class="w-3 h-3 bg-accent/60 rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+              <div class="w-2 h-2 bg-primary/60 rounded-full animate-float" style="animation-delay: 2s;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="py-24 px-10 bg-black text-white relative overflow-hidden scroll-animate parallax-bg">
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-7xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">WHY CHOOSE</h2>
+      <h3 class="text-3xl md:text-5xl font-bold text-accent mb-4" style="font-family: 'Oswald', sans-serif;">NEERAALI DIGITAL</h3>
+      <div class="w-24 h-1 bg-accent mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">auto_awesome</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Pure Originality</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Authentic creativity in every campaign that sets you apart from the competition.</p>
+        </div>
+      </div>
+
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">lightbulb</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Bold Innovation</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Strategy-driven ideas that break boundaries and create market disruption.</p>
+        </div>
+      </div>
+
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">tune</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Custom Solutions</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">100% tailored approaches designed specifically for your brand's unique needs.</p>
+        </div>
+      </div>
+
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">groups</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Elite Team</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">In-house creative & tech experts who live and breathe digital excellence.</p>
+        </div>
+      </div>
+
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">analytics</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Data-Driven</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Performance-focused campaigns backed by real insights and measurable results.</p>
+        </div>
+      </div>
+
+      <div class="group hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300">
+          <div class="flex items-center mb-6">
+            <span class="material-icons text-accent text-4xl mr-4">rocket_launch</span>
+            <h4 class="text-xl font-bold" style="font-family: 'Poppins', sans-serif;">Future-Ready</h4>
+          </div>
+          <p class="text-gray-300 leading-relaxed" style="font-family: 'Poppins', sans-serif;">We don't follow trends — we create them and prepare your brand for tomorrow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

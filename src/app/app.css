@@ -169,11 +169,15 @@ html {
 .scroll-animate:nth-child(7) { transition-delay: 0.7s; }
 .scroll-animate:nth-child(8) { transition-delay: 0.8s; }
 
+
+
 /* Enhanced hover effects for scroll elements */
 .scroll-animate.animate-in:hover {
   transform: translateY(-5px) scale(1.02);
   transition: all 0.3s ease;
 }
+
+
 
 /* Responsive vertical text for mobile */
 @media (max-width: 768px) {
