@@ -1,5 +1,15 @@
 /* Custom animations and styles for Home Component */
 
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-text {
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
 @keyframes scale-in {
   from {
     transform: scale(0.8);
