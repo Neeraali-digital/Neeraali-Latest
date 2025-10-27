@@ -208,7 +208,7 @@
           <p class="text-xl md:text-2xl pb-3 text-black relative"  style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">
            Ready to grow your brand? Get a free quote today
           </p>
-          <button class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+          <button (click)="getQuote()" class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
           Get Quote 
         </button>
         </div>
@@ -294,57 +294,70 @@
 <!-- Our Process Section -->
 <section class="py-7 px-7 bg-gray-50 relative scroll-animate parallax-bg">
   <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
-  <div class="max-w-7xl mx-auto text-center relative z-10">
-    <div class="mb-12">
-      <div class="relative inline-block">
-        <div class="absolute -left-8 top-0 w-1 h-16 bg-gradient-to-b from-primary to-accent rounded-full"></div>
-        <h2 class="text-4xl md:text-6xl text-gray-800 mb-4" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">OUR PROCESS</h2>
-        <div class="w-24 h-0.5 bg-accent mx-auto"></div>
-      </div>
-      <h3 class="text-2xl md:text-3xl text-gray-800 mt-6" style="font-family: 'Poppins', sans-serif; font-weight: 600;">The Way We Create</h3>
-    </div>
+  <div class="mx-auto relative z-10 md:px-20">
+    <div class="grid lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-11">
+        <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/5 to-primary/5 rounded-bl-full"></div>
+          <div class="relative mb-8">
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 bg-accent rounded-full"></div>
+              <h4 class="text-xl" style="font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.05em;">THE WAY WE CREATE</h4>
+              <div class="flex-1 h-0.5 bg-gradient-to-r from-accent to-transparent"></div>
+            </div>
+          </div>
+          <div class="space-y-3 relative">
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                  <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">01</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900" style="font-family: 'Poppins', sans-serif;">Discover</h4>
+              </div>
+              <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Understanding your brand, audience, and market landscape to build a solid foundation.</p>
+            </div>
 
-    <div class="bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-lg relative overflow-hidden mb-8">
-      <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/5 to-primary/5 rounded-bl-full"></div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
-        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
-          <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">01</span>
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                  <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">02</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900" style="font-family: 'Poppins', sans-serif;">Strategize</h4>
+              </div>
+              <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Crafting data-driven strategies tailored to your goals and market positioning.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-primary/30 scroll-animate fade-in-up">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                  <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">03</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900" style="font-family: 'Poppins', sans-serif;">Create</h4>
+              </div>
+              <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Bringing ideas to life with creative excellence and innovative solutions.</p>
+            </div>
+
+            <div class="group bg-white border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-accent/30 scroll-animate fade-in-up">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                  <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">04</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900" style="font-family: 'Poppins', sans-serif;">Evolve</h4>
+              </div>
+              <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">Continuously optimizing and refining for better results and growth.</p>
+            </div>
           </div>
-          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Discover</h4>
-          <div class="w-8 h-0.5 bg-gradient-to-r from-primary to-accent mx-auto"></div>
-        </div>
-        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
-          <div class="w-20 h-20 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">02</span>
-          </div>
-          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Strategize</h4>
-          <div class="w-8 h-0.5 bg-gradient-to-r from-accent to-primary mx-auto"></div>
-        </div>
-        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
-          <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">03</span>
-          </div>
-          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Create</h4>
-          <div class="w-8 h-0.5 bg-gradient-to-r from-primary to-accent mx-auto"></div>
-        </div>
-        <div class="group text-center hover:transform hover:scale-105 transition-all duration-300 scroll-animate fade-in-up">
-          <div class="w-20 h-20 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-            <span class="text-white text-lg font-bold" style="font-family: 'Oswald', sans-serif;">04</span>
-          </div>
-          <h4 class="text-lg font-semibold text-gray-900 mb-2" style="font-family: 'Poppins', sans-serif;">Evolve</h4>
-          <div class="w-8 h-0.5 bg-gradient-to-r from-accent to-primary mx-auto"></div>
         </div>
       </div>
-    </div>
-
-    <div class="max-w-4xl mx-auto">
-      <p class="text-gray-700 text-lg leading-relaxed mb-4" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
-        Every project begins with insight, grows with innovation, and evolves with impact.
-      </p>
-      <p class="text-gray-700 text-lg leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">
-        We listen, we plan, we execute — and we continuously refine until your brand thrives digitally.
-      </p>
+      
+      <div class="lg:col-span-1 flex items-center justify-center md:justify-start">
+        <div>
+          <h2 class="text-3xl md:text-6xl md:mt-16 text-gray-800 writing-mode-vertical-rl text-orientation-mixed lg:transform lg:rotate-180" style="font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em;">
+            OUR PROCESS
+          </h2>
+          <div class="w-16 h-1 bg-accent mt-2"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -517,3 +530,66 @@
     </div>
   </div>
 </section>
+
+<!-- Quote Modal -->
+<div *ngIf="showQuoteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 modal-overlay" (click)="closeQuoteModal($event)">
+  <div class="bg-white rounded-2xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto overflow-hidden modal-content" (click)="$event.stopPropagation()">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">GET QUOTE</h3>
+      <button (click)="closeQuoteModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+    
+    <form (ngSubmit)="submitQuote()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Name *</label>
+        <input [(ngModel)]="quoteForm.name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Your full name">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Email *</label>
+        <input [(ngModel)]="quoteForm.email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="your@email.com">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Phone *</label>
+        <input [(ngModel)]="quoteForm.phone" name="phone" type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="+91 12345 67890">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Website</label>
+        <input [(ngModel)]="quoteForm.website" name="website" type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="https://yourwebsite.com">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Company</label>
+        <input [(ngModel)]="quoteForm.company" name="company" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Your company name">
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Service Required *</label>
+        <select [(ngModel)]="quoteForm.service" name="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+          <option value="">Select a service</option>
+          <option value="brand-identity">Brand Identity</option>
+          <option value="digital-marketing">Digital Marketing</option>
+          <option value="web-solutions">Web Solutions</option>
+          <option value="social-media">Social Media</option>
+          <option value="creative-design">Creative Design</option>
+          <option value="performance-marketing">Performance Marketing</option>
+          <option value="video-production">Video Production</option>
+          <option value="influencer-marketing">Influencer Marketing</option>
+        </select>
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Project Details</label>
+        <textarea [(ngModel)]="quoteForm.message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="Tell us about your project requirements..."></textarea>
+      </div>
+      
+      <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+        Send Quote Request
+      </button>
+    </form>
+  </div>
+</div>

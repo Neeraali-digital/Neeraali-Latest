@@ -299,3 +299,66 @@
     page-break-before: always;
   }
 }
+/* Modal Styles */
+.modal-overlay {
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideInUp 0.4s ease-out;
+  transform-origin: center bottom;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Form Input Focus Styles */
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Mobile Responsive Adjustments for Process Section */
+@media (max-width: 1024px) {
+  .writing-mode-vertical-rl {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .lg\:col-span-4 {
+    order: -1;
+  }
+  
+  .lg\:col-span-8 {
+    text-align: center;
+  }
+}
