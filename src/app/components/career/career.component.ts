@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 interface Job {
@@ -16,7 +17,7 @@ interface Job {
 @Component({
   selector: 'app-career',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css']
 })
@@ -54,9 +55,31 @@ export class CareerComponent {
     }
   ];
 
+  filteredJobs: Job[] = [...this.jobs];
+  searchTerm: string = '';
+
   constructor(private router: Router) {}
 
   viewJobDetail(jobId: string) {
     this.router.navigate(['/career', jobId]);
+  }
+
+  filterJobs() {
+    if (!this.searchTerm.trim()) {
+      this.filteredJobs = [...this.jobs];
+    } else {
+      const term = this.searchTerm.toLowerCase();
+      this.filteredJobs = this.jobs.filter(job =>
+        job.title.toLowerCase().includes(term) ||
+        job.location.toLowerCase().includes(term) ||
+        job.type.toLowerCase().includes(term) ||
+        job.careerArea.toLowerCase().includes(term)
+      );
+    }
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.filterJobs();
   }
 }
