@@ -9,9 +9,9 @@
 
       <div class="hidden lg:flex items-center space-x-8">
         <a *ngFor="let item of navItems"
-           (click)="scrollToSection(item.href)"
-           class="nav-link cursor-pointer relative px-3 py-2 text-sm font-semibold transition-all duration-300"
+           [class]="item.isRoute ? 'nav-link cursor-pointer relative px-3 py-2 text-sm font-semibold transition-all duration-300' : 'nav-link cursor-pointer relative px-3 py-2 text-sm font-semibold transition-all duration-300'"
            [class.active]="activeSection === item.href"
+           (click)="item.isRoute ? navigateToRoute(item.href) : scrollToSection(item.href)"
            style="font-family: 'Poppins', sans-serif; font-weight: 500;">
           {{ item.label }}
           <span class="nav-underline"></span>
@@ -30,15 +30,15 @@
       </div>
     </div>
 
-    <div class="lg:hidden transition-all duration-300 overflow-hidden" [ngClass]="{'max-h-96': isMobileMenuOpen, 'max-h-0': !isMobileMenuOpen}">
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
-        <a *ngFor="let item of navItems" 
-           (click)="scrollToSection(item.href)"
-           class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 cursor-pointer"
-           style="font-family: 'Poppins', sans-serif;">
-          {{ item.label }}
-        </a>
+      <div class="lg:hidden transition-all duration-300 overflow-hidden" [ngClass]="{'max-h-96': isMobileMenuOpen, 'max-h-0': !isMobileMenuOpen}">
+        <div class="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
+          <a *ngFor="let item of navItems"
+             (click)="item.isRoute ? navigateToRoute(item.href) : scrollToSection(item.href)"
+             class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 cursor-pointer"
+             style="font-family: 'Poppins', sans-serif;">
+            {{ item.label }}
+          </a>
+        </div>
       </div>
-    </div>
   </div>
 </nav>

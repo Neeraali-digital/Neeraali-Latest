@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -19,10 +20,12 @@ export class NavbarComponent implements OnInit {
     { label: 'Who we are', href: '#who-we-are' },
     { label: 'What we do', href: '#what-we-do' },
     { label: 'Our work', href: '#our-work' },
-    { label: 'Career', href: '#career' },
+    { label: 'Career', href: '/career', isRoute: true },
     { label: 'Blogs', href: '#blogs' },
     { label: 'Contact', href: '#contact' }
   ];
+
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
@@ -59,6 +62,11 @@ export class NavbarComponent implements OnInit {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    this.isMobileMenuOpen = false;
+  }
+
+  navigateToRoute(href: string) {
+    this.router.navigate([href]);
     this.isMobileMenuOpen = false;
   }
 }

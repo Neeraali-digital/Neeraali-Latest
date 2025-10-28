@@ -1,0 +1,78 @@
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-screen bg-white">
+  <!-- Hero Section -->
+  <section class="py-10 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+    <div class="max-w-7xl mx-auto px-5 relative z-10">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-7xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
+          CAREERS
+        </h1>
+        <h2 class="text-2xl md:text-4xl font-bold text-accent mb-8" style="font-family: 'Oswald', sans-serif;">
+          Join Our Team
+        </h2>
+        <p class="text-lg md:text-xl max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
+          Discover exciting opportunities to grow your career with us. We're looking for talented individuals ready to make an impact.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jobs List Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-800" style="font-family: 'Oswald', sans-serif;">
+          Open Positions
+        </h2>
+        <p class="text-xl text-gray-700" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+          Find your next opportunity
+        </p>
+      </div>
+
+      <div class="space-y-3 max-w-4xl mx-auto">
+        <div *ngFor="let job of jobs" (click)="viewJobDetail(job.id)" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md hover:border-primary/30 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <div class="flex items-center mb-2">
+                <span class="material-icons text-primary mr-3 text-xl">work_outline</span>
+                <h3 class="text-lg font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.title }}</h3>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600" style="font-family: 'Poppins', sans-serif;">
+                <div class="flex items-center">
+                  <span class="material-icons text-gray-400 mr-2 text-base">location_on</span>
+                  <span>{{ job.location }}</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="material-icons text-gray-400 mr-2 text-base">schedule</span>
+                  <span>{{ job.type }} • {{ job.shiftWork }}</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="material-icons text-gray-400 mr-2 text-base">business_center</span>
+                  <span>{{ job.careerArea }}</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 mt-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">{{ job.contractualLocation }}</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent">{{ job.termOfEmployment }}</span>
+              </div>
+            </div>
+
+            <div class="ml-4 flex-shrink-0">
+              <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+                <span class="material-icons text-lg">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
