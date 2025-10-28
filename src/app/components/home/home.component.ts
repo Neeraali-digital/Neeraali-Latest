@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
@@ -36,6 +37,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     service: '',
     message: ''
   };
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.startSlideShow();
@@ -113,5 +116,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       service: '',
       message: ''
     };
+  }
+
+  navigateToService(serviceId: string) {
+    this.router.navigate(['/service', serviceId]);
   }
 }
