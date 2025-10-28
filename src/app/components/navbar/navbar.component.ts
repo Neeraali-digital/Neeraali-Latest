@@ -58,9 +58,22 @@ export class NavbarComponent implements OnInit {
   }
 
   scrollToSection(href: string) {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're not on the home page, navigate to home first, then scroll
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']).then(() => {
+        // Wait a bit for the page to load, then scroll
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     this.isMobileMenuOpen = false;
   }
