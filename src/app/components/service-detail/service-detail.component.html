@@ -6,25 +6,30 @@
 
 <div *ngIf="service" class="min-h-screen bg-white">
   <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+  <section class="py-20  text-white relative overflow-hidden"
+  
+  >
+    <div class="absolute inset-0 "
+    style="background-image: url('../../../assets/grid.png');"
+    ></div>
+
     <div class="max-w-7xl mx-auto px-5 relative z-10">
-      <button (click)="goBack()" class="mb-8 flex items-center text-white/80 hover:text-white transition-colors group">
+      <button (click)="goBack()" class="mb-8 flex items-center text-gray-500 hover:text-gray-600 transition-colors group">
         <span class="material-icons mr-2 group-hover:-translate-x-1 transition-transform">arrow_back</span>
         Back to Home
       </button>
       
       <div class="text-center">
-        <h1 class="text-5xl md:text-7xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 text-brand-600" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
           Digital Marketing
         </h1>
         <h2 class="text-2xl md:text-4xl font-bold mb-8 text-accent" style="font-family: 'Oswald', sans-serif;">
           Marketing That Actually Works
         </h2>
-        <p class="text-lg md:text-xl max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
+        <p class="text-lg md:text-xl text-gray-500 max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
           Digital marketing isn't just about showing up online—it's about showing results. At Neeraali Digital, we create smart, impactful strategies that help your brand connect with the right audience, tell the right story, and get real business results.
         </p>
-        <p class="text-lg max-w-3xl mx-auto mb-12" style="font-family: 'Poppins', sans-serif;">
+        <p class="text-lg max-w-3xl mx-auto mb-12  text-gray-500" style="font-family: 'Poppins', sans-serif;">
           From social media and SEO to performance campaigns and content creation, we make sure every click, like, and share brings you closer to your goals.
         </p>
         <button class="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg" style="font-family: 'Poppins', sans-serif;">
@@ -259,36 +264,16 @@
       <h2 class="text-4xl md:text-5xl font-black mb-12 text-center text-gray-800" style="font-family: 'Oswald', sans-serif;">
         Frequently Asked Questions
       </h2>
-      
+
       <div class="space-y-6">
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">How do you measure success?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">We track what really matters—leads, traffic, conversions, and ROI. Every campaign includes detailed reports and analytics so you can see your growth.</p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">Which platforms do you focus on?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">We manage campaigns across Google Ads, Meta (Facebook & Instagram), LinkedIn, YouTube, and other emerging platforms—wherever your audience spends time.</p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">Can I get a custom marketing plan?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Of course! Every brand is different. We create customized digital marketing strategies that align perfectly with your goals and budget.</p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">Do you handle branding and content too?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Yes! Our creative team handles everything from design to storytelling, ensuring your brand looks great and communicates effectively.</p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">When will I start seeing results?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Paid campaigns can show impact within weeks, while organic growth through SEO usually takes a few months. We balance both for quick wins and lasting growth.</p>
-        </div>
-        
-        <div class="bg-gray-50 rounded-xl p-6">
-          <h3 class="text-lg font-bold mb-3 text-gray-800" style="font-family: 'Poppins', sans-serif;">Do you offer ongoing support?</h3>
-          <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Yes, we manage long-term marketing campaigns with continuous optimization and support—so your brand keeps growing month after month.</p>
+        <div *ngFor="let faq of faqs; let i = index" class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex justify-between items-center cursor-pointer" (click)="toggleFAQ(i)">
+            <h3 class="text-lg font-bold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ faq.question }}</h3>
+            <span class="material-icons text-gray-500 transition-transform duration-200" [class.rotate-45]="faq.isOpen">{{ faq.isOpen ? 'remove' : 'add' }}</span>
+          </div>
+          <div *ngIf="faq.isOpen" class="mt-4 pt-4 border-t border-gray-200">
+            <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">{{ faq.answer }}</p>
+          </div>
         </div>
       </div>
     </div>

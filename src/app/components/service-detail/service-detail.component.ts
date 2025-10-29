@@ -11,6 +11,12 @@ interface ServiceDetail {
   process: string[];
 }
 
+interface FAQItem {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+}
+
 @Component({
   selector: 'app-service-detail',
   standalone: true,
@@ -20,6 +26,39 @@ interface ServiceDetail {
 })
 export class ServiceDetailComponent implements OnInit {
   service: ServiceDetail | null = null;
+
+  faqs: FAQItem[] = [
+    {
+      question: 'How do you measure success?',
+      answer: 'We track what really matters—leads, traffic, conversions, and ROI. Every campaign includes detailed reports and analytics so you can see your growth.',
+      isOpen: false
+    },
+    {
+      question: 'Which platforms do you focus on?',
+      answer: 'We manage campaigns across Google Ads, Meta (Facebook & Instagram), LinkedIn, YouTube, and other emerging platforms—wherever your audience spends time.',
+      isOpen: false
+    },
+    {
+      question: 'Can I get a custom marketing plan?',
+      answer: 'Of course! Every brand is different. We create customized digital marketing strategies that align perfectly with your goals and budget.',
+      isOpen: false
+    },
+    {
+      question: 'Do you handle branding and content too?',
+      answer: 'Yes! Our creative team handles everything from design to storytelling, ensuring your brand looks great and communicates effectively.',
+      isOpen: false
+    },
+    {
+      question: 'When will I start seeing results?',
+      answer: 'Paid campaigns can show impact within weeks, while organic growth through SEO usually takes a few months. We balance both for quick wins and lasting growth.',
+      isOpen: false
+    },
+    {
+      question: 'Do you offer ongoing support?',
+      answer: 'Yes, we manage long-term marketing campaigns with continuous optimization and support—so your brand keeps growing month after month.',
+      isOpen: false
+    }
+  ];
 
   private services: ServiceDetail[] = [
     {
@@ -105,5 +144,9 @@ export class ServiceDetailComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  toggleFAQ(index: number) {
+    this.faqs[index].isOpen = !this.faqs[index].isOpen;
   }
 }
