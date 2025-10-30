@@ -1,0 +1,241 @@
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="contact-hero py-16 px-5 text-white relative overflow-hidden"
+style="background-image: url(../../../assets/pink.png);">
+  <!-- <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div> -->
+  <div class="max-w-6xl mx-auto text-center relative z-10">
+    <div class="mb-12">
+      <h1 class="text-5xl md:text-7xl font-black mb-6 text-brand-500" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">GET IN TOUCH</h1>
+      <div class="w-24 h-1 bg-accent mx-auto mb-8"></div>
+      <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto text-gray-600" style="font-family: 'Poppins', sans-serif;">
+        Ready to transform your brand? Let's create something extraordinary together.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Information Section -->
+<section class="py-16 px-5 bg-gray-50 relative">
+  <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <!-- Phone -->
+      <div class="contact-card border border-gray-100 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105 text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-icons text-3xl text-white">phone</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3" style="font-family: 'Poppins', sans-serif;">Call Us</h3>
+        <p class="text-gray-600 mb-4" style="font-family: 'Poppins', sans-serif;">Ready to discuss your project?</p>
+        <a href="tel:+919945883333" class="text-md font-bold text-gray-600 hover:text-accent transition-colors" style="font-family: 'Poppins', sans-serif;">+91 99458 83333</a>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-card border border-gray-100 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105 text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-icons text-3xl text-white">email</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3" style="font-family: 'Poppins', sans-serif;">Email Us</h3>
+        <p class="text-gray-600 mb-4" style="font-family: 'Poppins', sans-serif;">Drop us a line anytime</p>
+        <a href="mailto:connect@neeraali.com" class="text-md font-bold text-gray-600 hover:text-accent transition-colors" style="font-family: 'Poppins', sans-serif;">connect&#64;neeraali.com</a>
+      </div>
+
+      <!-- Location -->
+      <div class="contact-card border border-gray-100 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105 text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-icons text-3xl text-white">location_on</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3" style="font-family: 'Poppins', sans-serif;">Visit Us</h3>
+        <p class="text-gray-600 mb-4" style="font-family: 'Poppins', sans-serif;">Come say hello at our office</p>
+        <p class="text-sm font-bold text-gray-600  hover:text-accent leading-tight" style="font-family: 'Poppins', sans-serif;">
+          Kirloskar Business Park,<br>
+          Hebbal, Bengaluru 560024
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form & Map Section -->
+<section class="py-16 px-5 bg-white relative">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      
+      <!-- Contact Form -->
+      <div class="contact-card border border-gray-100 rounded-2xl p-8 shadow-lg">
+        <div class="mb-8">
+          <h2 class="text-3xl md:text-4xl font-black text-gray-800 mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">SEND MESSAGE</h2>
+          <div class="w-20 h-1 bg-gradient-to-r from-primary to-accent"></div>
+          <p class="text-gray-600 mt-4" style="font-family: 'Poppins', sans-serif;">Tell us about your project and we'll get back to you within 24 hours.</p>
+        </div>
+
+        <form (ngSubmit)="submitContact()" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Name *</label>
+              <input 
+                [(ngModel)]="contactForm.name" 
+                name="name" 
+                type="text" 
+                required 
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300" 
+                placeholder="Your full name"
+                style="font-family: 'Poppins', sans-serif;">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Email *</label>
+              <input 
+                [(ngModel)]="contactForm.email" 
+                name="email" 
+                type="email" 
+                required 
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300" 
+                placeholder="your@email.com"
+                style="font-family: 'Poppins', sans-serif;">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Phone *</label>
+              <input 
+                [(ngModel)]="contactForm.phone" 
+                name="phone" 
+                type="tel" 
+                required 
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300" 
+                placeholder="+91 12345 67890"
+                style="font-family: 'Poppins', sans-serif;">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Company</label>
+              <input 
+                [(ngModel)]="contactForm.company" 
+                name="company" 
+                type="text" 
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300" 
+                placeholder="Your company name"
+                style="font-family: 'Poppins', sans-serif;">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Service Required</label>
+            <select 
+              [(ngModel)]="contactForm.service" 
+              name="service" 
+              class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300"
+              style="font-family: 'Poppins', sans-serif;">
+              <option value="">Select a service</option>
+              <option value="brand-identity">Brand Identity</option>
+              <option value="digital-marketing">Digital Marketing</option>
+              <option value="web-solutions">Web Solutions</option>
+              <option value="social-media">Social Media</option>
+              <option value="creative-design">Creative Design</option>
+              <option value="performance-marketing">Performance Marketing</option>
+              <option value="video-production">Video Production</option>
+              <option value="influencer-marketing">Influencer Marketing</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Project Details</label>
+            <textarea 
+              [(ngModel)]="contactForm.message" 
+              name="message" 
+              rows="5" 
+              class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg transition-all duration-300 resize-none" 
+              placeholder="Tell us about your project requirements, goals, and timeline..."
+              style="font-family: 'Poppins', sans-serif;"></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold text-lg"
+            style="font-family: 'Poppins', sans-serif;">
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Map & Office Info -->
+      <div class="space-y-8">
+        <!-- Map -->
+        <div class="contact-card border border-gray-100 rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">FIND US</h3>
+          <div class="map-container bg-gray-200 rounded-lg flex items-center justify-center">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.752588974528!2d77.59283897512417!3d13.051414187271336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae175de22072bf%3A0x9a1639486d6a45db!2sKirloskar%20Business%20Park!5e0!3m2!1sen!2sin!4v1761800137896!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style="border:0; border-radius: 0.5rem;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Office Hours -->
+        <div class="contact-card border border-gray-100 rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">OFFICE HOURS</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="font-semibold text-gray-700" style="font-family: 'Poppins', sans-serif;">Monday - Friday</span>
+              <span class="text-gray-600" style="font-family: 'Poppins', sans-serif;">9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="font-semibold text-gray-700" style="font-family: 'Poppins', sans-serif;">Saturday</span>
+              <span class="text-gray-600" style="font-family: 'Poppins', sans-serif;">10:00 AM - 4:00 PM</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="font-semibold text-gray-700" style="font-family: 'Poppins', sans-serif;">Sunday</span>
+              <span class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="contact-card border border-gray-100 rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">FOLLOW US</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-white">facebook</span>
+            </a>
+            <a href="#" class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-white">camera_alt</span>
+            </a>
+            <a href="#" class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <span class="material-icons text-white">link</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 px-5 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <h2 class="text-4xl md:text-5xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">READY TO START?</h2>
+    <p class="text-xl mb-8 opacity-90" style="font-family: 'Poppins', sans-serif;">
+      Let's discuss your project and create something amazing together.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+919945883333" class="bg-white text-brand-800 hover:bg-gray-100 py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold" style="font-family: 'Poppins', sans-serif;">
+        Call Now
+      </a>
+      <a href="mailto:connect@neeraali.com" class="border-2 border-white text-white hover:bg-white hover:text-brand-800 py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold" style="font-family: 'Poppins', sans-serif;">
+        Send Email
+      </a>
+    </div>
+  </div>
+</section>

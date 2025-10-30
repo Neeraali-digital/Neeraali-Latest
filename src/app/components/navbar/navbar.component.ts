@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Our work', href: '#our-work' },
     { label: 'Career', href: '/career', isRoute: true },
     { label: 'Blogs', href: '#blogs' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Contact', href: '/contact', isRoute: true }
   ];
 
   constructor(private router: Router) {}
