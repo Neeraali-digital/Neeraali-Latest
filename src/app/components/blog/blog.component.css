@@ -1,0 +1,13 @@
+.blog-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.blog-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.blog-image {
+  height: 200px;
+  object-fit: cover;
+}

@@ -1,0 +1,14 @@
+.blog-content h3 {
+  color: #374151;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+  font-family: 'Oswald', sans-serif;
+}
+
+.blog-content p {
+  color: #6b7280;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+}

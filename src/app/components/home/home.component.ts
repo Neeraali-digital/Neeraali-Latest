@@ -23,9 +23,41 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/l3.jpeg',
     '../assets/clientLogos/l4.jpeg',
     '../assets/clientLogos/l5.jpeg',
-    '../assets/clientLogos/l6.jpeg',
-    // '../assets/clientLogos/l7.jpeg'
+    '../assets/clientLogos/l6.jpeg'
   ];
+
+  clientReviews = [
+    {
+      name: 'Sarah Johnson',
+      company: 'TechStart Inc.',
+      review: 'Neeraali Digital transformed our brand identity completely. Their creative approach and strategic thinking helped us stand out in a competitive market.',
+      rating: 5,
+      image: '../assets/client1.jpg'
+    },
+    {
+      name: 'Michael Chen',
+      company: 'GrowthCorp',
+      review: 'Outstanding digital marketing results! Our online presence increased by 300% within just 3 months of working with them.',
+      rating: 5,
+      image: '../assets/client2.jpg'
+    },
+    {
+      name: 'Emily Rodriguez',
+      company: 'Creative Studios',
+      review: 'Professional, creative, and results-driven. The team at Neeraali Digital exceeded all our expectations with their innovative solutions.',
+      rating: 5,
+      image: '../assets/client3.jpg'
+    },
+    {
+      name: 'David Kumar',
+      company: 'NextGen Solutions',
+      review: 'Their web development and SEO services helped us achieve top rankings on Google. Highly recommend their expertise!',
+      rating: 5,
+      image: '../assets/client4.jpg'
+    }
+  ];
+
+  currentReviewIndex = 0;
 
   showQuoteModal: boolean = false;
   quoteForm = {
@@ -120,5 +152,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateToService(serviceId: string) {
     this.router.navigate(['/service', serviceId]);
+  }
+
+  nextReview() {
+    this.currentReviewIndex = (this.currentReviewIndex + 1) % this.clientReviews.length;
+  }
+
+  prevReview() {
+    this.currentReviewIndex = this.currentReviewIndex === 0 ? this.clientReviews.length - 1 : this.currentReviewIndex - 1;
+  }
+
+  goToReview(index: number) {
+    this.currentReviewIndex = index;
   }
 }

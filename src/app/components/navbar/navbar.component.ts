@@ -1,6 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   isScrolled = false;
   isMobileMenuOpen = false;
   activeSection = '#home';
   showNavbar = false;
+  private routerSubscription: Subscription = new Subscription();
 
   navItems = [
     { label: 'Home', href: '#home' },
@@ -21,13 +23,24 @@ export class NavbarComponent implements OnInit {
     { label: 'What we do', href: '#what-we-do' },
     { label: 'Our work', href: '#our-work' },
     { label: 'Career', href: '/career', isRoute: true },
-    { label: 'Blogs', href: '#blogs' },
+    { label: 'Blogs', href: '/blog', isRoute: true },
     { label: 'Contact', href: '/contact', isRoute: true }
   ];
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setActiveSectionFromRoute();
+    this.routerSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.setActiveSectionFromRoute();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -38,6 +51,9 @@ export class NavbarComponent implements OnInit {
   }
 
   updateActiveSection() {
+    if (this.router.url !== '/') {
+      return; // Only update on home page
+    }
     const sections = this.navItems.map(item => item.href);
     const scrollPosition = window.scrollY + 100;
 
@@ -50,6 +66,16 @@ export class NavbarComponent implements OnInit {
           break;
         }
       }
+    }
+  }
+
+  setActiveSectionFromRoute() {
+    const currentUrl = this.router.url;
+    const routeItem = this.navItems.find(item => item.isRoute && item.href === currentUrl);
+    if (routeItem) {
+      this.activeSection = routeItem.href;
+    } else if (currentUrl === '/') {
+      this.activeSection = '#home';
     }
   }
 

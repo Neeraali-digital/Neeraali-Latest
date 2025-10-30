@@ -1,0 +1,85 @@
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="blog-hero py-24 px-5 text-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+  <div class="max-w-6xl mx-auto text-center relative z-10">
+    <div class="mb-12">
+      <h1 class="text-5xl md:text-7xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">OUR BLOG</h1>
+      <div class="w-24 h-1 bg-accent mx-auto mb-8"></div>
+      <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto" style="font-family: 'Poppins', sans-serif;">
+        Insights, trends, and strategies to help your brand thrive in the digital world.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Posts Section -->
+<section class="py-16 px-5 bg-gray-50 relative">
+  <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let blog of blogs" class="blog-card border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105">
+        <div class="blog-image bg-gray-200 flex items-center justify-center">
+          <span class="material-icons text-6xl text-gray-400">article</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-gradient-to-r from-primary to-accent text-white px-3 py-1 rounded-full text-xs font-semibold" style="font-family: 'Poppins', sans-serif;">{{ blog.category }}</span>
+            <span class="text-gray-500 text-sm" style="font-family: 'Poppins', sans-serif;">{{ blog.readTime }}</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-primary transition-colors" style="font-family: 'Poppins', sans-serif;">{{ blog.title }}</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ blog.excerpt }}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-500 text-sm" style="font-family: 'Poppins', sans-serif;">{{ blog.date }}</span>
+            <button (click)="readBlog(blog.id)" class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105 text-sm font-semibold" style="font-family: 'Poppins', sans-serif;">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-16 px-5 bg-white relative">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="blog-card border border-gray-100 rounded-2xl p-8 shadow-lg">
+      <h2 class="text-3xl md:text-4xl font-black text-gray-800 mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">STAY UPDATED</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-6"></div>
+      <p class="text-gray-600 mb-8" style="font-family: 'Poppins', sans-serif;">Subscribe to our newsletter and get the latest insights delivered to your inbox.</p>
+      <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" style="font-family: 'Poppins', sans-serif;">
+        <button class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold" style="font-family: 'Poppins', sans-serif;">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 px-5 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <h2 class="text-4xl md:text-5xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">READY TO GROW?</h2>
+    <p class="text-xl mb-8 opacity-90" style="font-family: 'Poppins', sans-serif;">
+      Let's discuss how we can help your brand succeed in the digital landscape.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/contact" class="bg-white text-brand-800 hover:bg-gray-100 py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold" style="font-family: 'Poppins', sans-serif;">
+        Get Started
+      </a>
+      <a href="tel:+919945883333" class="border-2 border-white text-white hover:bg-white hover:text-brand-800 py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 font-semibold" style="font-family: 'Poppins', sans-serif;">
+        Call Now
+      </a>
+    </div>
+  </div>
+</section>
