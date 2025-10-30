@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     { label: 'Home', href: '#home' },
     { label: 'Who we are', href: '#who-we-are' },
     { label: 'What we do', href: '#what-we-do' },
-    { label: 'Our work', href: '#our-work' },
     { label: 'Career', href: '/career', isRoute: true },
     { label: 'Blogs', href: '/blog', isRoute: true },
     { label: 'Contact', href: '/contact', isRoute: true }
@@ -46,7 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onWindowScroll() {
     const currentScrollY = window.scrollY;
     this.isScrolled = currentScrollY > 50;
-    this.showNavbar = currentScrollY > 100;
+    this.showNavbar = true;
     this.updateActiveSection();
   }
 
