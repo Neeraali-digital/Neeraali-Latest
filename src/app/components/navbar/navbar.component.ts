@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isScrolled = false;
   isMobileMenuOpen = false;
   activeSection = '#home';
-  showNavbar = false;
+  showNavbar = true;
   private routerSubscription: Subscription = new Subscription();
 
   navItems = [
