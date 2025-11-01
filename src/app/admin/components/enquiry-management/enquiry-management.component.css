@@ -1,0 +1,20 @@
+/* Enquiry Management Styles */
+.status-select {
+  appearance: none;
+  background-image: none;
+}
+
+.status-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(248, 42, 93, 0.2);
+}
+
+.contact-actions a,
+.contact-actions button {
+  transition: all 0.2s ease-in-out;
+}
+
+.contact-actions a:hover,
+.contact-actions button:hover {
+  transform: scale(1.1);
+}

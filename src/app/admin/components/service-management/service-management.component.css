@@ -1,0 +1,16 @@
+/* Service Management Styles */
+.service-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+.feature-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.add-feature-btn:hover {
+  transform: scale(1.05);
+}

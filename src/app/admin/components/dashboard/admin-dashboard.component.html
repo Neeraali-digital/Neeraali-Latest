@@ -1,0 +1,103 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+    <h1 class="text-3xl font-black text-gray-800 mb-2" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">DASHBOARD</h1>
+    <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">Welcome to Neeraali Digital Admin Panel</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600" style="font-family: 'Poppins', sans-serif;">Total Blogs</p>
+          <p class="text-3xl font-bold text-primary" style="font-family: 'Oswald', sans-serif;">{{stats.totalBlogs}}</p>
+        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+          <span class="material-icons text-white">article</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600" style="font-family: 'Poppins', sans-serif;">Services</p>
+          <p class="text-3xl font-bold text-primary" style="font-family: 'Oswald', sans-serif;">{{stats.totalServices}}</p>
+        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+          <span class="material-icons text-white">business_center</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600" style="font-family: 'Poppins', sans-serif;">Enquiries</p>
+          <p class="text-3xl font-bold text-primary" style="font-family: 'Oswald', sans-serif;">{{stats.totalEnquiries}}</p>
+        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+          <span class="material-icons text-white">contact_mail</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600" style="font-family: 'Poppins', sans-serif;">Reviews</p>
+          <p class="text-3xl font-bold text-primary" style="font-family: 'Oswald', sans-serif;">{{stats.totalReviews}}</p>
+        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+          <span class="material-icons text-white">star</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600" style="font-family: 'Poppins', sans-serif;">Careers</p>
+          <p class="text-3xl font-bold text-primary" style="font-family: 'Oswald', sans-serif;">{{stats.totalCareers}}</p>
+        </div>
+        <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+          <span class="material-icons text-white">work</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activities -->
+  <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">RECENT ACTIVITIES</h2>
+      <div class="w-6 h-0.5 bg-gradient-to-r from-primary to-accent"></div>
+    </div>
+    
+    <div class="space-y-4">
+      <div *ngFor="let activity of recentActivities" 
+           class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center mr-4"
+             [class.bg-blue-100]="activity.type === 'enquiry'"
+             [class.bg-green-100]="activity.type === 'blog'"
+             [class.bg-yellow-100]="activity.type === 'review'"
+             [class.bg-purple-100]="activity.type === 'career'">
+          <span class="material-icons text-sm"
+                [class.text-blue-600]="activity.type === 'enquiry'"
+                [class.text-green-600]="activity.type === 'blog'"
+                [class.text-yellow-600]="activity.type === 'review'"
+                [class.text-purple-600]="activity.type === 'career'">
+            {{activity.type === 'enquiry' ? 'contact_mail' : 
+              activity.type === 'blog' ? 'article' : 
+              activity.type === 'review' ? 'star' : 'work'}}
+          </span>
+        </div>
+        <div class="flex-1">
+          <p class="text-gray-800 font-medium" style="font-family: 'Poppins', sans-serif;">{{activity.message}}</p>
+          <p class="text-gray-500 text-sm" style="font-family: 'Poppins', sans-serif;">{{activity.time}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

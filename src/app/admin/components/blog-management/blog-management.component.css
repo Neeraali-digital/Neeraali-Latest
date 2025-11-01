@@ -1,0 +1,20 @@
+/* Blog Management Styles */
+.table-row:hover {
+  background-color: #f9fafb;
+}
+
+.action-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+}
+
+.modal-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.status-badge {
+  transition: all 0.2s ease-in-out;
+}

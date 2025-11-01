@@ -1,0 +1,17 @@
+/* Dashboard specific styles */
+.stats-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.activity-item {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.activity-item:hover {
+  background-color: #f9fafb;
+}

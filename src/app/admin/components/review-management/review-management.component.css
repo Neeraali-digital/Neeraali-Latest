@@ -1,0 +1,23 @@
+/* Review Management Styles */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+.status-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.status-button:hover {
+  transform: scale(1.1);
+}

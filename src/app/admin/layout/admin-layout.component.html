@@ -1,0 +1,94 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Sidebar -->
+  <div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out"
+       [class.translate-x-0]="sidebarOpen"
+       [class.-translate-x-full]="!sidebarOpen">
+    
+    <!-- Logo -->
+    <div class="flex items-center justify-center h-16 px-4 bg-gradient-to-r from-primary to-accent">
+      <img src="../../../assets/logo1.png" alt="Neeraali Digital" class="h-10 filter brightness-0 invert">
+      <span class="ml-2 text-white font-bold text-lg" style="font-family: 'Oswald', sans-serif;">ADMIN</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="mt-8">
+      <div class="px-4 space-y-2">
+        <a routerLink="/admin/dashboard" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">dashboard</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Dashboard</span>
+        </a>
+
+        <a routerLink="/admin/blogs" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">article</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Blogs</span>
+        </a>
+
+        <a routerLink="/admin/services" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">business_center</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Services</span>
+        </a>
+
+        <a routerLink="/admin/enquiries" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">contact_mail</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Enquiries</span>
+        </a>
+
+        <a routerLink="/admin/reviews" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">star</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Reviews</span>
+        </a>
+
+        <a routerLink="/admin/careers" 
+           routerLinkActive="bg-primary/10 text-primary border-r-4 border-primary"
+           class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
+          <span class="material-icons mr-3">work</span>
+          <span style="font-family: 'Poppins', sans-serif; font-weight: 500;">Careers</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="transition-all duration-300 ease-in-out"
+       [class.ml-64]="sidebarOpen"
+       [class.ml-0]="!sidebarOpen">
+    
+    <!-- Top Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+      <div class="flex items-center justify-between px-6 py-4">
+        <button (click)="toggleSidebar()" 
+                class="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+          <span class="material-icons">menu</span>
+        </button>
+        
+        <div class="flex items-center space-x-4">
+          <div class="text-right">
+            <p class="text-sm font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">Admin User</p>
+            <p class="text-xs text-gray-500" style="font-family: 'Poppins', sans-serif;">Administrator</p>
+          </div>
+          <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+            <span class="material-icons text-white text-lg">person</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<!-- Google Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
