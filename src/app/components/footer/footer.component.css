@@ -243,29 +243,31 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.privacy-content h2 {
-  color: #000000;
-  margin-top: 24px;
-  margin-bottom: 12px;
+.privacy-content::-webkit-scrollbar {
+  width: 8px;
 }
 
-.privacy-content h3 {
-  color: #333333;
-  margin-top: 16px;
-  margin-bottom: 8px;
+.privacy-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
 }
 
-.privacy-content p {
-  line-height: 1.6;
-  margin-bottom: 12px;
+.privacy-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #ff6b35);
+  border-radius: 4px;
 }
 
-.privacy-content ul {
-  margin-bottom: 16px;
+.privacy-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff6b35, #00d4ff);
 }
 
+.privacy-content .text-gray-700 {
+  color: #6b7280 !important;
+}
+
+.privacy-content p,
 .privacy-content li {
-  margin-bottom: 4px;
+  color: #6b7280 !important;
 }
 
 .partner-badges h4 {
@@ -279,4 +281,45 @@
 
 .partner-badges div:hover img {
   transform: scale(1.05);
+}
+
+/* Brand color utilities */
+.from-brand-50 {
+  --tw-gradient-from: #fef7f0;
+}
+
+.to-brand-100 {
+  --tw-gradient-to: #fed7aa;
+}
+
+.border-brand-200 {
+  border-color: #fecaca;
+}
+
+.from-brand-500 {
+  --tw-gradient-from: #f82a5d;
+}
+
+.to-brand-600 {
+  --tw-gradient-to: #d91e4a;
+}
+
+.from-brand-600 {
+  --tw-gradient-from: #d91e4a;
+}
+
+.to-brand-800 {
+  --tw-gradient-to: #991b1b;
+}
+
+.from-brand-700 {
+  --tw-gradient-from: #b91c1c;
+}
+
+.via-brand-800 {
+  --tw-gradient-via: #991b1b;
+}
+
+.to-brand-900 {
+  --tw-gradient-to: #7f1d1d;
 }
