@@ -34,9 +34,10 @@
         <div class="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
           <a *ngFor="let item of navItems"
              (click)="item.isRoute ? navigateToRoute(item.href) : scrollToSection(item.href)"
-             class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 cursor-pointer"
+             class="flex justify-between items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 cursor-pointer"
              style="font-family: 'Poppins', sans-serif;">
-            {{ item.label }}
+            <p>{{ item.label }}</p>
+            <span class="material-icons text-gray-700">chevron_right</span>
           </a>
         </div>
       </div>
