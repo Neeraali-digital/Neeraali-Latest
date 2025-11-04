@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, LoadingComponent, FormsModule],
+  imports: [CommonModule, LoadingComponent, FormsModule, FooterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
