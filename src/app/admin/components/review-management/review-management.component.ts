@@ -1,16 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Review {
-  id: number;
-  name: string;
-  company: string;
-  rating: number;
-  review: string;
-  date: string;
-  status: 'approved' | 'pending' | 'rejected';
-}
+import { AdminDataService, Review } from '../../services/admin-data.service';
 
 @Component({
   selector: 'app-review-management',
@@ -20,39 +11,42 @@ interface Review {
   styleUrls: ['./review-management.component.css']
 })
 export class ReviewManagementComponent implements OnInit {
-  reviews: Review[] = [
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      company: 'Tech Innovations',
-      rating: 5,
-      review: 'Exceptional service! The team delivered beyond our expectations with creative solutions and professional approach.',
-      date: '2024-01-15',
-      status: 'approved'
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      company: 'Digital Solutions',
-      rating: 4,
-      review: 'Great work on our digital marketing campaign. Saw significant improvement in our online presence.',
-      date: '2024-01-12',
-      status: 'pending'
-    }
-  ];
+  private adminDataService = inject(AdminDataService);
 
+  reviews: Review[] = [];
   showModal = false;
   editingReview: Review | null = null;
   searchTerm = '';
-  statusFilter = '';
+  statusFilter = 'all';
+  loading = true;
+  error: string | null = null;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadReviews();
+  }
+
+  loadReviews() {
+    this.loading = true;
+    this.error = null;
+
+    this.adminDataService.getReviews().subscribe({
+      next: (reviews) => {
+        this.reviews = reviews;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load reviews';
+        console.error('Reviews loading error:', error);
+        this.loading = false;
+      }
+    });
+  }
 
   get filteredReviews() {
     return this.reviews.filter(review => {
       const matchesSearch = review.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
                            review.company.toLowerCase().includes(this.searchTerm.toLowerCase());
-      const matchesStatus = !this.statusFilter || review.status === this.statusFilter;
+      const matchesStatus = this.statusFilter === 'all' || review.status === this.statusFilter;
       return matchesSearch && matchesStatus;
     });
   }
@@ -76,31 +70,72 @@ export class ReviewManagementComponent implements OnInit {
   }
 
   saveReview() {
-    if (this.editingReview) {
-      if (this.editingReview.id === 0) {
-        this.editingReview.id = Math.max(...this.reviews.map(r => r.id)) + 1;
-        this.reviews.push(this.editingReview);
-      } else {
-        const index = this.reviews.findIndex(r => r.id === this.editingReview!.id);
-        if (index !== -1) {
-          this.reviews[index] = this.editingReview;
+    if (!this.editingReview) return;
+
+    const reviewData = { ...this.editingReview };
+
+    if (this.editingReview.id === 0) {
+      // Add new review
+      const { id, ...newReviewData } = reviewData;
+      this.adminDataService.addReview(newReviewData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to add review';
+          console.error('Add review error:', error);
         }
-      }
+      });
+    } else {
+      // Update existing review
+      this.adminDataService.updateReview(this.editingReview.id, reviewData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to update review';
+          console.error('Update review error:', error);
+        }
+      });
     }
-    this.closeModal();
   }
 
   deleteReview(id: number) {
     if (confirm('Are you sure you want to delete this review?')) {
-      this.reviews = this.reviews.filter(r => r.id !== id);
+      this.adminDataService.deleteReview(id).subscribe({
+        next: () => {
+          // Review will be automatically removed from the list via the service
+        },
+        error: (error) => {
+          this.error = 'Failed to delete review';
+          console.error('Delete review error:', error);
+        }
+      });
     }
   }
 
-  updateStatus(review: Review, status: 'approved' | 'pending' | 'rejected') {
-    review.status = status;
+  updateReviewStatus(review: Review, newStatus: Review['status']) {
+    this.adminDataService.updateReview(review.id, { status: newStatus }).subscribe({
+      next: () => {
+        review.status = newStatus;
+      },
+      error: (error) => {
+        this.error = 'Failed to update review status';
+        console.error('Update review status error:', error);
+      }
+    });
   }
 
-  getStatusColor(status: string): string {
+  getStatusClass(status: Review['status']): string {
+    switch (status) {
+      case 'approved': return 'status-approved';
+      case 'pending': return 'status-pending';
+      case 'rejected': return 'status-rejected';
+      default: return '';
+    }
+  }
+
+  getStatusColor(status: Review['status']): string {
     switch (status) {
       case 'approved': return 'bg-green-100 text-green-800';
       case 'pending': return 'bg-yellow-100 text-yellow-800';
@@ -109,7 +144,11 @@ export class ReviewManagementComponent implements OnInit {
     }
   }
 
+  updateStatus(review: Review, status: Review['status']) {
+    this.updateReviewStatus(review, status);
+  }
+
   getStars(rating: number): number[] {
-    return Array(5).fill(0).map((_, i) => i < rating ? 1 : 0);
+    return Array.from({ length: 5 }, (_, i) => i + 1);
   }
 }

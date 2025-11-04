@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,8 +12,33 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class AdminLayoutComponent {
   sidebarOpen = true;
+  showUserMenu = false;
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  get currentUser() {
+    return this.authService['currentUserSubject'].value;
+  }
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  logout() {
+    this.showUserMenu = false; // Close menu
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/admin/login']);
+      },
+      error: () => {
+        // Even if logout fails, clear local session and redirect
+        this.router.navigate(['/admin/login']);
+      }
+    });
+  }
+
+  // Close user menu when clicking outside
+  closeUserMenu() {
+    this.showUserMenu = false;
   }
 }

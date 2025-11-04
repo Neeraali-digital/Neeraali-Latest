@@ -1,16 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Blog {
-  id: number;
-  title: string;
-  excerpt: string;
-  author: string;
-  publishDate: string;
-  status: 'published' | 'draft';
-  image: string;
-}
+import { AdminDataService, Blog } from '../../services/admin-data.service';
 
 @Component({
   selector: 'app-blog-management',
@@ -20,35 +11,38 @@ interface Blog {
   styleUrls: ['./blog-management.component.css']
 })
 export class BlogManagementComponent implements OnInit {
-  blogs: Blog[] = [
-    {
-      id: 1,
-      title: 'Digital Marketing Trends 2024',
-      excerpt: 'Explore the latest trends shaping digital marketing...',
-      author: 'Admin',
-      publishDate: '2024-01-15',
-      status: 'published',
-      image: 'assets/blog.jpg'
-    },
-    {
-      id: 2,
-      title: 'Social Media Strategy Guide',
-      excerpt: 'Complete guide to building effective social media...',
-      author: 'Admin',
-      publishDate: '2024-01-10',
-      status: 'draft',
-      image: 'assets/blog.jpg'
-    }
-  ];
+  private adminDataService = inject(AdminDataService);
 
+  blogs: Blog[] = [];
   showModal = false;
   editingBlog: Blog | null = null;
   searchTerm = '';
+  loading = true;
+  error: string | null = null;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadBlogs();
+  }
+
+  loadBlogs() {
+    this.loading = true;
+    this.error = null;
+
+    this.adminDataService.getBlogs().subscribe({
+      next: (blogs) => {
+        this.blogs = blogs;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load blogs';
+        console.error('Blogs loading error:', error);
+        this.loading = false;
+      }
+    });
+  }
 
   get filteredBlogs() {
-    return this.blogs.filter(blog => 
+    return this.blogs.filter(blog =>
       blog.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       blog.author.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
@@ -60,7 +54,7 @@ export class BlogManagementComponent implements OnInit {
       title: '',
       excerpt: '',
       author: 'Admin',
-      publishDate: new Date().toISOString().split('T')[0],
+      publish_date: new Date().toISOString().split('T')[0],
       status: 'draft',
       image: ''
     };
@@ -73,27 +67,64 @@ export class BlogManagementComponent implements OnInit {
   }
 
   saveBlog() {
-    if (this.editingBlog) {
-      if (this.editingBlog.id === 0) {
-        this.editingBlog.id = Math.max(...this.blogs.map(b => b.id)) + 1;
-        this.blogs.push(this.editingBlog);
-      } else {
-        const index = this.blogs.findIndex(b => b.id === this.editingBlog!.id);
-        if (index !== -1) {
-          this.blogs[index] = this.editingBlog;
+    if (!this.editingBlog) return;
+
+    const blogData = { ...this.editingBlog };
+
+    if (this.editingBlog.id === 0) {
+      // Add new blog
+      const { id, ...newBlogData } = blogData;
+      this.adminDataService.addBlog(newBlogData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to add blog';
+          console.error('Add blog error:', error);
         }
-      }
+      });
+    } else {
+      // Update existing blog
+      this.adminDataService.updateBlog(this.editingBlog.id, blogData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to update blog';
+          console.error('Update blog error:', error);
+        }
+      });
     }
-    this.closeModal();
   }
 
   deleteBlog(id: number) {
     if (confirm('Are you sure you want to delete this blog?')) {
-      this.blogs = this.blogs.filter(b => b.id !== id);
+      this.adminDataService.deleteBlog(id).subscribe({
+        next: () => {
+          // Blog will be automatically removed from the list via the service
+        },
+        error: (error) => {
+          this.error = 'Failed to delete blog';
+          console.error('Delete blog error:', error);
+        }
+      });
     }
   }
 
   toggleStatus(blog: Blog) {
-    blog.status = blog.status === 'published' ? 'draft' : 'published';
+    const newStatus = blog.status === 'published' ? 'draft' : 'published';
+    this.adminDataService.updateBlog(blog.id, { status: newStatus }).subscribe({
+      next: () => {
+        blog.status = newStatus;
+      },
+      error: (error) => {
+        this.error = 'Failed to update blog status';
+        console.error('Toggle status error:', error);
+      }
+    });
+  }
+
+  trackByIndex(index: number): number {
+    return index;
   }
 }

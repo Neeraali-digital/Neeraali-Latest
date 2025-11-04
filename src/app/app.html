@@ -6,7 +6,7 @@
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div>
-<app-navbar></app-navbar>
-<div class="md:pt-20 pt-14">
+<app-navbar *ngIf="!isAdminRoute()"></app-navbar>
+<div [class]="isAdminRoute() ? '' : 'md:pt-20 pt-14'">
   <router-outlet></router-outlet>
 </div>

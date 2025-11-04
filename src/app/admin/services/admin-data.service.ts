@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 export interface Blog {
   id: number;
   title: string;
   excerpt: string;
   author: string;
-  publishDate: string;
+  publish_date: string;
   status: 'published' | 'draft';
   image: string;
+  content?: string;
 }
 
 export interface Service {
@@ -55,10 +59,27 @@ export interface Job {
   applications: number;
 }
 
+export interface DashboardStats {
+  totalBlogs: number;
+  totalServices: number;
+  totalEnquiries: number;
+  totalReviews: number;
+  totalCareers: number;
+  activeJobs: number;
+  publishedBlogs: number;
+  activeServices: number;
+  newEnquiries: number;
+  pendingReviews: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminDataService {
+  private readonly API_URL = 'http://localhost:8000/api';
+  private http = inject(HttpClient);
+  private authService = inject(AuthService);
+
   private blogsSubject = new BehaviorSubject<Blog[]>([]);
   private servicesSubject = new BehaviorSubject<Service[]>([]);
   private enquiriesSubject = new BehaviorSubject<Enquiry[]>([]);
@@ -72,208 +93,216 @@ export class AdminDataService {
   jobs$ = this.jobsSubject.asObservable();
 
   constructor() {
-    // Initialize with sample data
-    this.initializeData();
+    // Load data on initialization
+    this.loadAllData();
   }
 
-  private initializeData() {
-    // Sample blogs
-    this.blogsSubject.next([
-      {
-        id: 1,
-        title: 'Digital Marketing Trends 2024',
-        excerpt: 'Explore the latest trends shaping digital marketing...',
-        author: 'Admin',
-        publishDate: '2024-01-15',
-        status: 'published',
-        image: 'assets/blog.jpg'
-      }
-    ]);
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : ''
+    });
+  }
 
-    // Sample services
-    this.servicesSubject.next([
-      {
-        id: 1,
-        name: 'Brand Identity',
-        description: 'Build recognition and trust with powerful brand systems.',
-        features: ['Logo Design', 'Brand Guidelines', 'Visual Identity'],
-        price: 'Starting from ₹25,000',
-        status: 'active'
-      }
-    ]);
+  private handleError(error: any) {
+    console.error('API Error:', error);
+    return throwError(() => new Error(error.message || 'An error occurred'));
+  }
 
-    // Sample enquiries
-    this.enquiriesSubject.next([
-      {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@example.com',
-        phone: '+91 9876543210',
-        company: 'Tech Corp',
-        service: 'Digital Marketing',
-        message: 'Looking for comprehensive digital marketing services.',
-        date: '2024-01-15',
-        status: 'new'
-      }
-    ]);
-
-    // Sample reviews
-    this.reviewsSubject.next([
-      {
-        id: 1,
-        name: 'Sarah Johnson',
-        company: 'Tech Innovations',
-        rating: 5,
-        review: 'Exceptional service! The team delivered beyond expectations.',
-        date: '2024-01-15',
-        status: 'approved'
-      }
-    ]);
-
-    // Sample jobs
-    this.jobsSubject.next([
-      {
-        id: 1,
-        title: 'Frontend Developer',
-        department: 'Technology',
-        location: 'Bangalore',
-        type: 'full-time',
-        experience: '2-4 years',
-        description: 'We are looking for a skilled Frontend Developer.',
-        requirements: ['React/Angular expertise', 'HTML/CSS/JavaScript'],
-        status: 'active',
-        applications: 12
-      }
-    ]);
+  loadAllData(): void {
+    this.loadBlogs();
+    this.loadServices();
+    this.loadEnquiries();
+    this.loadReviews();
+    this.loadJobs();
   }
 
   // Blog methods
+  loadBlogs(): void {
+    this.http.get<Blog[]>(`${this.API_URL}/blogs/admin/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (blogs) => this.blogsSubject.next(blogs),
+        error: (error) => console.error('Failed to load blogs:', error)
+      });
+  }
+
   getBlogs(): Observable<Blog[]> {
     return this.blogs$;
   }
 
-  addBlog(blog: Blog): void {
-    const currentBlogs = this.blogsSubject.value;
-    blog.id = Math.max(...currentBlogs.map(b => b.id), 0) + 1;
-    this.blogsSubject.next([...currentBlogs, blog]);
+  addBlog(blog: Partial<Blog>): Observable<Blog> {
+    return this.http.post<Blog>(`${this.API_URL}/blogs/admin/`, blog, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadBlogs()),
+        catchError(this.handleError)
+      );
   }
 
-  updateBlog(blog: Blog): void {
-    const currentBlogs = this.blogsSubject.value;
-    const index = currentBlogs.findIndex(b => b.id === blog.id);
-    if (index !== -1) {
-      currentBlogs[index] = blog;
-      this.blogsSubject.next([...currentBlogs]);
-    }
+  updateBlog(id: number, blog: Partial<Blog>): Observable<Blog> {
+    return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, blog, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadBlogs()),
+        catchError(this.handleError)
+      );
   }
 
-  deleteBlog(id: number): void {
-    const currentBlogs = this.blogsSubject.value;
-    this.blogsSubject.next(currentBlogs.filter(b => b.id !== id));
+  deleteBlog(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/blogs/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadBlogs()),
+        catchError(this.handleError)
+      );
   }
 
   // Service methods
+  loadServices(): void {
+    this.http.get<Service[]>(`${this.API_URL}/services/admin/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (services) => this.servicesSubject.next(services),
+        error: (error) => console.error('Failed to load services:', error)
+      });
+  }
+
   getServices(): Observable<Service[]> {
     return this.services$;
   }
 
-  addService(service: Service): void {
-    const currentServices = this.servicesSubject.value;
-    service.id = Math.max(...currentServices.map(s => s.id), 0) + 1;
-    this.servicesSubject.next([...currentServices, service]);
+  addService(service: Partial<Service>): Observable<Service> {
+    return this.http.post<Service>(`${this.API_URL}/services/admin/`, service, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadServices()),
+        catchError(this.handleError)
+      );
   }
 
-  updateService(service: Service): void {
-    const currentServices = this.servicesSubject.value;
-    const index = currentServices.findIndex(s => s.id === service.id);
-    if (index !== -1) {
-      currentServices[index] = service;
-      this.servicesSubject.next([...currentServices]);
-    }
+  updateService(id: number, service: Partial<Service>): Observable<Service> {
+    return this.http.put<Service>(`${this.API_URL}/services/admin/${id}/`, service, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadServices()),
+        catchError(this.handleError)
+      );
   }
 
-  deleteService(id: number): void {
-    const currentServices = this.servicesSubject.value;
-    this.servicesSubject.next(currentServices.filter(s => s.id !== id));
+  deleteService(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/services/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadServices()),
+        catchError(this.handleError)
+      );
   }
 
   // Enquiry methods
+  loadEnquiries(): void {
+    this.http.get<Enquiry[]>(`${this.API_URL}/enquiries/admin/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (enquiries) => this.enquiriesSubject.next(enquiries),
+        error: (error) => console.error('Failed to load enquiries:', error)
+      });
+  }
+
   getEnquiries(): Observable<Enquiry[]> {
     return this.enquiries$;
   }
 
-  updateEnquiry(enquiry: Enquiry): void {
-    const currentEnquiries = this.enquiriesSubject.value;
-    const index = currentEnquiries.findIndex(e => e.id === enquiry.id);
-    if (index !== -1) {
-      currentEnquiries[index] = enquiry;
-      this.enquiriesSubject.next([...currentEnquiries]);
-    }
+  updateEnquiry(id: number, enquiry: Partial<Enquiry>): Observable<Enquiry> {
+    return this.http.put<Enquiry>(`${this.API_URL}/enquiries/admin/${id}/`, enquiry, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadEnquiries()),
+        catchError(this.handleError)
+      );
   }
 
-  deleteEnquiry(id: number): void {
-    const currentEnquiries = this.enquiriesSubject.value;
-    this.enquiriesSubject.next(currentEnquiries.filter(e => e.id !== id));
+  deleteEnquiry(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/enquiries/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadEnquiries()),
+        catchError(this.handleError)
+      );
   }
 
   // Review methods
+  loadReviews(): void {
+    this.http.get<Review[]>(`${this.API_URL}/reviews/admin/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (reviews) => this.reviewsSubject.next(reviews),
+        error: (error) => console.error('Failed to load reviews:', error)
+      });
+  }
+
   getReviews(): Observable<Review[]> {
     return this.reviews$;
   }
 
-  addReview(review: Review): void {
-    const currentReviews = this.reviewsSubject.value;
-    review.id = Math.max(...currentReviews.map(r => r.id), 0) + 1;
-    this.reviewsSubject.next([...currentReviews, review]);
+  addReview(review: Partial<Review>): Observable<Review> {
+    return this.http.post<Review>(`${this.API_URL}/reviews/admin/`, review, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadReviews()),
+        catchError(this.handleError)
+      );
   }
 
-  updateReview(review: Review): void {
-    const currentReviews = this.reviewsSubject.value;
-    const index = currentReviews.findIndex(r => r.id === review.id);
-    if (index !== -1) {
-      currentReviews[index] = review;
-      this.reviewsSubject.next([...currentReviews]);
-    }
+  updateReview(id: number, review: Partial<Review>): Observable<Review> {
+    return this.http.put<Review>(`${this.API_URL}/reviews/admin/${id}/`, review, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadReviews()),
+        catchError(this.handleError)
+      );
   }
 
-  deleteReview(id: number): void {
-    const currentReviews = this.reviewsSubject.value;
-    this.reviewsSubject.next(currentReviews.filter(r => r.id !== id));
+  deleteReview(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/reviews/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadReviews()),
+        catchError(this.handleError)
+      );
   }
 
   // Job methods
+  loadJobs(): void {
+    this.http.get<Job[]>(`${this.API_URL}/careers/admin/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (jobs) => this.jobsSubject.next(jobs),
+        error: (error) => console.error('Failed to load jobs:', error)
+      });
+  }
+
   getJobs(): Observable<Job[]> {
     return this.jobs$;
   }
 
-  addJob(job: Job): void {
-    const currentJobs = this.jobsSubject.value;
-    job.id = Math.max(...currentJobs.map(j => j.id), 0) + 1;
-    this.jobsSubject.next([...currentJobs, job]);
+  addJob(job: Partial<Job>): Observable<Job> {
+    return this.http.post<Job>(`${this.API_URL}/careers/admin/`, job, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadJobs()),
+        catchError(this.handleError)
+      );
   }
 
-  updateJob(job: Job): void {
-    const currentJobs = this.jobsSubject.value;
-    const index = currentJobs.findIndex(j => j.id === job.id);
-    if (index !== -1) {
-      currentJobs[index] = job;
-      this.jobsSubject.next([...currentJobs]);
-    }
+  updateJob(id: number, job: Partial<Job>): Observable<Job> {
+    return this.http.put<Job>(`${this.API_URL}/careers/admin/${id}/`, job, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadJobs()),
+        catchError(this.handleError)
+      );
   }
 
-  deleteJob(id: number): void {
-    const currentJobs = this.jobsSubject.value;
-    this.jobsSubject.next(currentJobs.filter(j => j.id !== id));
+  deleteJob(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/careers/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadJobs()),
+        catchError(this.handleError)
+      );
   }
 
-  // Statistics
-  getStats() {
-    return {
-      totalBlogs: this.blogsSubject.value.length,
-      totalServices: this.servicesSubject.value.length,
-      totalEnquiries: this.enquiriesSubject.value.length,
-      totalReviews: this.reviewsSubject.value.length,
-      totalCareers: this.jobsSubject.value.length
-    };
+  // Dashboard stats
+  getStats(): Observable<DashboardStats> {
+    return this.http.get<DashboardStats>(`${this.API_URL}/dashboard/stats/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 }

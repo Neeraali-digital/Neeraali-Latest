@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Service {
-  id: number;
-  name: string;
-  description: string;
-  features: string[];
-  price: string;
-  status: 'active' | 'inactive';
-}
+import { AdminDataService, Service } from '../../services/admin-data.service';
 
 @Component({
   selector: 'app-service-management',
@@ -19,46 +11,51 @@ interface Service {
   styleUrls: ['./service-management.component.css']
 })
 export class ServiceManagementComponent implements OnInit {
-  services: Service[] = [
-    {
-      id: 1,
-      name: 'Brand Identity',
-      description: 'Build recognition and trust with powerful brand systems.',
-      features: ['Logo Design', 'Brand Guidelines', 'Visual Identity', 'Brand Strategy'],
-      price: 'Starting from ₹25,000',
-      status: 'active'
-    },
-    {
-      id: 2,
-      name: 'Digital Marketing',
-      description: 'SEO, PPC, Email & Content strategies that get you discovered.',
-      features: ['SEO Optimization', 'PPC Campaigns', 'Content Marketing', 'Email Marketing'],
-      price: 'Starting from ₹15,000/month',
-      status: 'active'
-    }
-  ];
+  private adminDataService = inject(AdminDataService);
 
+  services: Service[] = [];
   showModal = false;
   editingService: Service | null = null;
   searchTerm = '';
+  loading = true;
+  error: string | null = null;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadServices();
+  }
+
+  loadServices() {
+    this.loading = true;
+    this.error = null;
+
+    this.adminDataService.getServices().subscribe({
+      next: (services) => {
+        this.services = services;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load services';
+        console.error('Services loading error:', error);
+        this.loading = false;
+      }
+    });
+  }
 
   get filteredServices() {
-    return this.services.filter(service => 
+    return this.services.filter(service =>
       service.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       service.description.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
   openModal(service?: Service) {
-    this.editingService = service ? { ...service, features: [...service.features] } : {
+    this.editingService = service ? { ...service } : {
       id: 0,
       name: '',
       description: '',
       features: [],
       price: '',
-      status: 'active'
+      status: 'inactive'
     };
     this.showModal = true;
   }
@@ -69,28 +66,61 @@ export class ServiceManagementComponent implements OnInit {
   }
 
   saveService() {
-    if (this.editingService) {
-      if (this.editingService.id === 0) {
-        this.editingService.id = Math.max(...this.services.map(s => s.id)) + 1;
-        this.services.push(this.editingService);
-      } else {
-        const index = this.services.findIndex(s => s.id === this.editingService!.id);
-        if (index !== -1) {
-          this.services[index] = this.editingService;
+    if (!this.editingService) return;
+
+    const serviceData = { ...this.editingService };
+
+    if (this.editingService.id === 0) {
+      // Add new service
+      const { id, ...newServiceData } = serviceData;
+      this.adminDataService.addService(newServiceData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to add service';
+          console.error('Add service error:', error);
         }
-      }
+      });
+    } else {
+      // Update existing service
+      this.adminDataService.updateService(this.editingService.id, serviceData).subscribe({
+        next: () => {
+          this.closeModal();
+        },
+        error: (error) => {
+          this.error = 'Failed to update service';
+          console.error('Update service error:', error);
+        }
+      });
     }
-    this.closeModal();
   }
 
   deleteService(id: number) {
     if (confirm('Are you sure you want to delete this service?')) {
-      this.services = this.services.filter(s => s.id !== id);
+      this.adminDataService.deleteService(id).subscribe({
+        next: () => {
+          // Service will be automatically removed from the list via the service
+        },
+        error: (error) => {
+          this.error = 'Failed to delete service';
+          console.error('Delete service error:', error);
+        }
+      });
     }
   }
 
   toggleStatus(service: Service) {
-    service.status = service.status === 'active' ? 'inactive' : 'active';
+    const newStatus = service.status === 'active' ? 'inactive' : 'active';
+    this.adminDataService.updateService(service.id, { status: newStatus }).subscribe({
+      next: () => {
+        service.status = newStatus;
+      },
+      error: (error) => {
+        this.error = 'Failed to update service status';
+        console.error('Toggle status error:', error);
+      }
+    });
   }
 
   addFeature() {

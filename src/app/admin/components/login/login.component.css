@@ -1,0 +1,28 @@
+/* Additional custom styles for login component */
+.login-container {
+  background: linear-gradient(135deg, #f82a5d 0%, #f82a5d 50%, rgba(248, 42, 93, 0.8) 100%);
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(248, 42, 93, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(248, 42, 93, 0.3);
+}
+
+.error-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
