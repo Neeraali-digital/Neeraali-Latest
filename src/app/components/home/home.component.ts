@@ -42,32 +42,32 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   clientReviews = [
     {
-      name: 'Sarah Johnson',
-      company: 'TechStart Inc.',
+      name: 'Rahul Sharma',
+      company: 'TechStart India',
       review: 'Neeraali Digital transformed our brand identity completely. Their creative approach and strategic thinking helped us stand out in a competitive market.',
       rating: 5,
-      image: '../assets/client1.jpg'
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
     },
     {
-      name: 'Michael Chen',
-      company: 'GrowthCorp',
+      name: 'Priya Patel',
+      company: 'GrowthCorp Solutions',
       review: 'Outstanding digital marketing results! Our online presence increased by 300% within just 3 months of working with them.',
       rating: 5,
-      image: '../assets/client2.jpg'
+      image: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face'
     },
     {
-      name: 'Emily Rodriguez',
-      company: 'Creative Studios',
+      name: 'Arjun Singh',
+      company: 'Creative Studios India',
       review: 'Professional, creative, and results-driven. The team at Neeraali Digital exceeded all our expectations with their innovative solutions.',
       rating: 5,
-      image: '../assets/client3.jpg'
+      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face'
     },
     {
-      name: 'David Kumar',
-      company: 'NextGen Solutions',
+      name: 'Anjali Gupta',
+      company: 'NextGen Technologies',
       review: 'Their web development and SEO services helped us achieve top rankings on Google. Highly recommend their expertise!',
       rating: 5,
-      image: '../assets/client4.jpg'
+      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face'
     }
   ];
 
