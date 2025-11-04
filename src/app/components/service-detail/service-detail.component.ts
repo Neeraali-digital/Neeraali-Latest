@@ -27,6 +27,29 @@ interface FAQItem {
 export class ServiceDetailComponent implements OnInit {
   service: ServiceDetail | null = null;
 
+  clientLogos: string[] = [
+    '../assets/clientLogos/1.png',
+    '../assets/clientLogos/2.png',
+    '../assets/clientLogos/3.png',
+    '../assets/clientLogos/4.png',
+    // '../assets/clientLogos/5.png',
+    '../assets/clientLogos/6.png',
+    '../assets/clientLogos/7.png',
+    '../assets/clientLogos/8.png',
+    '../assets/clientLogos/9.png',
+    '../assets/clientLogos/10.png',
+    '../assets/clientLogos/11.png',
+    '../assets/clientLogos/12.png',
+    '../assets/clientLogos/13.png',
+    '../assets/clientLogos/14.png',
+    '../assets/clientLogos/15.png',
+    '../assets/clientLogos/16.png',
+    '../assets/clientLogos/17.png',
+    '../assets/clientLogos/18.png',
+    // '../assets/clientLogos/19.png',
+    // '../assets/clientLogos/20.png',
+  ];
+
   faqs: FAQItem[] = [
     {
       question: 'How do you measure success?',

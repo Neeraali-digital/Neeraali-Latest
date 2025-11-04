@@ -220,37 +220,16 @@
         </h2>
         <p class="text-xl text-gray-600" style="font-family: 'Poppins', sans-serif;">Proud partners in digital growth</p>
       </div>
-      
+
       <div class="bg-gray-50 rounded-2xl p-8">
         <div class="logos-marquee-container overflow-hidden">
           <div class="logos-marquee flex space-x-12 animate-marquee">
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l1.jpeg" alt="Client Logo 1" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l2.jpeg" alt="Client Logo 2" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l3.jpeg" alt="Client Logo 3" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l4.jpeg" alt="Client Logo 4" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l5.jpeg" alt="Client Logo 5" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l6.jpeg" alt="Client Logo 6" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+            <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
+              <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
             </div>
             <!-- Duplicate for seamless loop -->
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l1.jpeg" alt="Client Logo 1" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l2.jpeg" alt="Client Logo 2" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
-            </div>
-            <div class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
-              <img src="../assets/clientLogos/l3.jpeg" alt="Client Logo 3" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+            <div *ngFor="let logo of clientLogos.slice(0, 6); let i = index" class="group relative overflow-hidden rounded-xl bg-white border border-gray-100 p-6 hover:shadow-lg transition-all duration-500 hover:scale-105 flex-shrink-0">
+              <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-20 h-20 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
             </div>
           </div>
         </div>
