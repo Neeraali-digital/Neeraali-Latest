@@ -383,7 +383,7 @@
 
         <!-- Client Logos Grid -->
         <div class="scroll-animate fade-in-up">
-          <div class="grid grid-cols-6 gap-4 justify-items-center">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 justify-items-center">
             <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden bg-white border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-gray-50 flex items-center justify-center" style="width: 140px; height: 100px;">
               <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-full h-full object-contain filter group-hover:grayscale-0 transition-all duration-300">
             </div>
