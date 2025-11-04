@@ -381,19 +381,11 @@
         </div>
         <p class="text-md text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12 scroll-animate fade-in-up" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Proud Partners in Growth</p>
 
-        <!-- Client Logos Marquee -->
+        <!-- Client Logos Grid -->
         <div class="scroll-animate fade-in-up">
-          <div class="logos-marquee-container overflow-hidden">
-            <div class="logos-marquee flex space-x-8 animate-marquee">
-              <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80 flex-shrink-0">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-16 h-16 md:w-20 md:h-20 object-contain filter group-hover:grayscale-0 transition-all duration-300 relative z-10">
-              </div>
-              <!-- Duplicate logos for seamless loop -->
-              <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden rounded-xl backdrop-blur-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/80 flex-shrink-0">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-16 h-16 md:w-20 md:h-20 object-contain filter group-hover:grayscale-0 transition-all duration-300 relative z-10">
-              </div>
+          <div class="grid grid-cols-6 gap-4 justify-items-center">
+            <div *ngFor="let logo of clientLogos; let i = index" class="group relative overflow-hidden bg-white border border-gray-100 p-4 hover:shadow-lg transition-all duration-500 hover:scale-105 hover:bg-gray-50 flex items-center justify-center" style="width: 140px; height: 100px;">
+              <img [src]="logo" [alt]="'Client Logo ' + (i + 1)" class="w-full h-full object-contain filter group-hover:grayscale-0 transition-all duration-300">
             </div>
           </div>
         </div>
