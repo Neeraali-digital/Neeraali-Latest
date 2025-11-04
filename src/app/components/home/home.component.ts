@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/9.png',
     '../assets/clientLogos/10.png',
     '../assets/clientLogos/11.png',
-    '../assets/clientLogos/6.png',
     '../assets/clientLogos/12.png',
     '../assets/clientLogos/13.png',
     '../assets/clientLogos/14.png',
@@ -36,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/16.png',
     '../assets/clientLogos/17.png',
     '../assets/clientLogos/18.png',
+    '../assets/clientLogos/6.png',
     // '../assets/clientLogos/19.png',
     // '../assets/clientLogos/20.png',
   ];
