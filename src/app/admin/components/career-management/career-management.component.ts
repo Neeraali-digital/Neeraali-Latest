@@ -64,7 +64,20 @@ export class CareerManagementComponent implements OnInit {
       description: '',
       requirements: [],
       status: 'inactive',
-      applications: 0
+      applications: 0,
+      shift_work: 'No',
+      career_area: 'General',
+      contractual_location: '',
+      term_of_employment: 'Permanent',
+      job_description: '',
+      the_opportunity: '',
+      what_youll_be_doing: '',
+      your_work_location: '',
+      who_you_are: '',
+      security_vetting: '',
+      pay: '',
+      benefits_and_culture: '',
+      additional_information: ''
     };
     this.showModal = true;
     this.cdr.detectChanges();

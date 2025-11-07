@@ -25,6 +25,32 @@ export interface PublicReview {
   date: string;
 }
 
+export interface PublicJob {
+  id: number;
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  experience: string;
+  description: string;
+  requirements: string[];
+  status: string;
+  applications: number;
+  shift_work: string;
+  career_area: string;
+  contractual_location: string;
+  term_of_employment: string;
+  job_description: string;
+  the_opportunity: string;
+  what_youll_be_doing: string;
+  your_work_location: string;
+  who_you_are: string;
+  security_vetting: string;
+  pay: string;
+  benefits_and_culture: string;
+  additional_information: string;
+}
+
 export interface EnquiryForm {
   name: string;
   email: string;
@@ -68,6 +94,20 @@ export class PublicDataService {
         map((response: any) => response.results || response),
         catchError(this.handleError)
       );
+  }
+
+  // Job methods
+  getJobs(): Observable<PublicJob[]> {
+    return this.http.get<PublicJob[]>(`${this.API_URL}/careers/`)
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      );
+  }
+
+  getJobDetail(id: number): Observable<PublicJob> {
+    return this.http.get<PublicJob>(`${this.API_URL}/careers/${id}/`)
+      .pipe(catchError(this.handleError));
   }
 
   // Enquiry methods

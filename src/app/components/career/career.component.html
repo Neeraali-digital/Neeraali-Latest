@@ -6,17 +6,19 @@
 
 <div class="min-h-screen bg-white">
   <!-- Hero Section -->
-  <section class="py-10 bg-gradient-to-br from-brand-600 to-brand-800 text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div>
+  <section class="py-10 text-white relative overflow-hidden bg-cover"
+  style="background-image: url(../../../assets/pink.png);"
+  >
+    <!-- <div class="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900"></div> -->
     <div class="max-w-7xl mx-auto px-5 relative z-10">
       <div class="text-center">
-        <h1 class="text-5xl md:text-7xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 text-gray-700" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
           CAREERS
         </h1>
         <h2 class="text-2xl md:text-4xl font-bold text-accent mb-8" style="font-family: 'Oswald', sans-serif;">
           Join Our Team
         </h2>
-        <p class="text-lg md:text-xl max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
+        <p class="text-lg md:text-xl text-gray-500 max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
           Discover exciting opportunities to grow your career with us. We're looking for talented individuals ready to make an impact.
         </p>
       </div>
@@ -68,17 +70,17 @@
                 </div>
                 <div class="flex items-center">
                   <span class="material-icons text-gray-400 mr-2 text-base">schedule</span>
-                  <span>{{ job.type }} • {{ job.shiftWork }}</span>
+                  <span>{{ job.type }} • {{ job.shift_work }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class="material-icons text-gray-400 mr-2 text-base">business_center</span>
-                  <span>{{ job.careerArea }}</span>
+                  <span>{{ job.career_area }}</span>
                 </div>
               </div>
 
               <div class="flex items-center gap-3 mt-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">{{ job.contractualLocation }}</span>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent">{{ job.termOfEmployment }}</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">{{ job.contractual_location }}</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent">{{ job.term_of_employment }}</span>
               </div>
             </div>
 

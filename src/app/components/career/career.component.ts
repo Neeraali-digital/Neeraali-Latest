@@ -1,18 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-interface Job {
-  id: string;
-  title: string;
-  location: string;
-  type: string;
-  shiftWork: string;
-  careerArea: string;
-  contractualLocation: string;
-  termOfEmployment: string;
-}
+import { PublicDataService, PublicJob } from '../../services/public-data.service';
 
 @Component({
   selector: 'app-career',
@@ -21,46 +11,42 @@ interface Job {
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css']
 })
-export class CareerComponent {
-  jobs: Job[] = [
-    {
-      id: '1',
-      title: 'Senior Software Engineer',
-      location: 'Morecambe, United Kingdom',
-      type: 'Full-time',
-      shiftWork: 'No',
-      careerArea: 'Placements',
-      contractualLocation: 'Heysham 2',
-      termOfEmployment: 'Fixed Term'
-    },
-    {
-      id: '2',
-      title: 'Project Manager',
-      location: 'Morecambe, United Kingdom',
-      type: 'Full-time',
-      shiftWork: 'No',
-      careerArea: 'Placements',
-      contractualLocation: 'Heysham 2',
-      termOfEmployment: 'Fixed Term'
-    },
-    {
-      id: '3',
-      title: 'UX Designer',
-      location: 'Morecambe, United Kingdom',
-      type: 'Full-time',
-      shiftWork: 'No',
-      careerArea: 'Placements',
-      contractualLocation: 'Heysham 2',
-      termOfEmployment: 'Fixed Term'
-    }
-  ];
-
-  filteredJobs: Job[] = [...this.jobs];
+export class CareerComponent implements OnInit {
+  jobs: PublicJob[] = [];
+  filteredJobs: PublicJob[] = [];
   searchTerm: string = '';
+  loading = true;
+  error: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private publicDataService: PublicDataService
+  ) {}
 
-  viewJobDetail(jobId: string) {
+  ngOnInit() {
+    this.loadJobs();
+  }
+
+  loadJobs() {
+    this.loading = true;
+    this.error = null;
+
+    this.publicDataService.getJobs().subscribe({
+      next: (jobs) => {
+        // Filter only active jobs for public view
+        this.jobs = jobs.filter(job => job.status === 'active');
+        this.filteredJobs = [...this.jobs];
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load jobs';
+        console.error('Jobs loading error:', error);
+        this.loading = false;
+      }
+    });
+  }
+
+  viewJobDetail(jobId: number) {
     this.router.navigate(['/career', jobId]);
   }
 
@@ -73,7 +59,7 @@ export class CareerComponent {
         job.title.toLowerCase().includes(term) ||
         job.location.toLowerCase().includes(term) ||
         job.type.toLowerCase().includes(term) ||
-        job.careerArea.toLowerCase().includes(term)
+        job.career_area.toLowerCase().includes(term)
       );
     }
   }

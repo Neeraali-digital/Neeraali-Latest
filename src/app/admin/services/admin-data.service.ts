@@ -75,6 +75,19 @@ export interface Job {
   requirements: string[];
   status: 'active' | 'inactive';
   applications: number;
+  shift_work: string;
+  career_area: string;
+  contractual_location: string;
+  term_of_employment: string;
+  job_description: string;
+  the_opportunity: string;
+  what_youll_be_doing: string;
+  your_work_location: string;
+  who_you_are: string;
+  security_vetting: string;
+  pay: string;
+  benefits_and_culture: string;
+  additional_information: string;
 }
 
 export interface DashboardStats {

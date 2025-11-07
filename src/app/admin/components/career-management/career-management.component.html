@@ -140,14 +140,14 @@
       <div class="grid grid-cols-3 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Location</label>
-          <input [(ngModel)]="editingJob.location" name="location" type="text" 
+          <input [(ngModel)]="editingJob.location" name="location" type="text"
                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                  style="font-family: 'Poppins', sans-serif;">
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Job Type</label>
-          <select [(ngModel)]="editingJob.type" name="type" 
+          <select [(ngModel)]="editingJob.type" name="type"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   style="font-family: 'Poppins', sans-serif;">
             <option value="full-time">Full Time</option>
@@ -156,13 +156,47 @@
             <option value="internship">Internship</option>
           </select>
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Experience</label>
-          <input [(ngModel)]="editingJob.experience" name="experience" type="text" 
+          <input [(ngModel)]="editingJob.experience" name="experience" type="text"
                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                  style="font-family: 'Poppins', sans-serif;"
                  placeholder="e.g., 2-4 years">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Shift Work</label>
+          <input [(ngModel)]="editingJob.shift_work" name="shift_work" type="text"
+                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                 style="font-family: 'Poppins', sans-serif;"
+                 placeholder="e.g., No">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Career Area</label>
+          <input [(ngModel)]="editingJob.career_area" name="career_area" type="text"
+                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                 style="font-family: 'Poppins', sans-serif;"
+                 placeholder="e.g., Placements">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Contractual Location</label>
+          <input [(ngModel)]="editingJob.contractual_location" name="contractual_location" type="text"
+                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                 style="font-family: 'Poppins', sans-serif;"
+                 placeholder="e.g., Heysham 2">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Term of Employment</label>
+          <input [(ngModel)]="editingJob.term_of_employment" name="term_of_employment" type="text"
+                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                 style="font-family: 'Poppins', sans-serif;"
+                 placeholder="e.g., Fixed Term">
         </div>
       </div>
       
@@ -200,12 +234,87 @@
       
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Status</label>
-        <select [(ngModel)]="editingJob.status" name="status" 
+        <select [(ngModel)]="editingJob.status" name="status"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 style="font-family: 'Poppins', sans-serif;">
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
+      </div>
+
+      <!-- Detailed Job Description Sections -->
+      <div class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Job Description</label>
+          <textarea [(ngModel)]="editingJob.job_description" name="job_description" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Detailed job description..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">The Opportunity</label>
+          <textarea [(ngModel)]="editingJob.the_opportunity" name="the_opportunity" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Describe the opportunity..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">What You'll Be Doing</label>
+          <textarea [(ngModel)]="editingJob.what_youll_be_doing" name="what_youll_be_doing" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Describe responsibilities..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Your Work Location</label>
+          <textarea [(ngModel)]="editingJob.your_work_location" name="your_work_location" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Describe work location..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Who You Are</label>
+          <textarea [(ngModel)]="editingJob.who_you_are" name="who_you_are" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Describe ideal candidate..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Security Vetting</label>
+          <textarea [(ngModel)]="editingJob.security_vetting" name="security_vetting" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Security requirements..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Pay</label>
+          <textarea [(ngModel)]="editingJob.pay" name="pay" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Salary information..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Benefits and Culture</label>
+          <textarea [(ngModel)]="editingJob.benefits_and_culture" name="benefits_and_culture" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Benefits and company culture..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Additional Information</label>
+          <textarea [(ngModel)]="editingJob.additional_information" name="additional_information" rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    style="font-family: 'Poppins', sans-serif;"
+                    placeholder="Any additional information..."></textarea>
+        </div>
       </div>
       
       <div class="flex justify-end space-x-4">

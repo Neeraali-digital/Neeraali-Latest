@@ -30,57 +30,57 @@
         <!-- Left Side -->
         <div class="lg:col-span-2">
           <!-- Job Description -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.job_description">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Job Description</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.jobDescription }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.job_description }}</p>
           </div>
 
           <!-- The Opportunity -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.the_opportunity">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">The Opportunity</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.theOpportunity }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.the_opportunity }}</p>
           </div>
 
           <!-- What You'll Be Doing -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.what_youll_be_doing">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">What You'll Be Doing</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.whatYoullBeDoing }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.what_youll_be_doing }}</p>
           </div>
 
           <!-- Your Work Location -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.your_work_location">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Your Work Location</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.yourWorkLocation }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.your_work_location }}</p>
           </div>
 
           <!-- Who You Are -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.who_you_are">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Who You Are</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.whoYouAre }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.who_you_are }}</p>
           </div>
 
           <!-- Security Vetting -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.security_vetting">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Security Vetting</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.securityVetting }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.security_vetting }}</p>
           </div>
 
           <!-- Pay -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.pay">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Pay</h3>
             <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.pay }}</p>
           </div>
 
           <!-- Benefits and Culture -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.benefits_and_culture">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Benefits and Culture</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.benefitsAndCulture }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.benefits_and_culture }}</p>
           </div>
 
           <!-- Additional Information -->
-          <div class="mb-8">
+          <div class="mb-8" *ngIf="job.additional_information">
             <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Additional Information</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.additionalInformation }}</p>
+            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.additional_information }}</p>
           </div>
         </div>
 
@@ -99,21 +99,21 @@
                   <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Type:</span>
                   <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.type }}</p>
                 </div>
-                <div>
+                <div *ngIf="job.shift_work">
                   <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Shift Work:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.shiftWork }}</p>
+                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.shift_work }}</p>
                 </div>
-                <div>
+                <div *ngIf="job.career_area">
                   <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Career Area:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.careerArea }}</p>
+                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.career_area }}</p>
                 </div>
-                <div>
+                <div *ngIf="job.contractual_location">
                   <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Contractual Location:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.contractualLocation }}</p>
+                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.contractual_location }}</p>
                 </div>
-                <div>
+                <div *ngIf="job.term_of_employment">
                   <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Term of Employment:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.termOfEmployment }}</p>
+                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.term_of_employment }}</p>
                 </div>
               </div>
             </div>
