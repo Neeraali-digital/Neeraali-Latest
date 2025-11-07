@@ -8,11 +8,12 @@ export interface Blog {
   id: number;
   title: string;
   excerpt: string;
+  content: string;
+  related_to: string;
   author: string;
   publish_date: string;
   status: 'published' | 'draft';
   image: string;
-  content?: string;
 }
 
 export interface Service {
@@ -107,6 +108,13 @@ export class AdminDataService {
 
   private handleError(error: any) {
     console.error('API Error:', error);
+
+    // Handle 401 Unauthorized - token expired
+    if (error.status === 401) {
+      this.authService.logout();
+      return throwError(() => new Error('Session expired. Please login again.'));
+    }
+
     return throwError(() => new Error(error.message || 'An error occurred'));
   }
 
@@ -120,8 +128,11 @@ export class AdminDataService {
 
   // Blog methods
   loadBlogs(): void {
-    this.http.get<Blog[]>(`${this.API_URL}/blogs/admin/`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError))
+    this.http.get(`${this.API_URL}/blogs/admin/`, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      )
       .subscribe({
         next: (blogs) => this.blogsSubject.next(blogs),
         error: (error) => console.error('Failed to load blogs:', error)
@@ -132,20 +143,60 @@ export class AdminDataService {
     return this.blogs$;
   }
 
-  addBlog(blog: Partial<Blog>): Observable<Blog> {
-    return this.http.post<Blog>(`${this.API_URL}/blogs/admin/`, blog, { headers: this.getHeaders() })
-      .pipe(
+  addBlog(blog: Partial<Blog>, file?: File | null): Observable<Blog> {
+    if (file) {
+      const formData = new FormData();
+      Object.keys(blog).forEach(key => {
+        const value = (blog as any)[key];
+        if (value !== null && value !== undefined) {
+          formData.append(key, value.toString());
+        }
+      });
+      formData.append('image', file);
+
+      return this.http.post<Blog>(`${this.API_URL}/blogs/admin/`, formData, {
+        headers: new HttpHeaders({
+          'Authorization': this.authService.getToken() ? `Bearer ${this.authService.getToken()}` : ''
+        })
+      }).pipe(
         tap(() => this.loadBlogs()),
         catchError(this.handleError)
       );
+    } else {
+      return this.http.post<Blog>(`${this.API_URL}/blogs/admin/`, blog, { headers: this.getHeaders() })
+        .pipe(
+          tap(() => this.loadBlogs()),
+          catchError(this.handleError)
+        );
+    }
   }
 
-  updateBlog(id: number, blog: Partial<Blog>): Observable<Blog> {
-    return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, blog, { headers: this.getHeaders() })
-      .pipe(
+  updateBlog(id: number, blog: Partial<Blog>, file?: File | null): Observable<Blog> {
+    if (file) {
+      const formData = new FormData();
+      Object.keys(blog).forEach(key => {
+        const value = (blog as any)[key];
+        if (value !== null && value !== undefined) {
+          formData.append(key, value.toString());
+        }
+      });
+      formData.append('image', file);
+
+      return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, formData, {
+        headers: new HttpHeaders({
+          'Authorization': this.authService.getToken() ? `Bearer ${this.authService.getToken()}` : ''
+        })
+      }).pipe(
         tap(() => this.loadBlogs()),
         catchError(this.handleError)
       );
+    } else {
+      return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, blog, { headers: this.getHeaders() })
+        .pipe(
+          tap(() => this.loadBlogs()),
+          catchError(this.handleError)
+        );
+    }
   }
 
   deleteBlog(id: number): Observable<void> {
@@ -158,8 +209,11 @@ export class AdminDataService {
 
   // Service methods
   loadServices(): void {
-    this.http.get<Service[]>(`${this.API_URL}/services/admin/`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError))
+    this.http.get(`${this.API_URL}/services/admin/`, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      )
       .subscribe({
         next: (services) => this.servicesSubject.next(services),
         error: (error) => console.error('Failed to load services:', error)
@@ -196,8 +250,11 @@ export class AdminDataService {
 
   // Enquiry methods
   loadEnquiries(): void {
-    this.http.get<Enquiry[]>(`${this.API_URL}/enquiries/admin/`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError))
+    this.http.get(`${this.API_URL}/enquiries/admin/`, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      )
       .subscribe({
         next: (enquiries) => this.enquiriesSubject.next(enquiries),
         error: (error) => console.error('Failed to load enquiries:', error)
@@ -226,8 +283,11 @@ export class AdminDataService {
 
   // Review methods
   loadReviews(): void {
-    this.http.get<Review[]>(`${this.API_URL}/reviews/admin/`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError))
+    this.http.get(`${this.API_URL}/reviews/admin/`, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      )
       .subscribe({
         next: (reviews) => this.reviewsSubject.next(reviews),
         error: (error) => console.error('Failed to load reviews:', error)
@@ -264,8 +324,11 @@ export class AdminDataService {
 
   // Job methods
   loadJobs(): void {
-    this.http.get<Job[]>(`${this.API_URL}/careers/admin/`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError))
+    this.http.get(`${this.API_URL}/careers/admin/`, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      )
       .subscribe({
         next: (jobs) => this.jobsSubject.next(jobs),
         error: (error) => console.error('Failed to load jobs:', error)

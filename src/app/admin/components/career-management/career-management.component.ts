@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Job } from '../../services/admin-data.service';
@@ -12,6 +12,7 @@ import { AdminDataService, Job } from '../../services/admin-data.service';
 })
 export class CareerManagementComponent implements OnInit {
   private adminDataService = inject(AdminDataService);
+  private cdr = inject(ChangeDetectorRef);
 
   jobs: Job[] = [];
   showModal = false;
@@ -66,6 +67,7 @@ export class CareerManagementComponent implements OnInit {
       applications: 0
     };
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal() {

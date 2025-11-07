@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Service } from '../../services/admin-data.service';
@@ -12,6 +12,7 @@ import { AdminDataService, Service } from '../../services/admin-data.service';
 })
 export class ServiceManagementComponent implements OnInit {
   private adminDataService = inject(AdminDataService);
+  private cdr = inject(ChangeDetectorRef);
 
   services: Service[] = [];
   showModal = false;
@@ -58,6 +59,7 @@ export class ServiceManagementComponent implements OnInit {
       status: 'inactive'
     };
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal() {

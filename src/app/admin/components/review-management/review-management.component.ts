@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Review } from '../../services/admin-data.service';
@@ -12,6 +12,7 @@ import { AdminDataService, Review } from '../../services/admin-data.service';
 })
 export class ReviewManagementComponent implements OnInit {
   private adminDataService = inject(AdminDataService);
+  private cdr = inject(ChangeDetectorRef);
 
   reviews: Review[] = [];
   showModal = false;
@@ -62,6 +63,7 @@ export class ReviewManagementComponent implements OnInit {
       status: 'pending'
     };
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Blog } from '../../services/admin-data.service';
@@ -12,6 +12,7 @@ import { AdminDataService, Blog } from '../../services/admin-data.service';
 })
 export class BlogManagementComponent implements OnInit {
   private adminDataService = inject(AdminDataService);
+  private cdr = inject(ChangeDetectorRef);
 
   blogs: Blog[] = [];
   showModal = false;
@@ -19,6 +20,8 @@ export class BlogManagementComponent implements OnInit {
   searchTerm = '';
   loading = true;
   error: string | null = null;
+  selectedFile: File | null = null;
+  isDragOver = false;
 
   ngOnInit() {
     this.loadBlogs();
@@ -53,12 +56,17 @@ export class BlogManagementComponent implements OnInit {
       id: 0,
       title: '',
       excerpt: '',
+      content: '',
+      related_to: '',
       author: 'Admin',
       publish_date: new Date().toISOString().split('T')[0],
       status: 'draft',
       image: ''
     };
+    this.selectedFile = null;
+    this.isDragOver = false;
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal() {
@@ -74,7 +82,7 @@ export class BlogManagementComponent implements OnInit {
     if (this.editingBlog.id === 0) {
       // Add new blog
       const { id, ...newBlogData } = blogData;
-      this.adminDataService.addBlog(newBlogData).subscribe({
+      this.adminDataService.addBlog(newBlogData, this.selectedFile).subscribe({
         next: () => {
           this.closeModal();
         },
@@ -85,7 +93,7 @@ export class BlogManagementComponent implements OnInit {
       });
     } else {
       // Update existing blog
-      this.adminDataService.updateBlog(this.editingBlog.id, blogData).subscribe({
+      this.adminDataService.updateBlog(this.editingBlog.id, blogData, this.selectedFile).subscribe({
         next: () => {
           this.closeModal();
         },
@@ -113,7 +121,17 @@ export class BlogManagementComponent implements OnInit {
 
   toggleStatus(blog: Blog) {
     const newStatus = blog.status === 'published' ? 'draft' : 'published';
-    this.adminDataService.updateBlog(blog.id, { status: newStatus }).subscribe({
+    // Include required fields for the update
+    const updateData = {
+      status: newStatus as 'published' | 'draft',
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      related_to: blog.related_to,
+      author: blog.author,
+      publish_date: blog.publish_date
+    };
+    this.adminDataService.updateBlog(blog.id, updateData).subscribe({
       next: () => {
         blog.status = newStatus;
       },
@@ -122,6 +140,58 @@ export class BlogManagementComponent implements OnInit {
         console.error('Toggle status error:', error);
       }
     });
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.validateAndSetFile(file);
+    }
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = false;
+
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.validateAndSetFile(files[0]);
+    }
+  }
+
+  validateAndSetFile(file: File) {
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      this.error = 'Please select a valid image file';
+      return;
+    }
+
+    // Check file size (5MB limit)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      this.error = 'File size must be less than 5MB';
+      return;
+    }
+
+    this.selectedFile = file;
+    this.error = null;
+  }
+
+  removeFile() {
+    this.selectedFile = null;
   }
 
   trackByIndex(index: number): number {
