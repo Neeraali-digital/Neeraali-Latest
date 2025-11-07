@@ -21,19 +21,19 @@
       
       <div class="text-center">
         <h1 class="text-5xl md:text-7xl font-black mb-6 text-brand-600" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
-          Digital Marketing
+          {{ service && service.hero_section.title || 'Service Title' }}
         </h1>
         <h2 class="text-2xl md:text-4xl font-bold mb-8 text-accent" style="font-family: 'Oswald', sans-serif;">
-          Marketing That Actually Works
+          {{ service && service.hero_section.subtitle || 'Service Subtitle' }}
         </h2>
         <p class="text-lg md:text-xl text-gray-500 max-w-4xl mx-auto mb-8 leading-relaxed" style="font-family: 'Poppins', sans-serif;">
-          Digital marketing isn't just about showing up online—it's about showing results. At Neeraali Digital, we create smart, impactful strategies that help your brand connect with the right audience, tell the right story, and get real business results.
+          {{ service && service.hero_section.description || 'Service description' }}
         </p>
         <p class="text-lg max-w-3xl mx-auto mb-12  text-gray-500" style="font-family: 'Poppins', sans-serif;">
-          From social media and SEO to performance campaigns and content creation, we make sure every click, like, and share brings you closer to your goals.
+          {{ service && service.description || 'Service details' }}
         </p>
         <button class="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg" style="font-family: 'Poppins', sans-serif;">
-          Start Your Marketing Campaign →
+          {{ service && service.hero_section.button_text || 'Get Started →' }}
         </button>
       </div>
     </div>
@@ -80,85 +80,25 @@
   </section>
 
   <!-- Services Section -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white" *ngIf="service && service.services_section && service.services_section.length > 0">
     <div class="max-w-7xl mx-auto px-5">
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-black mb-4 text-gray-800" style="font-family: 'Oswald', sans-serif;">
-          Our Digital Marketing Services
+          Our Services
         </h2>
         <p class="text-xl text-gray-600" style="font-family: 'Poppins', sans-serif;">Powerful strategies tailored to your business</p>
       </div>
-      
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
+        <div *ngFor="let serviceItem of service.services_section; let i = index" class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
           <div class="relative z-10">
             <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-2xl font-black text-white" style="font-family: 'Oswald', sans-serif;">SEO</div>
+              <span class="material-icons text-white text-2xl">{{ serviceItem.icon || 'star' }}</span>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors" style="font-family: 'Poppins', sans-serif;">Search Engine Optimization</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Be seen where it matters most. Our SEO strategies help your website rank higher, attract quality traffic, and convert visitors into customers.</p>
+            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors" style="font-family: 'Poppins', sans-serif;">{{ serviceItem.title }}</h3>
+            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ serviceItem.description }}</p>
             <div class="mt-4 w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-          </div>
-        </div>
-        
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/10 to-primary/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-2xl font-black text-white" style="font-family: 'Oswald', sans-serif;">SMM</div>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-accent transition-colors" style="font-family: 'Poppins', sans-serif;">Social Media Marketing</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Turn your social media into a growth engine. From creative campaigns to community building, we make your brand stand out on Instagram, Facebook, LinkedIn, and beyond.</p>
-            <div class="mt-4 w-12 h-1 bg-gradient-to-r from-accent to-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-          </div>
-        </div>
-        
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-lg font-black text-white" style="font-family: 'Oswald', sans-serif;">PPC</div>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors" style="font-family: 'Poppins', sans-serif;">Performance Marketing</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Spend smarter, not more. We run data-driven ad campaigns across Google and Meta that focus on conversions, ROI, and real business outcomes.</p>
-            <div class="mt-4 w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-          </div>
-        </div>
-        
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/10 to-primary/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-lg font-black text-white" style="font-family: 'Oswald', sans-serif;">CTM</div>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-accent transition-colors" style="font-family: 'Poppins', sans-serif;">Content Marketing</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Good content builds trust. We craft blogs, videos, and brand stories that educate, inspire, and persuade—so your audience stays connected and engaged.</p>
-            <div class="mt-4 w-12 h-1 bg-gradient-to-r from-accent to-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-          </div>
-        </div>
-        
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-lg font-black text-white" style="font-family: 'Oswald', sans-serif;">EML</div>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors" style="font-family: 'Poppins', sans-serif;">Email & Automation</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Build relationships that last. Personalized email and automation strategies help you stay in touch, nurture leads, and drive repeat business.</p>
-            <div class="mt-4 w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-          </div>
-        </div>
-        
-        <div class="group relative bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/10 to-primary/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-12 transition-transform duration-300">
-              <div class="text-lg font-black text-white" style="font-family: 'Oswald', sans-serif;">ORM</div>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800 group-hover:text-accent transition-colors" style="font-family: 'Poppins', sans-serif;">Reputation Management</h3>
-            <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif;">Your online reputation is your digital first impression. We help you monitor, manage, and improve it—keeping your brand's image positive and trustworthy.</p>
-            <div class="mt-4 w-12 h-1 bg-gradient-to-r from-accent to-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
           </div>
         </div>
       </div>

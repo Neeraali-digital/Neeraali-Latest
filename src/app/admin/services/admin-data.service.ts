@@ -23,6 +23,21 @@ export interface Service {
   features: string[];
   price: string;
   status: 'active' | 'inactive';
+  hero_section: {
+    title: string;
+    subtitle: string;
+    description: string;
+    button_text: string;
+  };
+  services_section: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
+  faq_section: Array<{
+    question: string;
+    answer: string;
+  }>;
 }
 
 export interface Enquiry {
@@ -111,6 +126,12 @@ export class AdminDataService {
 
     // Handle 401 Unauthorized - token expired
     if (error.status === 401) {
+      this.authService.logout();
+      return throwError(() => new Error('Session expired. Please login again.'));
+    }
+
+    // Handle token invalid or expired
+    if (error.error && error.error.code === 'token_not_valid') {
       this.authService.logout();
       return throwError(() => new Error('Session expired. Please login again.'));
     }
@@ -222,6 +243,14 @@ export class AdminDataService {
 
   getServices(): Observable<Service[]> {
     return this.services$;
+  }
+
+  getPublicServices(): Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.API_URL}/services/`)
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      );
   }
 
   addService(service: Partial<Service>): Observable<Service> {

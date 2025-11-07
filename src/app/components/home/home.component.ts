@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
 import { FooterComponent } from '../footer/footer.component';
+import { AdminDataService, Service } from '../../admin/services/admin-data.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, LoadingComponent, FormsModule, FooterComponent],
+  providers: [AdminDataService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -18,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlide: number = 0;
   private slideInterval: any;
   loading: boolean = true;
+  services: Service[] = [];
   clientLogos: string[] = [
     '../assets/clientLogos/2.png',
     '../assets/clientLogos/1.png',
@@ -85,10 +88,24 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     message: ''
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private adminDataService: AdminDataService) {}
 
   ngOnInit() {
     this.startSlideShow();
+    this.loadServices();
+  }
+
+  private loadServices() {
+    this.adminDataService.getPublicServices().subscribe({
+      next: (services: Service[]) => {
+        this.services = services;
+        console.log(services,'eeeeeeeeeeeeeeeeeeee');
+        
+      },
+      error: (error: any) => {
+        console.error('Failed to load services:', error);
+      }
+    });
   }
 
   onLoadingFinished() {
@@ -165,7 +182,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  navigateToService(serviceId: string) {
+  navigateToService(service: Service) {
+    const serviceId = service.name.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/service', serviceId]);
   }
 

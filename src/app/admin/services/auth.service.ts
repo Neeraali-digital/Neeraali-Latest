@@ -112,7 +112,7 @@ export class AuthService {
     this.currentUserSubject.next(authResult.user);
   }
 
-  private clearSession(): void {
+  clearSession(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('current_user');

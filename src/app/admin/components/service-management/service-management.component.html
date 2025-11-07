@@ -130,18 +130,118 @@
         </div>
       </div>
       
-      <div class="grid grid-cols-2 gap-4">
+      <!-- Hero Section -->
+      <div class="border-t pt-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">Hero Section</h4>
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Title</label>
+            <input [(ngModel)]="editingService.hero_section.title" name="hero_title" type="text"
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                   style="font-family: 'Poppins', sans-serif;"
+                   placeholder="e.g., Digital Marketing">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Subtitle</label>
+            <input [(ngModel)]="editingService.hero_section.subtitle" name="hero_subtitle" type="text"
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                   style="font-family: 'Poppins', sans-serif;"
+                   placeholder="e.g., Marketing That Actually Works">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Description</label>
+            <textarea [(ngModel)]="editingService.hero_section.description" name="hero_description" rows="3"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      style="font-family: 'Poppins', sans-serif;"
+                      placeholder="Enter hero section description"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Button Text</label>
+            <input [(ngModel)]="editingService.hero_section.button_text" name="hero_button_text" type="text"
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                   style="font-family: 'Poppins', sans-serif;"
+                   placeholder="e.g., Start Your Marketing Campaign →">
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <div class="border-t pt-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">Services Section</h4>
+        <div class="space-y-4">
+          <div *ngFor="let serviceItem of editingService.services_section; let i = index; trackBy: trackByIndex"
+               class="border border-gray-200 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h5 class="font-medium text-gray-700" style="font-family: 'Poppins', sans-serif;">Service {{i + 1}}</h5>
+              <button type="button" (click)="removeServiceItem(i)"
+                      class="p-1 text-red-600 hover:bg-red-100 rounded transition-colors">
+                <span class="material-icons text-sm">remove</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <input [(ngModel)]="editingService.services_section[i].icon" [name]="'service_icon_' + i" type="text"
+                     class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-transparent"
+                     style="font-family: 'Poppins', sans-serif;" placeholder="Icon (e.g., SEO)">
+              <input [(ngModel)]="editingService.services_section[i].title" [name]="'service_title_' + i" type="text"
+                     class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-transparent"
+                     style="font-family: 'Poppins', sans-serif;" placeholder="Service Title">
+              <textarea [(ngModel)]="editingService.services_section[i].description" [name]="'service_desc_' + i" rows="2"
+                        class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                        style="font-family: 'Poppins', sans-serif;" placeholder="Service Description"></textarea>
+            </div>
+          </div>
+          <button type="button" (click)="addServiceItem()"
+                  class="flex items-center text-primary hover:text-accent transition-colors"
+                  style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+            <span class="material-icons mr-1">add</span>
+            Add Service Item
+          </button>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="border-t pt-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">FAQ Section</h4>
+        <div class="space-y-4">
+          <div *ngFor="let faq of editingService.faq_section; let i = index; trackBy: trackByIndex"
+               class="border border-gray-200 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h5 class="font-medium text-gray-700" style="font-family: 'Poppins', sans-serif;">FAQ {{i + 1}}</h5>
+              <button type="button" (click)="removeFaqItem(i)"
+                      class="p-1 text-red-600 hover:bg-red-100 rounded transition-colors">
+                <span class="material-icons text-sm">remove</span>
+              </button>
+            </div>
+            <div class="space-y-3">
+              <input [(ngModel)]="editingService.faq_section[i].question" [name]="'faq_question_' + i" type="text"
+                     class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-transparent"
+                     style="font-family: 'Poppins', sans-serif;" placeholder="Question">
+              <textarea [(ngModel)]="editingService.faq_section[i].answer" [name]="'faq_answer_' + i" rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                        style="font-family: 'Poppins', sans-serif;" placeholder="Answer"></textarea>
+            </div>
+          </div>
+          <button type="button" (click)="addFaqItem()"
+                  class="flex items-center text-primary hover:text-accent transition-colors"
+                  style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+            <span class="material-icons mr-1">add</span>
+            Add FAQ Item
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 border-t pt-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Price</label>
-          <input [(ngModel)]="editingService.price" name="price" type="text" 
+          <input [(ngModel)]="editingService.price" name="price" type="text"
                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                  style="font-family: 'Poppins', sans-serif;"
                  placeholder="e.g., Starting from ₹25,000">
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">Status</label>
-          <select [(ngModel)]="editingService.status" name="status" 
+          <select [(ngModel)]="editingService.status" name="status"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   style="font-family: 'Poppins', sans-serif;">
             <option value="active">Active</option>

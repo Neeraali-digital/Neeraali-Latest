@@ -56,7 +56,15 @@ export class ServiceManagementComponent implements OnInit {
       description: '',
       features: [],
       price: '',
-      status: 'inactive'
+      status: 'inactive',
+      hero_section: {
+        title: '',
+        subtitle: '',
+        description: '',
+        button_text: ''
+      },
+      services_section: [],
+      faq_section: []
     };
     this.showModal = true;
     this.cdr.detectChanges();
@@ -134,6 +142,37 @@ export class ServiceManagementComponent implements OnInit {
   removeFeature(index: number) {
     if (this.editingService) {
       this.editingService.features.splice(index, 1);
+    }
+  }
+
+  addServiceItem() {
+    if (this.editingService) {
+      this.editingService.services_section.push({
+        icon: '',
+        title: '',
+        description: ''
+      });
+    }
+  }
+
+  removeServiceItem(index: number) {
+    if (this.editingService) {
+      this.editingService.services_section.splice(index, 1);
+    }
+  }
+
+  addFaqItem() {
+    if (this.editingService) {
+      this.editingService.faq_section.push({
+        question: '',
+        answer: ''
+      });
+    }
+  }
+
+  removeFaqItem(index: number) {
+    if (this.editingService) {
+      this.editingService.faq_section.splice(index, 1);
     }
   }
 
