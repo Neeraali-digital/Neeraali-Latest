@@ -52,7 +52,7 @@
               </div>
             </td>
             <td class="px-6 py-4 text-gray-800" style="font-family: 'Poppins', sans-serif;">{{enquiry.service}}</td>
-            <td class="px-6 py-4 text-gray-800" style="font-family: 'Poppins', sans-serif;">{{enquiry.date}}</td>
+            <td class="px-6 py-4 text-gray-800" style="font-family: 'Poppins', sans-serif;">{{formatDate(enquiry.date)}}</td>
             <td class="px-6 py-4">
               <select [(ngModel)]="enquiry.status" 
                       (change)="updateStatus(enquiry, enquiry.status)"
@@ -139,7 +139,7 @@
       <div class="flex items-center justify-between pt-4 border-t border-gray-200">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1" style="font-family: 'Poppins', sans-serif;">Date Received</label>
-          <p class="text-gray-800" style="font-family: 'Poppins', sans-serif;">{{selectedEnquiry.date}}</p>
+          <p class="text-gray-800" style="font-family: 'Poppins', sans-serif;">{{formatDate(selectedEnquiry.date)}}</p>
         </div>
         <div>
           <span class="px-4 py-2 rounded-full text-sm font-medium"
@@ -152,13 +152,13 @@
       
       <div class="flex justify-end space-x-4 pt-4">
         <a [href]="'mailto:' + selectedEnquiry.email" 
-           class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+           class="bg-gradient-to-r flex justify-center items-center from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
            style="font-family: 'Poppins', sans-serif; font-weight: 600;">
           <span class="material-icons mr-2 text-sm">email</span>
           Send Email
         </a>
         <a [href]="'tel:' + selectedEnquiry.phone" 
-           class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+           class="bg-gradient-to-r from-primary flex justify-center items-center to-accent hover:from-accent hover:to-primary text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
            style="font-family: 'Poppins', sans-serif; font-weight: 600;">
           <span class="material-icons mr-2 text-sm">phone</span>
           Call Now

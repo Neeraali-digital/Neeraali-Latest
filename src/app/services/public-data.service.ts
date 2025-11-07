@@ -15,6 +15,15 @@ export interface PublicBlog {
   image_url?: string;
 }
 
+export interface EnquiryForm {
+  name: string;
+  email: string;
+  phone: string;
+  company?: string;
+  service: string;
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +48,12 @@ export class PublicDataService {
 
   getBlogDetail(id: number): Observable<PublicBlog> {
     return this.http.get<PublicBlog>(`${this.API_URL}/blogs/${id}/`)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Enquiry methods
+  submitEnquiry(enquiry: EnquiryForm): Observable<any> {
+    return this.http.post(`${this.API_URL}/enquiries/`, enquiry)
       .pipe(catchError(this.handleError));
   }
 }

@@ -109,4 +109,15 @@ export class EnquiryManagementComponent implements OnInit {
   updateStatus(enquiry: Enquiry, status: Enquiry['status']) {
     this.updateEnquiryStatus(enquiry, status);
   }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
 }
