@@ -26,10 +26,23 @@ style="background-image: url('../../../assets/pink.png');"
 <section class="py-16 px-5 bg-gray-50 relative">
   <div class="absolute inset-0 bg-gradient-to-br from-white to-gray-50"></div>
   <div class="max-w-6xl mx-auto relative z-10">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div *ngIf="loading" class="text-center py-16">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <p class="mt-4 text-gray-600">Loading blogs...</p>
+    </div>
+
+    <div *ngIf="error" class="text-center py-16">
+      <p class="text-red-600 mb-4">{{ error }}</p>
+      <button (click)="loadBlogs()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+        Try Again
+      </button>
+    </div>
+
+    <div *ngIf="!loading && !error" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       <div *ngFor="let blog of blogs" class="blog-card border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105">
         <div class="blog-image bg-gray-200 flex items-center justify-center">
-          <span class="material-icons text-6xl text-gray-400">article</span>
+          <img *ngIf="getImageUrl(blog.image_url)" [src]="getImageUrl(blog.image_url)" [alt]="blog.title" class="w-full h-48 object-cover">
+          <span *ngIf="!getImageUrl(blog.image_url)" class="material-icons text-6xl text-gray-400">article</span>
         </div>
         <div class="p-6">
           <div class="flex items-center justify-between mb-4">

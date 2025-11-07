@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { PublicDataService, PublicBlog } from '../../services/public-data.service';
 
 @Component({
   selector: 'app-blog',
@@ -9,39 +10,49 @@ import { Router } from '@angular/router';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
-export class BlogComponent {
-  constructor(private router: Router) {}
-  blogs = [
-    {
-      id: '1',
-      title: 'The Future of Digital Marketing in 2024',
-      excerpt: 'Discover the latest trends and strategies that will shape digital marketing this year.',
-      image: '../../../assets/blog1.jpg',
-      date: 'March 15, 2024',
-      category: 'Digital Marketing',
-      readTime: '5 min read'
-    },
-    {
-      id: '2',
-      title: 'Building Brand Identity That Resonates',
-      excerpt: 'Learn how to create a brand identity that connects with your target audience.',
-      image: '../../../assets/blog2.jpg',
-      date: 'March 10, 2024',
-      category: 'Branding',
-      readTime: '7 min read'
-    },
-    {
-      id: '3',
-      title: 'Web Design Trends for Modern Businesses',
-      excerpt: 'Explore the latest web design trends that drive conversions and user engagement.',
-      image: '../../../assets/blog3.jpg',
-      date: 'March 5, 2024',
-      category: 'Web Design',
-      readTime: '6 min read'
-    }
-  ];
+export class BlogComponent implements OnInit {
+  blogs: PublicBlog[] = [];
+  loading = true;
+  error: string | null = null;
 
-  readBlog(blogId: string) {
+  constructor(
+    private router: Router,
+    private publicDataService: PublicDataService
+  ) {}
+
+  ngOnInit() {
+    this.loadBlogs();
+  }
+
+  loadBlogs() {
+    this.loading = true;
+    this.error = null;
+    this.publicDataService.getBlogs().subscribe({
+      next: (blogs) => {
+        this.blogs = blogs;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Failed to load blogs. Please try again later.';
+        this.loading = false;
+        console.error('Error loading blogs:', error);
+      }
+    });
+  }
+
+  getImageUrl(imageUrl: string | null | undefined): string {
+    if (imageUrl) {
+      // If it's already a full URL, return as is
+      if (imageUrl.startsWith('http')) {
+        return imageUrl;
+      }
+      // Otherwise, prepend the backend URL
+      return `http://localhost:8000${imageUrl}`;
+    }
+    return '';
+  }
+
+  readBlog(blogId: number) {
     this.router.navigate(['/blog', blogId]);
   }
 }

@@ -6,9 +6,25 @@
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div *ngIf="blog">
+<div *ngIf="loading" class="min-h-screen flex items-center justify-center">
+  <div class="text-center">
+    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+    <p class="text-gray-600">Loading blog...</p>
+  </div>
+</div>
+
+<div *ngIf="error" class="min-h-screen flex items-center justify-center">
+  <div class="text-center">
+    <p class="text-red-600 mb-4">{{ error }}</p>
+    <button (click)="goBack()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+      Back to Blog
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!loading && !error && blog">
   <!-- Hero Section -->
-  <section class="hero-section py-24 px-5 text-white relative overflow-hidden">
+  <section class="hero-section py-24 px-5 text-white relative overflow-hidden" [style.background-image]="'url(' + heroBackgroundImage + ')'">
     <div class="max-w-4xl mx-auto relative z-10">
       <button (click)="goBack()" class="flex items-center text-white/80 hover:text-white mb-8 transition-colors">
         <span class="material-icons mr-2">arrow_back</span>

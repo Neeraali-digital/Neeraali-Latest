@@ -60,6 +60,7 @@ export class BlogManagementComponent implements OnInit {
       related_to: '',
       author: 'Admin',
       publish_date: new Date().toISOString().split('T')[0],
+      read_time: 5,
       status: 'draft',
       image: ''
     };
@@ -77,6 +78,9 @@ export class BlogManagementComponent implements OnInit {
   saveBlog() {
     if (!this.editingBlog) return;
 
+    this.loading = true;
+    this.error = null;
+
     const blogData = { ...this.editingBlog };
 
     if (this.editingBlog.id === 0) {
@@ -84,9 +88,11 @@ export class BlogManagementComponent implements OnInit {
       const { id, ...newBlogData } = blogData;
       this.adminDataService.addBlog(newBlogData, this.selectedFile).subscribe({
         next: () => {
+          this.loading = false;
           this.closeModal();
         },
         error: (error) => {
+          this.loading = false;
           this.error = 'Failed to add blog';
           console.error('Add blog error:', error);
         }
@@ -95,9 +101,11 @@ export class BlogManagementComponent implements OnInit {
       // Update existing blog
       this.adminDataService.updateBlog(this.editingBlog.id, blogData, this.selectedFile).subscribe({
         next: () => {
+          this.loading = false;
           this.closeModal();
         },
         error: (error) => {
+          this.loading = false;
           this.error = 'Failed to update blog';
           console.error('Update blog error:', error);
         }
@@ -129,7 +137,8 @@ export class BlogManagementComponent implements OnInit {
       content: blog.content,
       related_to: blog.related_to,
       author: blog.author,
-      publish_date: blog.publish_date
+      publish_date: blog.publish_date,
+      read_time: blog.read_time
     };
     this.adminDataService.updateBlog(blog.id, updateData).subscribe({
       next: () => {

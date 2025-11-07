@@ -12,6 +12,7 @@ export interface Blog {
   related_to: string;
   author: string;
   publish_date: string;
+  read_time?: number;
   status: 'published' | 'draft';
   image: string;
 }
@@ -197,7 +198,8 @@ export class AdminDataService {
       const formData = new FormData();
       Object.keys(blog).forEach(key => {
         const value = (blog as any)[key];
-        if (value !== null && value !== undefined) {
+        // Skip image field if it's a URL string (existing image)
+        if (key !== 'image' && value !== null && value !== undefined) {
           formData.append(key, value.toString());
         }
       });
@@ -212,7 +214,9 @@ export class AdminDataService {
         catchError(this.handleError)
       );
     } else {
-      return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, blog, { headers: this.getHeaders() })
+      // Remove image field if it's a URL string to avoid sending it as text
+      const { image, ...blogData } = blog;
+      return this.http.put<Blog>(`${this.API_URL}/blogs/admin/${id}/`, blogData, { headers: this.getHeaders() })
         .pipe(
           tap(() => this.loadBlogs()),
           catchError(this.handleError)
