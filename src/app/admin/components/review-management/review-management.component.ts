@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Review } from '../../services/admin-data.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-review-management',
@@ -13,6 +14,7 @@ import { AdminDataService, Review } from '../../services/admin-data.service';
 export class ReviewManagementComponent implements OnInit {
   private adminDataService = inject(AdminDataService);
   private cdr = inject(ChangeDetectorRef);
+  private http = inject(HttpClient);
 
   reviews: Review[] = [];
   showModal = false;
@@ -21,6 +23,9 @@ export class ReviewManagementComponent implements OnInit {
   statusFilter = 'all';
   loading = true;
   error: string | null = null;
+  saving = false;
+  selectedFile: File | null = null;
+  dragOver = false;
 
   ngOnInit() {
     this.loadReviews();
@@ -69,34 +74,44 @@ export class ReviewManagementComponent implements OnInit {
   closeModal() {
     this.showModal = false;
     this.editingReview = null;
+    this.selectedFile = null;
+    this.dragOver = false;
+    this.saving = false;
   }
 
   saveReview() {
     if (!this.editingReview) return;
+
+    this.saving = true;
+    this.error = null;
 
     const reviewData = { ...this.editingReview };
 
     if (this.editingReview.id === 0) {
       // Add new review
       const { id, ...newReviewData } = reviewData;
-      this.adminDataService.addReview(newReviewData).subscribe({
+      this.adminDataService.addReview(newReviewData, this.selectedFile).subscribe({
         next: () => {
           this.closeModal();
+          this.saving = false;
         },
         error: (error) => {
           this.error = 'Failed to add review';
           console.error('Add review error:', error);
+          this.saving = false;
         }
       });
     } else {
       // Update existing review
-      this.adminDataService.updateReview(this.editingReview.id, reviewData).subscribe({
+      this.adminDataService.updateReview(this.editingReview.id, reviewData, this.selectedFile).subscribe({
         next: () => {
           this.closeModal();
+          this.saving = false;
         },
         error: (error) => {
           this.error = 'Failed to update review';
           console.error('Update review error:', error);
+          this.saving = false;
         }
       });
     }
@@ -150,7 +165,47 @@ export class ReviewManagementComponent implements OnInit {
     this.updateReviewStatus(review, status);
   }
 
-  getStars(rating: number): number[] {
-    return Array.from({ length: 5 }, (_, i) => i + 1);
+  getStars(rating: number): boolean[] {
+    return Array.from({ length: 5 }, (_, i) => i < rating);
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.dragOver = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.dragOver = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.dragOver = false;
+
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+    }
+  }
+
+  removeFile() {
+    this.selectedFile = null;
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
 }

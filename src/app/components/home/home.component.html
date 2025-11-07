@@ -373,7 +373,9 @@
             </div>
           </div>
           <div class="flex mb-4">
-            <span *ngFor="let star of [1,2,3,4,5]" class="material-icons text-yellow-400 text-sm">star</span>
+            <span *ngFor="let star of getStars(review.rating)" class="material-icons text-yellow-400 text-sm">
+              {{star ? 'star' : 'star_border'}}
+            </span>
           </div>
           <p class="text-gray-600 text-sm leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">{{ review.review }}</p>
         </div>
@@ -397,7 +399,9 @@
                 </div>
               </div>
               <div class="flex mb-4">
-                <span *ngFor="let star of [1,2,3,4,5]" class="material-icons text-yellow-400 text-sm">star</span>
+                <span *ngFor="let star of getStars(review.rating)" class="material-icons text-yellow-400 text-sm">
+                  {{star ? 'star' : 'star_border'}}
+                </span>
               </div>
               <p class="text-gray-600 leading-relaxed" style="font-family: 'Poppins', sans-serif; font-weight: 400;">{{ review.review }}</p>
             </div>

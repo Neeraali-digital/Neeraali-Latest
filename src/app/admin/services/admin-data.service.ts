@@ -61,6 +61,7 @@ export interface Review {
   review: string;
   date: string;
   status: 'approved' | 'pending' | 'rejected';
+  image?: string;
 }
 
 export interface Job {
@@ -331,20 +332,63 @@ export class AdminDataService {
     return this.reviews$;
   }
 
-  addReview(review: Partial<Review>): Observable<Review> {
-    return this.http.post<Review>(`${this.API_URL}/reviews/admin/`, review, { headers: this.getHeaders() })
-      .pipe(
+  addReview(review: Partial<Review>, file?: File | null): Observable<Review> {
+    if (file) {
+      const formData = new FormData();
+      Object.keys(review).forEach(key => {
+        const value = (review as any)[key];
+        if (value !== null && value !== undefined) {
+          formData.append(key, value.toString());
+        }
+      });
+      formData.append('image', file);
+
+      return this.http.post<Review>(`${this.API_URL}/reviews/admin/`, formData, {
+        headers: new HttpHeaders({
+          'Authorization': this.authService.getToken() ? `Bearer ${this.authService.getToken()}` : ''
+        })
+      }).pipe(
         tap(() => this.loadReviews()),
         catchError(this.handleError)
       );
+    } else {
+      return this.http.post<Review>(`${this.API_URL}/reviews/admin/`, review, { headers: this.getHeaders() })
+        .pipe(
+          tap(() => this.loadReviews()),
+          catchError(this.handleError)
+        );
+    }
   }
 
-  updateReview(id: number, review: Partial<Review>): Observable<Review> {
-    return this.http.put<Review>(`${this.API_URL}/reviews/admin/${id}/`, review, { headers: this.getHeaders() })
-      .pipe(
+  updateReview(id: number, review: Partial<Review>, file?: File | null): Observable<Review> {
+    if (file) {
+      const formData = new FormData();
+      Object.keys(review).forEach(key => {
+        const value = (review as any)[key];
+        // Skip image field if it's a URL string (existing image)
+        if (key !== 'image' && value !== null && value !== undefined) {
+          formData.append(key, value.toString());
+        }
+      });
+      formData.append('image', file);
+
+      return this.http.put<Review>(`${this.API_URL}/reviews/admin/${id}/`, formData, {
+        headers: new HttpHeaders({
+          'Authorization': this.authService.getToken() ? `Bearer ${this.authService.getToken()}` : ''
+        })
+      }).pipe(
         tap(() => this.loadReviews()),
         catchError(this.handleError)
       );
+    } else {
+      // Remove image field if it's a URL string to avoid sending it as text
+      const { image, ...reviewData } = review;
+      return this.http.put<Review>(`${this.API_URL}/reviews/admin/${id}/`, reviewData, { headers: this.getHeaders() })
+        .pipe(
+          tap(() => this.loadReviews()),
+          catchError(this.handleError)
+        );
+    }
   }
 
   deleteReview(id: number): Observable<void> {

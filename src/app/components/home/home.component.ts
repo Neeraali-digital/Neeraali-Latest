@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AdminDataService, Service } from '../../admin/services/admin-data.service';
+import { PublicDataService, PublicReview } from '../../services/public-data.service';
 
 @Component({
   selector: 'app-home',
@@ -88,11 +89,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     message: ''
   };
 
-  constructor(private router: Router, private adminDataService: AdminDataService) {}
+  constructor(private router: Router, private adminDataService: AdminDataService, private publicDataService: PublicDataService) {}
 
   ngOnInit() {
     this.startSlideShow();
     this.loadServices();
+    this.loadReviews();
   }
 
   private loadServices() {
@@ -100,10 +102,30 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       next: (services: Service[]) => {
         this.services = services;
         console.log(services,'eeeeeeeeeeeeeeeeeeee');
-        
+
       },
       error: (error: any) => {
         console.error('Failed to load services:', error);
+      }
+    });
+  }
+
+  private loadReviews() {
+    this.publicDataService.getReviews().subscribe({
+      next: (reviews: PublicReview[]) => {
+        if (reviews && reviews.length > 0) {
+          this.clientReviews = reviews.map(review => ({
+            name: review.name,
+            company: review.company,
+            review: review.review,
+            rating: review.rating,
+            image: review.image || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+          }));
+        }
+      },
+      error: (error: any) => {
+        console.error('Failed to load reviews:', error);
+        // Keep fallback reviews if API fails
       }
     });
   }
@@ -197,5 +219,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   goToReview(index: number) {
     this.currentReviewIndex = index;
+  }
+
+  getStars(rating: number): boolean[] {
+    return Array.from({ length: 5 }, (_, i) => i < rating);
   }
 }
