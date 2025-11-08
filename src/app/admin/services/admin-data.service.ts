@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { environment } from '../../../environments/environment';
 
 export interface Blog {
   id: number;
@@ -107,7 +108,7 @@ export interface DashboardStats {
   providedIn: 'root'
 })
 export class AdminDataService {
-  private readonly API_URL = 'http://localhost:8000/api';
+  private readonly API_URL = `${environment.apiUrl}/api`;
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 

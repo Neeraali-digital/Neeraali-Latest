@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export interface PublicBlog {
   id: number;
@@ -64,7 +65,7 @@ export interface EnquiryForm {
   providedIn: 'root'
 })
 export class PublicDataService {
-  private readonly API_URL = 'http://localhost:8000/api';
+  private readonly API_URL = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

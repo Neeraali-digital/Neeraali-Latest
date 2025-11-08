@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PublicDataService, PublicBlog } from '../../services/public-data.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-blog-detail',
@@ -41,7 +42,7 @@ export class BlogDetailComponent implements OnInit {
       next: (blog) => {
         this.blog = blog;
         // Set dynamic background image if blog has an image
-        this.heroBackgroundImage = blog.image_url ? `http://localhost:8000${blog.image_url}` : '../../../assets/blog.jpg';
+        this.heroBackgroundImage = blog.image_url ? `${environment.apiUrl}${blog.image_url}` : '../../../assets/blog.jpg';
         this.loading = false;
       },
       error: (error) => {

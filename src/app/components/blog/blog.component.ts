@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PublicDataService, PublicBlog } from '../../services/public-data.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-blog',
@@ -47,7 +48,7 @@ export class BlogComponent implements OnInit {
         return imageUrl;
       }
       // Otherwise, prepend the backend URL
-      return `http://localhost:8000${imageUrl}`;
+      return `${environment.apiUrl}${imageUrl}`;
     }
     return '';
   }
