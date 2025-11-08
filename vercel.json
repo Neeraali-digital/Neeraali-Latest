@@ -1,6 +1,6 @@
 {
   "buildCommand": "ng build --configuration=production",
-  "outputDirectory": "dist/neeraali-digital",
+  "outputDirectory": "dist/neeraali-digital/browser",
   "installCommand": "npm install",
   "framework": "angular",
   "rewrites": [
