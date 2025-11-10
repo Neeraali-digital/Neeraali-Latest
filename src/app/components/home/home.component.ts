@@ -165,8 +165,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getQuote() {
-    this.showQuoteModal = true;
-    document.body.style.overflow = 'hidden';
+    this.router.navigate(['/contact'], { fragment: 'send-message' });
   }
 
   closeQuoteModal(event?: Event) {

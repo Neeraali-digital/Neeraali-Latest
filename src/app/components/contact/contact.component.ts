@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PublicDataService, EnquiryForm } from '../../services/public-data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { PublicDataService, EnquiryForm } from '../../services/public-data.servi
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit, AfterViewInit {
   contactForm: EnquiryForm = {
     name: '',
     email: '',
@@ -24,7 +25,24 @@ export class ContactComponent {
   submitMessage = '';
   submitError = '';
 
-  constructor(private publicDataService: PublicDataService) {}
+  constructor(private publicDataService: PublicDataService, private route: ActivatedRoute) {}
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    // Check if there's a fragment in the URL (e.g., #send-message)
+    this.route.fragment.subscribe(fragment => {
+      if (fragment === 'send-message') {
+        // Scroll to the send-message section after a short delay to ensure DOM is ready
+        setTimeout(() => {
+          const element = document.getElementById('send-message');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    });
+  }
 
   submitContact() {
     if (this.isSubmitting) return;
