@@ -22,6 +22,29 @@ export class CareerManagementComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
+  // Validation errors
+  titleError = '';
+  departmentError = '';
+  locationError = '';
+  typeError = '';
+  experienceError = '';
+  shiftWorkError = '';
+  careerAreaError = '';
+  contractualLocationError = '';
+  termOfEmploymentError = '';
+  descriptionError = '';
+  requirementsError = '';
+  statusError = '';
+  jobDescriptionError = '';
+  theOpportunityError = '';
+  whatYoullBeDoingError = '';
+  yourWorkLocationError = '';
+  whoYouAreError = '';
+  securityVettingError = '';
+  payError = '';
+  benefitsAndCultureError = '';
+  additionalInformationError = '';
+
   ngOnInit() {
     this.loadJobs();
   }
@@ -90,6 +113,141 @@ export class CareerManagementComponent implements OnInit {
 
   saveJob() {
     if (!this.editingJob) return;
+
+    // Reset validation errors
+    this.titleError = '';
+    this.departmentError = '';
+    this.locationError = '';
+    this.typeError = '';
+    this.experienceError = '';
+    this.shiftWorkError = '';
+    this.careerAreaError = '';
+    this.contractualLocationError = '';
+    this.termOfEmploymentError = '';
+    this.descriptionError = '';
+    this.requirementsError = '';
+    this.statusError = '';
+    this.jobDescriptionError = '';
+    this.theOpportunityError = '';
+    this.whatYoullBeDoingError = '';
+    this.yourWorkLocationError = '';
+    this.whoYouAreError = '';
+    this.securityVettingError = '';
+    this.payError = '';
+    this.benefitsAndCultureError = '';
+    this.additionalInformationError = '';
+
+    // Validate required fields
+    let isValid = true;
+
+    if (!this.editingJob.title || this.editingJob.title.trim() === '') {
+      this.titleError = 'Job title is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.department || this.editingJob.department.trim() === '') {
+      this.departmentError = 'Department is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.location || this.editingJob.location.trim() === '') {
+      this.locationError = 'Location is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.type || this.editingJob.type.trim() === '') {
+      this.typeError = 'Job type is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.experience || this.editingJob.experience.trim() === '') {
+      this.experienceError = 'Experience is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.shift_work || this.editingJob.shift_work.trim() === '') {
+      this.shiftWorkError = 'Shift work is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.career_area || this.editingJob.career_area.trim() === '') {
+      this.careerAreaError = 'Career area is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.contractual_location || this.editingJob.contractual_location.trim() === '') {
+      this.contractualLocationError = 'Contractual location is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.term_of_employment || this.editingJob.term_of_employment.trim() === '') {
+      this.termOfEmploymentError = 'Term of employment is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.description || this.editingJob.description.trim() === '') {
+      this.descriptionError = 'Description is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.requirements || this.editingJob.requirements.length === 0 || this.editingJob.requirements.every(req => req.trim() === '')) {
+      this.requirementsError = 'At least one requirement is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.status || this.editingJob.status.trim() === '') {
+      this.statusError = 'Status is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.job_description || this.editingJob.job_description.trim() === '') {
+      this.jobDescriptionError = 'Job description is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.the_opportunity || this.editingJob.the_opportunity.trim() === '') {
+      this.theOpportunityError = 'The opportunity is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.what_youll_be_doing || this.editingJob.what_youll_be_doing.trim() === '') {
+      this.whatYoullBeDoingError = 'What you\'ll be doing is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.your_work_location || this.editingJob.your_work_location.trim() === '') {
+      this.yourWorkLocationError = 'Your work location is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.who_you_are || this.editingJob.who_you_are.trim() === '') {
+      this.whoYouAreError = 'Who you are is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.security_vetting || this.editingJob.security_vetting.trim() === '') {
+      this.securityVettingError = 'Security vetting is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.pay || this.editingJob.pay.trim() === '') {
+      this.payError = 'Pay is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.benefits_and_culture || this.editingJob.benefits_and_culture.trim() === '') {
+      this.benefitsAndCultureError = 'Benefits and culture is required';
+      isValid = false;
+    }
+
+    if (!this.editingJob.additional_information || this.editingJob.additional_information.trim() === '') {
+      this.additionalInformationError = 'Additional information is required';
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
+    }
 
     const jobData = { ...this.editingJob };
 

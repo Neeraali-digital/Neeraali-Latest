@@ -23,6 +23,16 @@ export class BlogManagementComponent implements OnInit {
   selectedFile: File | null = null;
   isDragOver = false;
 
+  // Validation errors
+  titleError: string | null = null;
+  excerptError: string | null = null;
+  contentError: string | null = null;
+  relatedToError: string | null = null;
+  authorError: string | null = null;
+  readTimeError: string | null = null;
+  statusError: string | null = null;
+  imageError: string | null = null;
+
   ngOnInit() {
     this.loadBlogs();
   }
@@ -77,6 +87,67 @@ export class BlogManagementComponent implements OnInit {
 
   saveBlog() {
     if (!this.editingBlog) return;
+
+    // Reset errors
+    this.titleError = null;
+    this.excerptError = null;
+    this.contentError = null;
+    this.relatedToError = null;
+    this.authorError = null;
+    this.readTimeError = null;
+    this.statusError = null;
+    this.imageError = null;
+
+    // Validate required fields
+    let hasErrors = false;
+
+    if (!this.editingBlog.title || this.editingBlog.title.trim() === '') {
+      this.titleError = 'Title is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.excerpt || this.editingBlog.excerpt.trim() === '') {
+      this.excerptError = 'Excerpt is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.content || this.editingBlog.content.trim() === '') {
+      this.contentError = 'Content is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.related_to || this.editingBlog.related_to.trim() === '') {
+      this.relatedToError = 'Related To is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.author || this.editingBlog.author.trim() === '') {
+      this.authorError = 'Author is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.read_time || this.editingBlog.read_time < 1 || this.editingBlog.read_time > 60) {
+      this.readTimeError = 'Read Time must be between 1 and 60 minutes';
+      hasErrors = true;
+    }
+
+    if (!this.editingBlog.status) {
+      this.statusError = 'Status is required';
+      hasErrors = true;
+    }
+
+    // For new blogs, image is required; for edits, if no existing image and no selected file, error
+    if (this.editingBlog.id === 0 && !this.selectedFile) {
+      this.imageError = 'Image is required for new blogs';
+      hasErrors = true;
+    } else if (this.editingBlog.id !== 0 && !this.editingBlog.image && !this.selectedFile) {
+      this.imageError = 'Image is required';
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return; // Stop submission if there are validation errors
+    }
 
     this.loading = true;
     this.error = null;

@@ -21,6 +21,12 @@ export class ServiceManagementComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
+  // Validation errors
+  nameError: string | null = null;
+  descriptionError: string | null = null;
+  priceError: string | null = null;
+  statusError: string | null = null;
+
   ngOnInit() {
     this.loadServices();
   }
@@ -77,6 +83,39 @@ export class ServiceManagementComponent implements OnInit {
 
   saveService() {
     if (!this.editingService) return;
+
+    // Reset errors
+    this.nameError = null;
+    this.descriptionError = null;
+    this.priceError = null;
+    this.statusError = null;
+
+    // Validate required fields
+    let hasErrors = false;
+
+    if (!this.editingService.name || this.editingService.name.trim() === '') {
+      this.nameError = 'Service name is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingService.description || this.editingService.description.trim() === '') {
+      this.descriptionError = 'Description is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingService.price || this.editingService.price.trim() === '') {
+      this.priceError = 'Price is required';
+      hasErrors = true;
+    }
+
+    if (!this.editingService.status) {
+      this.statusError = 'Status is required';
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return; // Stop submission if there are validation errors
+    }
 
     const serviceData = { ...this.editingService };
 

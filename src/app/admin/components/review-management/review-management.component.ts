@@ -27,6 +27,12 @@ export class ReviewManagementComponent implements OnInit {
   selectedFile: File | null = null;
   dragOver = false;
 
+  // Validation errors
+  nameError = '';
+  companyError = '';
+  ratingError = '';
+  reviewError = '';
+
   ngOnInit() {
     this.loadReviews();
   }
@@ -81,6 +87,39 @@ export class ReviewManagementComponent implements OnInit {
 
   saveReview() {
     if (!this.editingReview) return;
+
+    // Reset validation errors
+    this.nameError = '';
+    this.companyError = '';
+    this.ratingError = '';
+    this.reviewError = '';
+
+    // Validate required fields
+    let isValid = true;
+
+    if (!this.editingReview.name || this.editingReview.name.trim() === '') {
+      this.nameError = 'Name is required';
+      isValid = false;
+    }
+
+    if (!this.editingReview.company || this.editingReview.company.trim() === '') {
+      this.companyError = 'Company is required';
+      isValid = false;
+    }
+
+    if (!this.editingReview.rating) {
+      this.ratingError = 'Rating is required';
+      isValid = false;
+    }
+
+    if (!this.editingReview.review || this.editingReview.review.trim() === '') {
+      this.reviewError = 'Review is required';
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
+    }
 
     this.saving = true;
     this.error = null;
