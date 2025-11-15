@@ -56,7 +56,7 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   loadServices() {
-    this.adminDataService.getServices().subscribe({
+    this.adminDataService.getPublicServices().subscribe({
       next: (services: Service[]) => {
         this.services = services.filter((service: Service) => service.status === 'active');
         this.route.params.subscribe(params => {
