@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.router.url !== '/') {
       return; // Only update on home page
     }
-    const sections = this.navItems.map(item => item.href);
+    const sections = this.navItems.filter(item => !item.isRoute).map(item => item.href);
     const scrollPosition = window.scrollY + 100;
 
     for (let i = sections.length - 1; i >= 0; i--) {
