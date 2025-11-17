@@ -112,8 +112,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.adminDataService.getPublicServices().subscribe({
       next: (services: Service[]) => {
         this.services = services;
-        console.log(services,'eeeeeeeeeeeeeeeeeeee');
-
       },
       error: (error: any) => {
         console.error('Failed to load services:', error);
