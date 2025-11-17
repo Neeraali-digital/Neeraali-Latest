@@ -17,7 +17,18 @@ import { PublicDataService, PublicReview } from '../../services/public-data.serv
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'neeraali-digital';
-  slides: string[] = ['../assets/slide1.png', '../assets/slide2.png'];
+  slides = [
+    {
+      image: '../../../assets/pink.png',
+      h2: 'CRAFTING BRANDS',
+      h3: 'DIGITALLY'
+    },
+    {
+      image: '../../../assets/pink.png',
+      h2: 'INNOVATIVE AGENCY',
+      h3: 'FOR BRANDS'
+    }
+  ];
   currentSlide: number = 0;
   private slideInterval: any;
   loading: boolean = true;
