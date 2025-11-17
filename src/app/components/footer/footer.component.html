@@ -72,18 +72,20 @@
 <div *ngIf="showPrivacyPolicy" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in" (click)="showPrivacyPolicy = false">
   <div class="bg-white rounded-xl max-w-7xl w-full max-h-[90vh] overflow-hidden shadow-xl border border-gray-200" (click)="$event.stopPropagation()">
     <!-- Header -->
-    <div class="bg-gray-900 text-white p-6 flex justify-between items-center">
+    <div class="bg-gray-100 text-white p-6 flex justify-between items-center"
+    style="background-image: url('../../../assets/pink.png');"
+    >
       <div>
-        <h1 class="text-2xl font-bold text-white" style="font-family: 'Oswald', sans-serif;">PRIVACY POLICY</h1>
-        <p class="text-gray-300 text-sm mt-1">Neeraali Digital Solutions</p>
+        <h1 class="text-2xl font-bold text-gray-700" style="font-family: 'Oswald', sans-serif;">PRIVACY POLICY</h1>
+        <p class="text-gray-500 text-sm mt-1">Neeraali Digital Solutions</p>
       </div>
-      <button (click)="showPrivacyPolicy = false" class="text-white hover:text-gray-300 transition-colors p-2">
+      <button (click)="showPrivacyPolicy = false" class="text-gray-600 hover:text-gray-300 transition-colors p-2">
         <i class="fas fa-times text-xl"></i>
       </button>
     </div>
     
     <!-- Content -->
-    <div class="overflow-y-auto max-h-[calc(90vh-120px)] p-8 bg-gray-50">
+    <div class="overflow-y-auto max-h-[calc(90vh-120px)] p-8 bg-gray-100">
       <div class="max-w-5xl mx-auto">
 
         <!-- Header Info -->
