@@ -69,12 +69,12 @@
 </footer>
 
 <!-- Privacy Policy Modal -->
-<div *ngIf="showPrivacyPolicy" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4" (click)="showPrivacyPolicy = false">
-  <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl" (click)="$event.stopPropagation()">
+<div *ngIf="showPrivacyPolicy" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in" (click)="showPrivacyPolicy = false">
+  <div class="bg-white rounded-xl max-w-7xl w-full max-h-[90vh] overflow-hidden shadow-xl border border-gray-200" (click)="$event.stopPropagation()">
     <!-- Header -->
     <div class="bg-gray-900 text-white p-6 flex justify-between items-center">
       <div>
-        <h1 class="text-3xl font-bold text-white" style="font-family: 'Oswald', sans-serif;">PRIVACY POLICY</h1>
+        <h1 class="text-2xl font-bold text-white" style="font-family: 'Oswald', sans-serif;">PRIVACY POLICY</h1>
         <p class="text-gray-300 text-sm mt-1">Neeraali Digital Solutions</p>
       </div>
       <button (click)="showPrivacyPolicy = false" class="text-white hover:text-gray-300 transition-colors p-2">
@@ -83,180 +83,186 @@
     </div>
     
     <!-- Content -->
-    <div class="overflow-y-auto max-h-[calc(90vh-120px)] p-8 bg-white">
-      <div class="max-w-none">
-        
+    <div class="overflow-y-auto max-h-[calc(90vh-120px)] p-8 bg-gray-50">
+      <div class="max-w-5xl mx-auto">
+
         <!-- Header Info -->
-        <div class="mb-8 pb-6 border-b border-gray-200">
-          <div class="flex gap-4 text-sm text-gray-500 mb-4">
-            <span>Effective Date: November 4, 2025</span>
-            <span>Last Updated: November 4, 2025</span>
+        <div class="mb-8 pb-6 border-b border-gray-300">
+          <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+            <span><strong>Effective Date:</strong> November 4, 2025</span>
+            <span><strong>Last Updated:</strong> November 4, 2025</span>
           </div>
         </div>
 
         <!-- Introduction -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">Introduction</h2>
-          <p class="mb-4 text-gray-500 leading-relaxed">Welcome to Neeraali Digital Solutions ("Neeraali Digital," "we," "us," or "our"). We are committed to safeguarding your personal information and your right to privacy. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you visit our website or use our services.</p>
-          <p class="mb-4 text-gray-500 leading-relaxed">If you have any questions or concerns about this policy or our practices, please contact us at connect&#64;neeraali.com.</p>
-          <p class="text-gray-500 leading-relaxed">By using our website https://www.neeraali.com (the "Website") and our services, you agree to this Privacy Policy and consent to our data handling practices described herein.</p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">Introduction</h2>
+          <div class="space-y-3 text-gray-700 leading-relaxed">
+            <p>Welcome to Neeraali Digital Solutions ("Neeraali Digital," "we," "us," or "our"). We are committed to safeguarding your personal information and your right to privacy. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you visit our website or use our services.</p>
+            <p>If you have any questions or concerns about this policy or our practices, please contact us at <a href="mailto:connect@neeraali.com" class="text-blue-600 hover:text-blue-700 font-medium">connect&#64;neeraali.com</a>.</p>
+            <p>By using our website <a href="https://www.neeraali.com" target="_blank" class="text-blue-600 hover:text-blue-700 font-medium">https://www.neeraali.com</a> (the "Website") and our services, you agree to this Privacy Policy and consent to our data handling practices described herein.</p>
+          </div>
         </div>
 
         <!-- 1. Information We Collect -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">1. INFORMATION WE COLLECT</h2>
-          <p class="mb-4 text-gray-500">We collect personal information to provide better services and improve user experience. This includes:</p>
-          
-          <h3 class="text-lg font-semibold text-gray-700 mb-3">1.1 Personal Information You Provide</h3>
-          <ul class="list-disc pl-6 mb-6 text-gray-500 space-y-1">
-            <li>Name, email address, and phone number</li>
-            <li>Company details and project information</li>
-            <li>Communication preferences and feedback</li>
-            <li>Payment and billing details (processed securely via third-party gateways)</li>
-          </ul>
-          
-          <h3 class="text-lg font-semibold text-gray-700 mb-3">1.2 Information Collected Automatically</h3>
-          <ul class="list-disc pl-6 mb-6 text-gray-500 space-y-1">
-            <li>IP address, browser type, and operating system</li>
-            <li>Usage patterns, pages visited, and referral sources</li>
-            <li>Device and location information</li>
-            <li>Cookies and similar technologies</li>
-          </ul>
-          
-          <h3 class="text-lg font-semibold text-gray-700 mb-3">1.3 Information from Third Parties</h3>
-          <p class="mb-2 text-gray-500">We may receive information from:</p>
-          <ul class="list-disc pl-6 text-gray-500 space-y-1">
-            <li>Social media platforms (LinkedIn, Facebook, Instagram)</li>
-            <li>Analytics tools like Google Analytics</li>
-            <li>Payment processors and CRM systems</li>
-          </ul>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">1. INFORMATION WE COLLECT</h2>
+          <p class="mb-4 text-gray-700">We collect personal information to provide better services and improve user experience. This includes:</p>
+
+          <div class="space-y-4">
+            <div class="border-l-4 border-gray-300 pl-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">1.1 Personal Information You Provide</h3>
+              <ul class="space-y-1 text-gray-700 text-sm">
+                <li>• Name, email address, and phone number</li>
+                <li>• Company details and project information</li>
+                <li>• Communication preferences and feedback</li>
+                <li>• Payment and billing details (processed securely via third-party gateways)</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-gray-300 pl-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">1.2 Information Collected Automatically</h3>
+              <ul class="space-y-1 text-gray-700 text-sm">
+                <li>• IP address, browser type, and operating system</li>
+                <li>• Usage patterns, pages visited, and referral sources</li>
+                <li>• Device and location information</li>
+                <li>• Cookies and similar technologies</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-gray-300 pl-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">1.3 Information from Third Parties</h3>
+              <p class="mb-2 text-gray-700 text-sm">We may receive information from:</p>
+              <ul class="space-y-1 text-gray-700 text-sm">
+                <li>• Social media platforms (LinkedIn, Facebook, Instagram)</li>
+                <li>• Analytics tools like Google Analytics</li>
+                <li>• Payment processors and CRM systems</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <!-- 2. How We Use Your Information -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">2. HOW WE USE YOUR INFORMATION</h2>
-          <p class="mb-3 text-gray-500">We use your information to:</p>
-          <ul class="list-disc pl-6 text-gray-500 space-y-2">
-            <li>Provide and manage our services</li>
-            <li>Respond to inquiries and support requests</li>
-            <li>Improve user experience and website functionality</li>
-            <li>Send updates, offers, and newsletters (only with consent)</li>
-            <li>Ensure compliance with legal obligations</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">2. HOW WE USE YOUR INFORMATION</h2>
+          <p class="mb-4 text-gray-700">We use your information to:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li>• Provide and manage our services</li>
+            <li>• Respond to inquiries and support requests</li>
+            <li>• Improve user experience and website functionality</li>
+            <li>• Send updates, offers, and newsletters (only with consent)</li>
+            <li>• Ensure compliance with legal obligations</li>
           </ul>
         </div>
 
         <!-- 3. Sharing Your Information -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">3. SHARING YOUR INFORMATION</h2>
-          <p class="mb-3 text-gray-500">We may share information with:</p>
-          <ul class="list-disc pl-6 mb-4 text-gray-500 space-y-2">
-            <li><strong>Service Providers:</strong> Hosting, analytics, payment, or email marketing partners</li>
-            <li><strong>Business Partners:</strong> For collaborative marketing or project purposes (with your consent)</li>
-            <li><strong>Legal Authorities:</strong> When required by law or regulation</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">3. SHARING YOUR INFORMATION</h2>
+          <p class="mb-4 text-gray-700">We may share information with:</p>
+          <ul class="space-y-2 text-gray-700 text-sm mb-4">
+            <li>• <strong>Service Providers:</strong> Hosting, analytics, payment, or email marketing partners</li>
+            <li>• <strong>Business Partners:</strong> For collaborative marketing or project purposes (with your consent)</li>
+            <li>• <strong>Legal Authorities:</strong> When required by law or regulation</li>
           </ul>
-          <p class="text-gray-500">We do not sell or rent your personal data to third parties for marketing purposes.</p>
+          <p class="text-gray-700 text-sm"><strong>Note:</strong> We do not sell or rent your personal data to third parties for marketing purposes.</p>
         </div>
 
         <!-- 4. Cookies -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">4. COOKIES AND TRACKING TECHNOLOGIES</h2>
-          <p class="mb-3 text-gray-500">We use cookies to:</p>
-          <ul class="list-disc pl-6 mb-4 text-gray-500 space-y-1">
-            <li>Maintain session information</li>
-            <li>Analyze website traffic and performance</li>
-            <li>Personalize your experience</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">4. COOKIES AND TRACKING TECHNOLOGIES</h2>
+          <p class="mb-4 text-gray-700">We use cookies to:</p>
+          <ul class="space-y-2 text-gray-700 text-sm mb-4">
+            <li>• Maintain session information</li>
+            <li>• Analyze website traffic and performance</li>
+            <li>• Personalize your experience</li>
           </ul>
-          <p class="text-gray-500">You can control or delete cookies in your browser settings. Note that disabling cookies may limit some functionality.</p>
+          <p class="text-gray-700 text-sm">You can control or delete cookies in your browser settings. Note that disabling cookies may limit some functionality.</p>
         </div>
 
         <!-- 5. Data Security -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">5. DATA SECURITY</h2>
-          <p class="mb-3 text-gray-500">We apply strong security measures including:</p>
-          <ul class="list-disc pl-6 mb-4 text-gray-500 space-y-1">
-            <li>SSL/TLS encryption</li>
-            <li>Firewalls and secure servers</li>
-            <li>Access control and data backups</li>
-            <li>Regular audits and employee training</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">5. DATA SECURITY</h2>
+          <p class="mb-4 text-gray-700">We apply strong security measures including:</p>
+          <ul class="space-y-2 text-gray-700 text-sm mb-4">
+            <li>• SSL/TLS encryption</li>
+            <li>• Firewalls and secure servers</li>
+            <li>• Access control and data backups</li>
+            <li>• Regular audits and employee training</li>
           </ul>
-          <p class="text-gray-500">While we strive for full security, no method of transmission is 100% secure, and users should take precautions with their credentials.</p>
+          <p class="text-gray-700 text-sm">While we strive for full security, no method of transmission is 100% secure, and users should take precautions with their credentials.</p>
         </div>
 
         <!-- 6. Data Retention -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">6. DATA RETENTION</h2>
-          <p class="text-gray-500">We retain data only as long as needed for legitimate business or legal purposes. Once data is no longer necessary, it is securely deleted or anonymized.</p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">6. DATA RETENTION</h2>
+          <p class="text-gray-700">We retain data only as long as needed for legitimate business or legal purposes. Once data is no longer necessary, it is securely deleted or anonymized.</p>
         </div>
 
         <!-- 7. Privacy Rights -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">7. YOUR PRIVACY RIGHTS</h2>
-          <p class="mb-3 text-gray-500">You may:</p>
-          <ul class="list-disc pl-6 mb-4 text-gray-500 space-y-1">
-            <li>Request access, correction, or deletion of your personal data</li>
-            <li>Withdraw consent for marketing communications</li>
-            <li>Object to certain types of data processing</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">7. YOUR PRIVACY RIGHTS</h2>
+          <p class="mb-4 text-gray-700">You may:</p>
+          <ul class="space-y-2 text-gray-700 text-sm mb-4">
+            <li>• Request access, correction, or deletion of your personal data</li>
+            <li>• Withdraw consent for marketing communications</li>
+            <li>• Object to certain types of data processing</li>
           </ul>
-          <p class="text-gray-500">Requests can be made via connect&#64;neeraali.com. We respond within 30 days.</p>
+          <p class="text-gray-700 text-sm">Requests can be made via <a href="mailto:connect@neeraali.com" class="text-blue-600 hover:text-blue-700 font-medium">connect&#64;neeraali.com</a>. We respond within 30 days.</p>
         </div>
 
         <!-- 8. Legal Compliance -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">8. LEGAL COMPLIANCE</h2>
-          <p class="mb-3 text-gray-500">Neeraali Digital complies with:</p>
-          <ul class="list-disc pl-6 mb-4 text-gray-500 space-y-1">
-            <li>Information Technology Act, 2000</li>
-            <li>Information Technology Rules, 2011</li>
-            <li>Digital Personal Data Protection Act, 2023 (India)</li>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">8. LEGAL COMPLIANCE</h2>
+          <p class="mb-4 text-gray-700">Neeraali Digital complies with:</p>
+          <ul class="space-y-2 text-gray-700 text-sm mb-6">
+            <li>• Information Technology Act, 2000</li>
+            <li>• Information Technology Rules, 2011</li>
+            <li>• Digital Personal Data Protection Act, 2023 (India)</li>
           </ul>
-          <div class="bg-gray-50 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold text-gray-700 mb-2">Grievance Officer</h3>
-            <p class="text-gray-500 text-sm">
-              Name: Salman Faris<br>
-              Email: connect&#64;neeraali.com<br>
-              Phone: +91 99458 83333<br>
-              Address: Neeraali Digital, Kirloskar Tech Park, Godrej Woodsman Estate, Hebbal Kempapura, Bengaluru, Karnataka 560024
-            </p>
+          <div class="border-t border-gray-200 pt-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Grievance Officer</h3>
+            <div class="space-y-1 text-gray-700 text-sm">
+              <p><strong>Name:</strong> Salman Faris</p>
+              <p><strong>Email:</strong> <a href="mailto:connect@neeraali.com" class="text-blue-600 hover:text-blue-700 font-medium">connect&#64;neeraali.com</a></p>
+              <p><strong>Phone:</strong> +91 99458 83333</p>
+              <p><strong>Address:</strong> Neeraali Digital, Kirloskar Tech Park, Godrej Woodsman Estate, Hebbal Kempapura, Bengaluru, Karnataka 560024</p>
+            </div>
           </div>
         </div>
 
         <!-- 9. Children's Privacy -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">9. CHILDREN'S PRIVACY</h2>
-          <p class="text-gray-500">Our services are intended for individuals aged 18 and above. We do not knowingly collect data from minors. If such data is found, it will be deleted immediately.</p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">9. CHILDREN'S PRIVACY</h2>
+          <p class="text-gray-700">Our services are intended for individuals aged 18 and above. We do not knowingly collect data from minors. If such data is found, it will be deleted immediately.</p>
         </div>
 
         <!-- 10. Changes to Policy -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">10. CHANGES TO THIS POLICY</h2>
-          <p class="text-gray-500">We may update this Privacy Policy periodically. The updated version will be posted on our Website with a revised "Last Updated" date. Continued use of our services implies acceptance of the updated policy.</p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">10. CHANGES TO THIS POLICY</h2>
+          <p class="text-gray-700">We may update this Privacy Policy periodically. The updated version will be posted on our Website with a revised "Last Updated" date. Continued use of our services implies acceptance of the updated policy.</p>
         </div>
 
         <!-- 11. Contact Information -->
-        <div class="mb-8">
-          <h2 class="text-xl font-bold text-gray-700 mb-4" style="font-family: 'Oswald', sans-serif;">11. CONTACT INFORMATION</h2>
-          <p class="mb-4 text-gray-500">For privacy-related questions or complaints:</p>
-          <div class="bg-gray-50 p-4 rounded-lg mb-4">
-            <p class="text-gray-500 text-sm">
-              Email: connect&#64;neeraali.com<br>
-              Phone: +91 99458 83333<br>
-              Address: Neeraali Digital Solutions<br>
-              Kirloskar Tech Park, Godrej Woodsman Estate,<br>
-              Hebbal Kempapura, Bengaluru, Karnataka 560024<br>
-              Business Hours: Monday–Saturday, 10:00 AM – 7:00 PM IST
-            </p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+          <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Oswald', sans-serif;">11. CONTACT INFORMATION</h2>
+          <p class="mb-4 text-gray-700">For privacy-related questions or complaints:</p>
+          <div class="space-y-2 text-gray-700 text-sm">
+            <p><strong>Email:</strong> <a href="mailto:connect@neeraali.com" class="text-blue-600 hover:text-blue-700 font-medium">connect&#64;neeraali.com</a></p>
+            <p><strong>Phone:</strong> +91 99458 83333</p>
+            <p><strong>Business Hours:</strong> Monday–Saturday, 10:00 AM – 7:00 PM IST</p>
+            <p><strong>Address:</strong> Neeraali Digital Solutions, Kirloskar Tech Park, Godrej Woodsman Estate, Hebbal Kempapura, Bengaluru, Karnataka 560024</p>
           </div>
         </div>
 
         <!-- Document Version Control -->
-        <div class="mb-8 bg-gray-50 p-4 rounded-lg">
-          <h3 class="text-lg font-semibold text-gray-700 mb-2">Document Version Control</h3>
-          <p class="text-gray-500 text-sm">
-            Version: 1.0<br>
-            Effective Date: November 4, 2025<br>
-            Last Reviewed: November 4, 2025<br>
-            Next Review Date: November 4, 2026
-          </p>
+        <div class="mb-8 bg-gray-50 rounded-lg p-6 border border-gray-200">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Document Version Control</h3>
+          <div class="grid gap-2 md:grid-cols-2 text-sm text-gray-700">
+            <p><strong>Version:</strong> 1.0</p>
+            <p><strong>Effective Date:</strong> November 4, 2025</p>
+            <p><strong>Last Reviewed:</strong> November 4, 2025</p>
+            <p><strong>Next Review Date:</strong> November 4, 2026</p>
+          </div>
         </div>
 
         <!-- Footer -->
