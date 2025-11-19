@@ -22,12 +22,26 @@
            placeholder="Search services..." 
            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
            style="font-family: 'Poppins', sans-serif;">
+    <div *ngIf="searchTerm.length > 0" class="mt-2 text-sm text-gray-500 flex items-center" style="font-family: 'Poppins', sans-serif;">
+      <span class="material-icons text-sm mr-1">info</span>
+      Drag and drop is disabled during search. Clear search to reorder services.
+    </div>
   </div>
 
   <!-- Services Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let service of filteredServices" 
-         class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+       cdkDropList 
+       [cdkDropListDisabled]="searchTerm.length > 0"
+       (cdkDropListDropped)="onDrop($event)">
+    <div *ngFor="let service of filteredServices; trackBy: trackByServiceId" 
+         class="service-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-move"
+         cdkDrag
+         [cdkDragData]="service">
+      <!-- Drag Handle -->
+      <div class="flex items-center justify-between mb-2" cdkDragHandle>
+        <span class="material-icons drag-indicator text-gray-400 hover:text-primary cursor-grab active:cursor-grabbing">drag_indicator</span>
+        <span class="text-xs text-gray-500 font-medium" style="font-family: 'Poppins', sans-serif;">Drag to reorder</span>
+      </div>
       <div class="flex items-start justify-between mb-4">
         <h3 class="text-xl font-bold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{service.name}}</h3>
         <span class="px-3 py-1 rounded-full text-sm font-medium"

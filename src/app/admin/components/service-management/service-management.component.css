@@ -1,16 +1,65 @@
-/* Service Management Styles */
+/* Drag and Drop Styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: rotate(5deg);
+  opacity: 0.9;
+  background: white;
+  border: 2px solid #F8A247;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+  border: 2px dashed #D3242B;
+  background: rgba(211, 36, 43, 0.05);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Drag handle styles */
+.cdk-drag-handle {
+  cursor: grab;
+}
+
+.cdk-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Disabled drag state */
+.cdk-drop-list-disabled .cdk-drag {
+  cursor: default;
+}
+
+.cdk-drop-list-disabled .cdk-drag-handle {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Service card hover effects */
 .service-card {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .service-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-.feature-item {
-  transition: all 0.2s ease-in-out;
+/* Drag indicator animation */
+.drag-indicator {
+  transition: all 0.2s ease;
 }
 
-.add-feature-btn:hover {
-  transform: scale(1.05);
+.drag-indicator:hover {
+  color: #F8A247;
+  transform: scale(1.1);
 }

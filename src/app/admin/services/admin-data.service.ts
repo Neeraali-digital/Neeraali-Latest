@@ -25,6 +25,7 @@ export interface Service {
   features: string[];
   price: string;
   status: 'active' | 'inactive';
+  order: number;
   hero_section: {
     title: string;
     subtitle: string;
@@ -290,6 +291,14 @@ export class AdminDataService {
 
   deleteService(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/services/admin/${id}/`, { headers: this.getHeaders() })
+      .pipe(
+        tap(() => this.loadServices()),
+        catchError(this.handleError)
+      );
+  }
+
+  updateServiceOrder(serviceOrders: Array<{id: number, order: number}>): Observable<any> {
+    return this.http.post(`${this.API_URL}/services/admin/update-order/`, { service_orders: serviceOrders }, { headers: this.getHeaders() })
       .pipe(
         tap(() => this.loadServices()),
         catchError(this.handleError)

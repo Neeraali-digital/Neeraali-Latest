@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AdminDataService, Service } from '../../services/admin-data.service';
 
 @Component({
   selector: 'app-service-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DragDropModule],
   templateUrl: './service-management.component.html',
   styleUrls: ['./service-management.component.css']
 })
@@ -63,6 +64,7 @@ export class ServiceManagementComponent implements OnInit {
       features: [],
       price: '',
       status: 'inactive',
+      order: 0,
       hero_section: {
         title: '',
         subtitle: '',
@@ -217,5 +219,54 @@ export class ServiceManagementComponent implements OnInit {
 
   trackByIndex(index: number): number {
     return index;
+  }
+
+  trackByServiceId(index: number, service: Service): number {
+    return service.id;
+  }
+
+  onDrop(event: CdkDragDrop<Service[]>) {
+    if (event.previousIndex !== event.currentIndex && this.searchTerm.length === 0) {
+      console.log(`Dragging from index ${event.previousIndex} to ${event.currentIndex}`);
+      
+      // Get the services being moved
+      const movedService = this.services[event.previousIndex];
+      const targetService = this.services[event.currentIndex];
+      
+      console.log(`Moving service "${movedService.name}" (order: ${movedService.order}) to position of "${targetService.name}" (order: ${targetService.order})`);
+      
+      // Store original orders for potential rollback
+      const originalMovedOrder = movedService.order;
+      const originalTargetOrder = targetService.order;
+      
+      // Update the main services array immediately for UI feedback
+      moveItemInArray(this.services, event.previousIndex, event.currentIndex);
+      
+      // Swap the order values
+      const serviceOrders = [
+        { id: movedService.id, order: originalTargetOrder },
+        { id: targetService.id, order: originalMovedOrder }
+      ];
+      
+      console.log('Sending order updates:', serviceOrders);
+      
+      // Update backend
+      this.adminDataService.updateServiceOrder(serviceOrders).subscribe({
+        next: () => {
+          console.log('Service order updated successfully');
+          // Update the order values in the local array
+          const movedIndex = this.services.findIndex(s => s.id === movedService.id);
+          const targetIndex = this.services.findIndex(s => s.id === targetService.id);
+          if (movedIndex !== -1) this.services[movedIndex].order = originalTargetOrder;
+          if (targetIndex !== -1) this.services[targetIndex].order = originalMovedOrder;
+        },
+        error: (error) => {
+          this.error = 'Failed to update service order';
+          console.error('Update order error:', error);
+          // Revert on error
+          this.loadServices();
+        }
+      });
+    }
   }
 }
