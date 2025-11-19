@@ -5,8 +5,27 @@
 
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <div>
 <app-navbar *ngIf="!isAdminRoute()"></app-navbar>
 <div [class]="isAdminRoute() ? '' : 'md:pt-20 pt-14'">
   <router-outlet></router-outlet>
+</div>
+
+<!-- Floating Action Button for Contact -->
+<div *ngIf="!isAdminRoute()" class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 flex flex-col space-y-3">
+  <a href="https://wa.me/919945883333" target="_blank" class="group bg-green-500 hover:bg-green-600 text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:w-auto hover:px-4">
+    <i class="fab fa-whatsapp text-2xl ps-2"></i>
+    <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden w-0 group-hover:w-auto">WhatsApp Us</span>
+  </a>
+  <a href="tel:+919945883333" class="group bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:w-auto hover:px-4">
+    <i class="material-icons text-xl ps-2">phone</i>
+    <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden w-0 group-hover:w-auto">Call Us</span>
+  </a>
+  <a href="mailto:connect@neeraali.com" class="group bg-red-500 hover:bg-red-600 text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center hover:w-auto hover:px-4">
+    <i class="material-icons text-xl ps-2">email</i>
+    <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden w-0 group-hover:w-auto">Mail Us</span>
+  </a>
 </div>

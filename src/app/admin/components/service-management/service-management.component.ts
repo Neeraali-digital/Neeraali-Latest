@@ -229,24 +229,14 @@ export class ServiceManagementComponent implements OnInit {
     if (event.previousIndex !== event.currentIndex && this.searchTerm.length === 0) {
       console.log(`Dragging from index ${event.previousIndex} to ${event.currentIndex}`);
       
-      // Get the services being moved
-      const movedService = this.services[event.previousIndex];
-      const targetService = this.services[event.currentIndex];
-      
-      console.log(`Moving service "${movedService.name}" (order: ${movedService.order}) to position of "${targetService.name}" (order: ${targetService.order})`);
-      
-      // Store original orders for potential rollback
-      const originalMovedOrder = movedService.order;
-      const originalTargetOrder = targetService.order;
-      
       // Update the main services array immediately for UI feedback
       moveItemInArray(this.services, event.previousIndex, event.currentIndex);
       
-      // Swap the order values
-      const serviceOrders = [
-        { id: movedService.id, order: originalTargetOrder },
-        { id: targetService.id, order: originalMovedOrder }
-      ];
+      // Create order updates using array indices (handles case where all orders are 0)
+      const serviceOrders = this.services.map((service, index) => ({
+        id: service.id,
+        order: index
+      }));
       
       console.log('Sending order updates:', serviceOrders);
       
@@ -255,10 +245,9 @@ export class ServiceManagementComponent implements OnInit {
         next: () => {
           console.log('Service order updated successfully');
           // Update the order values in the local array
-          const movedIndex = this.services.findIndex(s => s.id === movedService.id);
-          const targetIndex = this.services.findIndex(s => s.id === targetService.id);
-          if (movedIndex !== -1) this.services[movedIndex].order = originalTargetOrder;
-          if (targetIndex !== -1) this.services[targetIndex].order = originalMovedOrder;
+          this.services.forEach((service, index) => {
+            service.order = index;
+          });
         },
         error: (error) => {
           this.error = 'Failed to update service order';
