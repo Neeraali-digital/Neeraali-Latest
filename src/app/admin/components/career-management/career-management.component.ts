@@ -2,11 +2,12 @@ import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminDataService, Job } from '../../services/admin-data.service';
+import { JobApplicationsComponent } from '../job-applications/job-applications.component';
 
 @Component({
   selector: 'app-career-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, JobApplicationsComponent],
   templateUrl: './career-management.component.html',
   styleUrls: ['./career-management.component.css']
 })
@@ -21,6 +22,8 @@ export class CareerManagementComponent implements OnInit {
   statusFilter = 'all';
   loading = true;
   error: string | null = null;
+  showApplicationsModal = false;
+  selectedJobId: number | null = null;
 
   // Validation errors
   titleError = '';
@@ -332,5 +335,15 @@ export class CareerManagementComponent implements OnInit {
 
   trackByIndex(index: number): number {
     return index;
+  }
+
+  viewApplications(job: Job) {
+    this.selectedJobId = job.id;
+    this.showApplicationsModal = true;
+  }
+
+  closeApplicationsModal() {
+    this.showApplicationsModal = false;
+    this.selectedJobId = null;
   }
 }

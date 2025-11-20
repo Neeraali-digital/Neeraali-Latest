@@ -61,6 +61,20 @@ export interface EnquiryForm {
   message: string;
 }
 
+export interface JobApplication {
+  job: number;
+  application_type: 'interested' | 'referral';
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  friend_first_name?: string;
+  friend_last_name?: string;
+  friend_email?: string;
+  friend_phone?: string;
+  cover_letter?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -114,6 +128,12 @@ export class PublicDataService {
   // Enquiry methods
   submitEnquiry(enquiry: EnquiryForm): Observable<any> {
     return this.http.post(`${this.API_URL}/enquiries/`, enquiry)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Job Application methods
+  submitJobApplication(application: JobApplication): Observable<any> {
+    return this.http.post(`${this.API_URL}/careers/applications/`, application)
       .pipe(catchError(this.handleError));
   }
 }

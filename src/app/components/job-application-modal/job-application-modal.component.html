@@ -1,0 +1,195 @@
+<div *ngIf="isOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+  <div class="bg-white rounded-2xl p-4 sm:p-8 max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">
+        {{ modalTitle }}
+      </h3>
+      <button (click)="onClose()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+
+    <div *ngIf="job" class="mb-6 p-4 bg-gray-50 rounded-lg">
+      <h4 class="font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.title }}</h4>
+      <p class="text-sm text-gray-600" style="font-family: 'Poppins', sans-serif;">{{ job.department }} • {{ job.location }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- General Error -->
+      <div *ngIf="errors.general" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        {{ errors.general }}
+      </div>
+
+      <!-- Your Information Section -->
+      <div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Your Information
+        </h4>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              First Name *
+            </label>
+            <input 
+              [(ngModel)]="application.first_name" 
+              name="first_name" 
+              type="text" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.first_name"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.first_name" class="text-red-500 text-sm mt-1">{{ errors.first_name }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Last Name *
+            </label>
+            <input 
+              [(ngModel)]="application.last_name" 
+              name="last_name" 
+              type="text" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.last_name"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.last_name" class="text-red-500 text-sm mt-1">{{ errors.last_name }}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Email *
+            </label>
+            <input 
+              [(ngModel)]="application.email" 
+              name="email" 
+              type="email" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.email"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Phone *
+            </label>
+            <input 
+              [(ngModel)]="application.phone" 
+              name="phone" 
+              type="tel" 
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.phone"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.phone" class="text-red-500 text-sm mt-1">{{ errors.phone }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friend Information Section (for referrals) -->
+      <div *ngIf="applicationType === 'referral'">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Friend's Information
+        </h4>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Friend's First Name *
+            </label>
+            <input 
+              [(ngModel)]="application.friend_first_name" 
+              name="friend_first_name" 
+              type="text"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.friend_first_name"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.friend_first_name" class="text-red-500 text-sm mt-1">{{ errors.friend_first_name }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Friend's Last Name *
+            </label>
+            <input 
+              [(ngModel)]="application.friend_last_name" 
+              name="friend_last_name" 
+              type="text"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.friend_last_name"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.friend_last_name" class="text-red-500 text-sm mt-1">{{ errors.friend_last_name }}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Friend's Email *
+            </label>
+            <input 
+              [(ngModel)]="application.friend_email" 
+              name="friend_email" 
+              type="email"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.friend_email"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.friend_email" class="text-red-500 text-sm mt-1">{{ errors.friend_email }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+              Friend's Phone *
+            </label>
+            <input 
+              [(ngModel)]="application.friend_phone" 
+              name="friend_phone" 
+              type="tel"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              [class.border-red-500]="errors.friend_phone"
+              style="font-family: 'Poppins', sans-serif;">
+            <div *ngIf="errors.friend_phone" class="text-red-500 text-sm mt-1">{{ errors.friend_phone }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cover Letter Section -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2" style="font-family: 'Poppins', sans-serif;">
+          Cover Letter (Optional)
+        </label>
+        <textarea 
+          [(ngModel)]="application.cover_letter" 
+          name="cover_letter" 
+          rows="4"
+          placeholder="Tell us why you're interested in this position..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+          style="font-family: 'Poppins', sans-serif;"></textarea>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 pt-4">
+        <button 
+          type="button" 
+          (click)="onClose()" 
+          class="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+          style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          [disabled]="isSubmitting"
+          class="w-full sm:w-auto bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+          style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+          <span *ngIf="isSubmitting" class="material-icons animate-spin mr-2 text-sm">refresh</span>
+          {{ isSubmitting ? 'Submitting...' : 'Submit Application' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

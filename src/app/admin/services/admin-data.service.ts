@@ -77,6 +77,7 @@ export interface Job {
   requirements: string[];
   status: 'active' | 'inactive';
   applications: number;
+  applications_count?: number;
   shift_work: string;
   career_area: string;
   contractual_location: string;
@@ -90,6 +91,25 @@ export interface Job {
   pay: string;
   benefits_and_culture: string;
   additional_information: string;
+}
+
+export interface JobApplication {
+  id: number;
+  job: number;
+  job_title: string;
+  application_type: 'interested' | 'referral';
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  friend_first_name?: string;
+  friend_last_name?: string;
+  friend_email?: string;
+  friend_phone?: string;
+  cover_letter?: string;
+  status: 'pending' | 'reviewed' | 'shortlisted' | 'rejected';
+  created_at: string;
+  applicant_name?: string;
 }
 
 export interface DashboardStats {
@@ -461,6 +481,33 @@ export class AdminDataService {
         tap(() => this.loadJobs()),
         catchError(this.handleError)
       );
+  }
+
+  // Job Application methods
+  getJobApplications(jobId?: number): Observable<JobApplication[]> {
+    const url = jobId 
+      ? `${this.API_URL}/careers/admin/applications/?job_id=${jobId}`
+      : `${this.API_URL}/careers/admin/applications/`;
+    return this.http.get<JobApplication[]>(url, { headers: this.getHeaders() })
+      .pipe(
+        map((response: any) => response.results || response),
+        catchError(this.handleError)
+      );
+  }
+
+  getJobApplication(id: number): Observable<JobApplication> {
+    return this.http.get<JobApplication>(`${this.API_URL}/careers/admin/applications/${id}/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updateJobApplicationStatus(id: number, status: string): Observable<JobApplication> {
+    return this.http.patch<JobApplication>(`${this.API_URL}/careers/admin/applications/${id}/`, { status }, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteJobApplication(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/careers/admin/applications/${id}/`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
   // Dashboard stats

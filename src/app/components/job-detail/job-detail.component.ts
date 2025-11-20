@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PublicDataService, PublicJob } from '../../services/public-data.service';
+import { JobApplicationModalComponent } from '../job-application-modal/job-application-modal.component';
 
 @Component({
   selector: 'app-job-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, JobApplicationModalComponent],
   templateUrl: './job-detail.component.html',
   styleUrls: ['./job-detail.component.css']
 })
@@ -14,6 +15,9 @@ export class JobDetailComponent implements OnInit {
   job: PublicJob | null = null;
   loading = true;
   error: string | null = null;
+  showApplicationModal = false;
+  applicationType: 'interested' | 'referral' = 'interested';
+  successMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -55,22 +59,41 @@ export class JobDetailComponent implements OnInit {
   }
 
   onInterested() {
-    // Handle "I am interested" action
-    alert('Thank you for your interest! We will contact you soon.');
+    this.applicationType = 'interested';
+    this.showApplicationModal = true;
   }
 
   referFriend() {
-    // Handle "Refer a friend" action
-    alert('Thank you for considering referring a friend! We appreciate your support.');
+    this.applicationType = 'referral';
+    this.showApplicationModal = true;
   }
 
+  closeApplicationModal() {
+    this.showApplicationModal = false;
+  }
+
+  onApplicationSubmitted() {
+    this.successMessage = this.applicationType === 'referral' 
+      ? 'Thank you for referring your friend! We will review the application and get in touch soon.'
+      : 'Thank you for your application! We will review it and get back to you soon.';
+    
+    // Clear success message after 5 seconds
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 5000);
+  }
+
+
+
   shareOnSocial(platform: string) {
-    // Handle social media sharing
     const url = window.location.href;
     const text = `Check out this job opportunity: ${this.job?.title}`;
 
     let shareUrl = '';
     switch (platform) {
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+        break;
       case 'facebook':
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;

@@ -162,3 +162,20 @@
     </div>
   </section>
 </div>
+
+<!-- Success Message -->
+<div *ngIf="successMessage" class="fixed top-4 left-4 right-4 sm:left-auto sm:right-4 bg-green-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg z-50 max-w-md mx-auto sm:mx-0">
+  <div class="flex items-center">
+    <span class="material-icons mr-2 text-lg sm:text-xl">check_circle</span>
+    <span class="text-sm sm:text-base" style="font-family: 'Poppins', sans-serif;">{{ successMessage }}</span>
+  </div>
+</div>
+
+<!-- Job Application Modal -->
+<app-job-application-modal
+  [isOpen]="showApplicationModal"
+  [job]="job"
+  [applicationType]="applicationType"
+  (closeModal)="closeApplicationModal()"
+  (applicationSubmitted)="onApplicationSubmitted()">
+</app-job-application-modal>

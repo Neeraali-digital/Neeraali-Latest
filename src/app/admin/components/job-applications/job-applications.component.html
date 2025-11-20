@@ -1,0 +1,232 @@
+<div *ngIf="isOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-2xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">
+        JOB APPLICATIONS
+      </h3>
+      <button (click)="onClose()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      {{ error }}
+    </div>
+
+
+
+    <!-- Applications List -->
+    <div *ngIf="!loading && !error">
+      <div *ngIf="applications.length === 0" class="text-center py-12">
+        <span class="material-icons text-6xl text-gray-300 mb-4">inbox</span>
+        <p class="text-gray-500 text-lg" style="font-family: 'Poppins', sans-serif;">No applications found for this job</p>
+      </div>
+
+      <div *ngIf="applications.length > 0" class="space-y-4">
+        <div *ngFor="let application of applications" 
+             class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors cursor-pointer"
+             (click)="viewApplication(application)">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-2">
+                <h4 class="text-lg font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">
+                  {{ application?.applicant_name || (application?.first_name + ' ' + application?.last_name) || 'N/A' }}
+                </h4>
+                <span class="px-3 py-1 rounded-full text-sm font-medium"
+                      [class]="getApplicationTypeColor(application.application_type)"
+                      style="font-family: 'Poppins', sans-serif;">
+                  {{ application.application_type === 'referral' ? 'Referral' : 'Direct Application' }}
+                </span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium"
+                      [class]="getStatusColor(application.status)"
+                      style="font-family: 'Poppins', sans-serif;">
+                  {{ application.status | titlecase }}
+                </span>
+              </div>
+              
+              <div class="text-sm text-gray-600 space-y-1" style="font-family: 'Poppins', sans-serif;">
+                <p *ngIf="application?.email"><span class="font-medium">Email:</span> {{ application.email }}</p>
+                <p *ngIf="application?.phone"><span class="font-medium">Phone:</span> {{ application.phone }}</p>
+                <p *ngIf="application?.application_type === 'referral' && application?.friend_first_name" class="text-purple-600">
+                  <span class="font-medium">Referred:</span> {{ application.friend_first_name }} {{ application.friend_last_name }}
+                </p>
+                <p><span class="font-medium">Applied:</span> {{ application?.created_at ? formatDate(application.created_at) : 'N/A' }}</p>
+
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <select (change)="onStatusChange(application.id, $event)"
+                      [value]="application.status"
+                      (click)="$event.stopPropagation()"
+                      class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                      style="font-family: 'Poppins', sans-serif;">
+                <option value="pending">Pending</option>
+                <option value="reviewed">Reviewed</option>
+                <option value="shortlisted">Shortlisted</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              
+              <button (click)="deleteApplication(application.id); $event.stopPropagation()" class="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors">
+                <span class="material-icons text-sm">delete</span>
+              </button>
+              <button class="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors">
+                <span class="material-icons text-sm">visibility</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Application Detail Modal -->
+<div *ngIf="showDetailModal && selectedApplication" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60 p-4">
+  <div class="bg-white rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">
+        APPLICATION DETAILS
+      </h3>
+      <button (click)="closeDetailModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Application Info -->
+      <div class="bg-gray-50 rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h4 class="text-lg font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">
+            Application Information
+          </h4>
+          <div class="flex items-center space-x-2">
+            <span class="px-3 py-1 rounded-full text-sm font-medium"
+                  [class]="getApplicationTypeColor(selectedApplication.application_type)"
+                  style="font-family: 'Poppins', sans-serif;">
+              {{ selectedApplication.application_type === 'referral' ? 'Referral' : 'Direct Application' }}
+            </span>
+            <span class="px-3 py-1 rounded-full text-sm font-medium"
+                  [class]="getStatusColor(selectedApplication.status)"
+                  style="font-family: 'Poppins', sans-serif;">
+              {{ selectedApplication.status | titlecase }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
+          <div>
+            <span class="font-medium text-gray-600">Applied Date:</span>
+            <p class="text-gray-800">{{ selectedApplication?.created_at ? formatDate(selectedApplication.created_at) : 'N/A' }}</p>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Job Position:</span>
+            <p class="text-gray-800">{{ selectedApplication?.job_title || 'N/A' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applicant Details -->
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Applicant Details
+        </h4>
+        
+        <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
+          <div>
+            <span class="font-medium text-gray-600">Name:</span>
+            <p class="text-gray-800">{{ selectedApplication?.first_name || 'N/A' }} {{ selectedApplication?.last_name || 'N/A' }}</p>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Email:</span>
+            <p class="text-gray-800">{{ selectedApplication?.email || 'N/A' }}</p>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Phone:</span>
+            <p class="text-gray-800">{{ selectedApplication?.phone || 'N/A' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Referral Details (if applicable) -->
+      <div *ngIf="selectedApplication.application_type === 'referral'" class="bg-purple-50 rounded-lg p-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Referral Details
+        </h4>
+        
+        <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
+          <div>
+            <span class="font-medium text-gray-600">Friend's Name:</span>
+            <p class="text-gray-800">{{ selectedApplication?.friend_first_name || 'N/A' }} {{ selectedApplication?.friend_last_name || 'N/A' }}</p>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Friend's Email:</span>
+            <p class="text-gray-800">{{ selectedApplication?.friend_email || 'N/A' }}</p>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Friend's Phone:</span>
+            <p class="text-gray-800">{{ selectedApplication?.friend_phone || 'N/A' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cover Letter -->
+      <div *ngIf="selectedApplication.cover_letter" class="bg-gray-50 rounded-lg p-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Cover Letter
+        </h4>
+        <p class="text-gray-700 whitespace-pre-wrap" style="font-family: 'Poppins', sans-serif;">
+          {{ selectedApplication?.cover_letter || 'No cover letter provided' }}
+        </p>
+      </div>
+
+      <!-- Status Update -->
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">
+          Update Status
+        </h4>
+        
+        <div class="flex items-center space-x-4">
+          <select (change)="onStatusChange(selectedApplication.id, $event)"
+                  [value]="selectedApplication.status"
+                  class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  style="font-family: 'Poppins', sans-serif;">
+            <option value="pending">Pending</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="shortlisted">Shortlisted</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          
+          <div class="flex space-x-2">
+            <a [href]="'mailto:' + selectedApplication.email" 
+               class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+               style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+              <span class="material-icons mr-2 text-sm">email</span>
+              Email Applicant
+            </a>
+            
+            <a [href]="'tel:' + selectedApplication.phone" 
+               class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center"
+               style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+              <span class="material-icons mr-2 text-sm">phone</span>
+              Call Applicant
+            </a>
+            
+            <button (click)="deleteApplication(selectedApplication.id)" 
+                    class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center"
+                    style="font-family: 'Poppins', sans-serif; font-weight: 500;">
+              <span class="material-icons mr-2 text-sm">delete</span>
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
