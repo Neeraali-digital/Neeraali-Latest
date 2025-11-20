@@ -123,11 +123,11 @@
         <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
           <div>
             <span class="font-medium text-gray-600">Applied Date:</span>
-            <p class="text-gray-800">{{ selectedApplication?.created_at ? formatDate(selectedApplication.created_at) : 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.created_at ? formatDate(selectedApplication.created_at) : 'N/A' }}</p>
           </div>
           <div>
             <span class="font-medium text-gray-600">Job Position:</span>
-            <p class="text-gray-800">{{ selectedApplication?.job_title || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.job_title || 'N/A' }}</p>
           </div>
         </div>
       </div>
@@ -141,15 +141,15 @@
         <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
           <div>
             <span class="font-medium text-gray-600">Name:</span>
-            <p class="text-gray-800">{{ selectedApplication?.first_name || 'N/A' }} {{ selectedApplication?.last_name || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.first_name || 'N/A' }} {{ selectedApplication.last_name || 'N/A' }}</p>
           </div>
           <div>
             <span class="font-medium text-gray-600">Email:</span>
-            <p class="text-gray-800">{{ selectedApplication?.email || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.email || 'N/A' }}</p>
           </div>
           <div>
             <span class="font-medium text-gray-600">Phone:</span>
-            <p class="text-gray-800">{{ selectedApplication?.phone || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.phone || 'N/A' }}</p>
           </div>
         </div>
       </div>
@@ -163,15 +163,15 @@
         <div class="grid grid-cols-2 gap-4 text-sm" style="font-family: 'Poppins', sans-serif;">
           <div>
             <span class="font-medium text-gray-600">Friend's Name:</span>
-            <p class="text-gray-800">{{ selectedApplication?.friend_first_name || 'N/A' }} {{ selectedApplication?.friend_last_name || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.friend_first_name || 'N/A' }} {{ selectedApplication.friend_last_name || 'N/A' }}</p>
           </div>
           <div>
             <span class="font-medium text-gray-600">Friend's Email:</span>
-            <p class="text-gray-800">{{ selectedApplication?.friend_email || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.friend_email || 'N/A' }}</p>
           </div>
           <div>
             <span class="font-medium text-gray-600">Friend's Phone:</span>
-            <p class="text-gray-800">{{ selectedApplication?.friend_phone || 'N/A' }}</p>
+            <p class="text-gray-800">{{ selectedApplication.friend_phone || 'N/A' }}</p>
           </div>
         </div>
       </div>
@@ -182,7 +182,7 @@
           Cover Letter
         </h4>
         <p class="text-gray-700 whitespace-pre-wrap" style="font-family: 'Poppins', sans-serif;">
-          {{ selectedApplication?.cover_letter || 'No cover letter provided' }}
+          {{ selectedApplication.cover_letter || 'No cover letter provided' }}
         </p>
       </div>
 
