@@ -139,7 +139,8 @@ export class JobApplicationsComponent implements OnInit, OnChanges {
     if (confirm('Are you sure you want to delete this application?')) {
       this.adminDataService.deleteJobApplication(applicationId).subscribe({
         next: () => {
-          this.applications = this.applications.filter(app => app.id !== applicationId);
+          // Reload applications from server to ensure consistency
+          this.loadApplications();
           if (this.selectedApplication && this.selectedApplication.id === applicationId) {
             this.closeDetailModal();
           }
