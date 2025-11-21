@@ -15,7 +15,8 @@ export class EnquiryManagementComponent implements OnInit {
 
   enquiries: Enquiry[] = [];
   searchTerm = '';
-  statusFilter = 'all';
+  statusFilter = '';
+  typeFilter = '';
   showModal = false;
   selectedEnquiry: Enquiry | null = null;
   loading = true;
@@ -47,8 +48,9 @@ export class EnquiryManagementComponent implements OnInit {
       const matchesSearch = enquiry.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
                            enquiry.email.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
                            enquiry.service.toLowerCase().includes(this.searchTerm.toLowerCase());
-      const matchesStatus = this.statusFilter === 'all' || enquiry.status === this.statusFilter;
-      return matchesSearch && matchesStatus;
+      const matchesStatus = this.statusFilter === '' || enquiry.status === this.statusFilter;
+      const matchesType = this.typeFilter === '' || enquiry.enquiry_type === this.typeFilter;
+      return matchesSearch && matchesStatus && matchesType;
     });
   }
 
@@ -119,5 +121,27 @@ export class EnquiryManagementComponent implements OnInit {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+
+  getEnquiryTypeLabel(enquiryType: string): string {
+    switch (enquiryType) {
+      case 'general': return 'General Enquiry';
+      case 'web_analysis': return 'Web Analysis';
+      default: return enquiryType;
+    }
+  }
+
+  getEnquiryTypeColor(enquiryType: string): string {
+    switch (enquiryType) {
+      case 'general': return 'bg-blue-100 text-blue-800';
+      case 'web_analysis': return 'bg-purple-100 text-purple-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  }
+
+  showWebAnalysisEnquiries() {
+    this.typeFilter = 'web_analysis';
+    this.statusFilter = '';
+    this.searchTerm = '';
   }
 }

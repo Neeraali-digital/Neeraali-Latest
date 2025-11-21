@@ -45,6 +45,7 @@ export interface Service {
 
 export interface Enquiry {
   id: number;
+  enquiry_type: 'general' | 'web_analysis';
   name: string;
   email: string;
   phone: string;

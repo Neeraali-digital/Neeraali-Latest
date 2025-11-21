@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
 import { FooterComponent } from '../footer/footer.component';
+import { SuccessNotificationComponent } from '../success-notification/success-notification.component';
 import { AdminDataService, Service } from '../../admin/services/admin-data.service';
 import { PublicDataService, PublicReview } from '../../services/public-data.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, LoadingComponent, FormsModule, FooterComponent],
+  imports: [CommonModule, LoadingComponent, FormsModule, FooterComponent, SuccessNotificationComponent],
   providers: [AdminDataService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -90,6 +91,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentReviewIndex = 0;
 
   showQuoteModal: boolean = false;
+  showWebAnalysisModal: boolean = false;
+  showSuccessNotification: boolean = false;
+  successMessage: string = '';
+  formSubmitted: boolean = false;
+  validationErrors: { [key: string]: string } = {};
   quoteForm = {
     name: '',
     email: '',
@@ -97,6 +103,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     website: '',
     company: '',
     service: '',
+    message: ''
+  };
+  webAnalysisForm = {
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    website: '',
     message: ''
   };
 
@@ -177,6 +191,23 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['/contact'], { fragment: 'send-message' });
   }
 
+  openWebAnalysisModal() {
+    this.showWebAnalysisModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeWebAnalysisModal(event?: Event) {
+    if (event && (event.target as HTMLElement).classList.contains('modal-overlay')) {
+      this.showWebAnalysisModal = false;
+      document.body.style.overflow = 'auto';
+      this.resetWebAnalysisForm();
+    } else if (!event) {
+      this.showWebAnalysisModal = false;
+      document.body.style.overflow = 'auto';
+      this.resetWebAnalysisForm();
+    }
+  }
+
   closeQuoteModal(event?: Event) {
     if (event && (event.target as HTMLElement).classList.contains('modal-overlay')) {
       this.showQuoteModal = false;
@@ -200,6 +231,58 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  submitWebAnalysis() {
+    this.formSubmitted = true;
+    this.validationErrors = {};
+
+    // Validate required fields
+    if (!this.webAnalysisForm.name.trim()) {
+      this.validationErrors['name'] = 'Name is required';
+    }
+    if (!this.webAnalysisForm.email.trim()) {
+      this.validationErrors['email'] = 'Email is required';
+    }
+    if (!this.webAnalysisForm.phone.trim()) {
+      this.validationErrors['phone'] = 'Phone is required';
+    }
+    if (!this.webAnalysisForm.company.trim()) {
+      this.validationErrors['company'] = 'Company is required';
+    }
+
+    // Check if there are any validation errors
+    if (Object.keys(this.validationErrors).length > 0) {
+      return;
+    }
+
+    const enquiryData = {
+      enquiry_type: 'web_analysis',
+      name: this.webAnalysisForm.name,
+      email: this.webAnalysisForm.email,
+      phone: this.webAnalysisForm.phone,
+      company: this.webAnalysisForm.company || '',
+      service: 'Web Analysis',
+      message: `Website: ${this.webAnalysisForm.website || 'Not provided'}\n\nAdditional Details: ${this.webAnalysisForm.message || 'Not provided'}`
+    };
+
+    this.publicDataService.submitEnquiry(enquiryData).subscribe({
+      next: (response) => {
+        this.successMessage = 'Thank you for your web analysis request! We will get back to you soon.';
+        this.showSuccessNotification = true;
+        this.closeWebAnalysisModal();
+      },
+      error: (error) => {
+        console.error('Error submitting web analysis enquiry:', error);
+        this.successMessage = 'Failed to submit your request. Please try again later.';
+        this.showSuccessNotification = true;
+      }
+    });
+  }
+
+  closeSuccessNotification() {
+    this.showSuccessNotification = false;
+    this.successMessage = '';
+  }
+
   private resetForm() {
     this.quoteForm = {
       name: '',
@@ -210,6 +293,19 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       service: '',
       message: ''
     };
+  }
+
+  private resetWebAnalysisForm() {
+    this.webAnalysisForm = {
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      website: '',
+      message: ''
+    };
+    this.formSubmitted = false;
+    this.validationErrors = {};
   }
 
   navigateToService(service: Service) {
