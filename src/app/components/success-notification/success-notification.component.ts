@@ -7,12 +7,15 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div *ngIf="show" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md animate-slide-in">
-      <div class="flex items-center">
+      <div class="flex">
         <span class="material-icons mr-2">check_circle</span>
-        <span style="font-family: 'Poppins', sans-serif;">{{ message }}</span>
-        <button (click)="close()" class="ml-4 text-white hover:text-gray-200">
+        <div class="flex items-center">
+          <span style="font-family: 'Poppins', sans-serif;"  class="ps-1">{{ message }}</span>
+        <button (click)="close()" class="ml-3 text-white hover:text-gray-200">
           <span class="material-icons text-sm">close</span>
         </button>
+        </div>
+        
       </div>
     </div>
   `,

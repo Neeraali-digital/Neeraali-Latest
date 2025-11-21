@@ -269,11 +269,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.successMessage = 'Thank you for your web analysis request! We will get back to you soon.';
         this.showSuccessNotification = true;
         this.closeWebAnalysisModal();
+        setTimeout(() => this.closeSuccessNotification(), 4000);
       },
       error: (error) => {
         console.error('Error submitting web analysis enquiry:', error);
         this.successMessage = 'Failed to submit your request. Please try again later.';
         this.showSuccessNotification = true;
+        setTimeout(() => this.closeSuccessNotification(), 4000);
       }
     });
   }
