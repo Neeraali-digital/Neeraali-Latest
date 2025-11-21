@@ -310,6 +310,25 @@
   transform-origin: center bottom;
 }
 
+/* Modal Scrollbar Styling */
+.modal-content::-webkit-scrollbar {
+  width: 8px !important;
+  border-radius: 30px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #9ca3af !important; /* gray-400 */
+  border-radius: 4px !important;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #6b7280 !important; /* gray-500 */
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

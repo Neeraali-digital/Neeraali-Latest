@@ -22,10 +22,10 @@
               <h3 class="text-lg sm:text-2l md:text-3xl lg:text-4xl xl:text-4xl font-black mb-4 sm:mb-6 md:mb-8 leading-tight" style="font-family: 'Oswald', sans-serif; color: #D3242B;">{{ slide.h3 }}</h3>
               <p class="text-sm sm:text-base md:text-md lg:text-lg xl:text-xl font-semibold mb-4 sm:mb-6 md:mb-8 leading-tight bg-gray-100 p-3 rounded-md" style="font-family: 'Poppins', sans-serif; color: #333333;">WHERE STRATEGY IS SMART, CREATIVITY IS WILD</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button (click)="getQuote()" class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-2 px-6 sm:py-2 sm:px-8 md:py-3 md:px-10 lg:py-3 lg:px-12 text-sm sm:text-base md:text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+            <button (click)="getQuote()" class="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-2 px-6 sm:py-2 sm:px-8 md:py-3 md:px-10 lg:py-2 lg:px-12 text-sm sm:text-base md:text-md rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
               GET QUOTE
             </button>
-            <button (click)="openWebAnalysisModal()" class="bg-gradient-to-r from-gray-700 to-primary hover:from-primary hover:bg-gray-700 text-white py-2 px-6 sm:py-2 sm:px-8 md:py-3 md:px-10 lg:py-3 lg:px-12 text-sm sm:text-base md:text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+            <button (click)="openWebAnalysisModal()" class="bg-gradient-to-r from-gray-700 to-primary hover:from-primary hover:bg-gray-700 text-white py-2 px-6 sm:py-2 sm:px-8 md:py-3 md:px-10 lg:py-2 lg:px-12 text-sm sm:text-base md:text-md rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
               FREE WEB ANALYSIS
             </button>
           </div>
@@ -580,10 +580,10 @@
 
 <!-- Web Analysis Modal -->
 <div *ngIf="showWebAnalysisModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 modal-overlay" (click)="closeWebAnalysisModal($event)">
-  <div class="bg-white rounded-2xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto overflow-hidden modal-content" (click)="$event.stopPropagation()">
+  <div class="bg-white rounded-2xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto scrollbar-thin !scrollbar-thumb-gray-400 modal-content" (click)="$event.stopPropagation()">
     <div class="flex justify-between items-center mb-6">
       <h3 class="text-2xl font-bold text-gray-800" style="font-family: 'Oswald', sans-serif;">FREE WEB ANALYSIS</h3>
-      <button (click)="closeWebAnalysisModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+      <button (click)="closeWebAnalysisModal()" class="text-gray-200 hover:text-gray-600 transition-colors">
         <span class="material-icons text-2xl">close</span>
       </button>
     </div>
@@ -631,7 +631,7 @@
         <textarea [(ngModel)]="webAnalysisForm.message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="Tell us about your website goals or specific areas you'd like us to analyze..."></textarea>
       </div>
 
-      <button type="submit" class="w-full bg-gradient-to-r from-gray-700 to-primary hover:from-primary hover:to-secondary text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+      <button type="submit" class="w-full bg-brand-500 text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
         Request Free Analysis
       </button>
     </form>
