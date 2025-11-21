@@ -6,16 +6,16 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngIf="show" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md animate-slide-in">
+    <div *ngIf="show" class="fixed top-4 right-4 md:top-4 md:right-4 left-4 md:left-auto bg-green-500 text-white px-4 md:px-6 py-4 rounded-lg shadow-lg z-50 max-w-md animate-slide-in">
       <div class="flex">
         <span class="material-icons mr-2">check_circle</span>
         <div class="flex items-center">
-          <span style="font-family: 'Poppins', sans-serif;"  class="ps-1">{{ message }}</span>
+          <span style="font-family: 'Poppins', sans-serif;"  class="ps-1 text-sm md:text-base">{{ message }}</span>
         <button (click)="close()" class="ml-3 text-white hover:text-gray-200">
           <span class="material-icons text-sm">close</span>
         </button>
         </div>
-        
+
       </div>
     </div>
   `,
