@@ -21,13 +21,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   slides = [
     {
       image: '../../../assets/pink.png',
-      h2: 'CRAFTING BRANDS',
-      h3: 'DIGITALLY'
+      h2: 'BUILDING POWERFUL BRANDS',
+      h3: 'DIGITALLY',
+      subText: 'Smart strategy. Bold creativity. Real growth.'
     },
     {
       image: '../../../assets/pink.png',
-      h2: 'INNOVATIVE AGENCY',
-      h3: 'FOR BRANDS'
+      h2: 'WHERE BUSINESS GROWS',
+      h3: 'NOT JUST TRAFFIC',
+      subText: 'Premium digital solutions for ambitious brands.'
     }
   ];
   currentSlide: number = 0;
