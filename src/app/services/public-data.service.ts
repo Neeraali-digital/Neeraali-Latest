@@ -29,27 +29,18 @@ export interface PublicReview {
 export interface PublicJob {
   id: number;
   title: string;
-  department: string;
+  company: string;
   location: string;
   type: string;
   experience: string;
-  description: string;
+  job_description: string;
+  responsibilities: string;
   requirements: string[];
+  working_days_timings: string;
+  how_to_apply: string;
   status: string;
   applications: number;
-  shift_work: string;
-  career_area: string;
-  contractual_location: string;
-  term_of_employment: string;
-  job_description: string;
-  the_opportunity: string;
-  what_youll_be_doing: string;
-  your_work_location: string;
-  who_you_are: string;
-  security_vetting: string;
-  pay: string;
-  benefits_and_culture: string;
-  additional_information: string;
+  created_at?: string;
 }
 
 export interface EnquiryForm {
@@ -81,7 +72,7 @@ export interface JobApplication {
 export class PublicDataService {
   private readonly API_URL = `${environment.apiUrl}/api`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private handleError(error: any) {
     console.error('API Error:', error);

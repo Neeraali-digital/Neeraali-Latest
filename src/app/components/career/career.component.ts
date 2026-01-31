@@ -21,7 +21,7 @@ export class CareerComponent implements OnInit {
   constructor(
     private router: Router,
     private publicDataService: PublicDataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadJobs();
@@ -59,7 +59,7 @@ export class CareerComponent implements OnInit {
         job.title.toLowerCase().includes(term) ||
         job.location.toLowerCase().includes(term) ||
         job.type.toLowerCase().includes(term) ||
-        job.career_area.toLowerCase().includes(term)
+        job.company.toLowerCase().includes(term)
       );
     }
   }

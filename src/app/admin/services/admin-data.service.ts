@@ -70,28 +70,18 @@ export interface Review {
 export interface Job {
   id: number;
   title: string;
-  department: string;
+  company: string;
   location: string;
   type: 'full-time' | 'part-time' | 'contract' | 'internship';
   experience: string;
-  description: string;
+  job_description: string;
+  responsibilities: string;
   requirements: string[];
+  working_days_timings: string;
+  how_to_apply: string;
   status: 'active' | 'inactive';
   applications: number;
   applications_count?: number;
-  shift_work: string;
-  career_area: string;
-  contractual_location: string;
-  term_of_employment: string;
-  job_description: string;
-  the_opportunity: string;
-  what_youll_be_doing: string;
-  your_work_location: string;
-  who_you_are: string;
-  security_vetting: string;
-  pay: string;
-  benefits_and_culture: string;
-  additional_information: string;
 }
 
 export interface JobApplication {
@@ -318,7 +308,7 @@ export class AdminDataService {
       );
   }
 
-  updateServiceOrder(serviceOrders: Array<{id: number, order: number}>): Observable<any> {
+  updateServiceOrder(serviceOrders: Array<{ id: number, order: number }>): Observable<any> {
     return this.http.post(`${this.API_URL}/services/admin/update-order/`, { service_orders: serviceOrders }, { headers: this.getHeaders() })
       .pipe(
         tap(() => this.loadServices()),
@@ -486,7 +476,7 @@ export class AdminDataService {
 
   // Job Application methods
   getJobApplications(jobId?: number): Observable<JobApplication[]> {
-    const url = jobId 
+    const url = jobId
       ? `${this.API_URL}/careers/admin/applications/?job_id=${jobId}`
       : `${this.API_URL}/careers/admin/applications/`;
     return this.http.get<JobApplication[]>(url, { headers: this.getHeaders() })

@@ -27,26 +27,17 @@ export class CareerManagementComponent implements OnInit {
 
   // Validation errors
   titleError = '';
-  departmentError = '';
+  companyError = '';
   locationError = '';
   typeError = '';
   experienceError = '';
-  shiftWorkError = '';
-  careerAreaError = '';
-  contractualLocationError = '';
-  termOfEmploymentError = '';
   descriptionError = '';
   requirementsError = '';
   statusError = '';
-  jobDescriptionError = '';
-  theOpportunityError = '';
-  whatYoullBeDoingError = '';
-  yourWorkLocationError = '';
-  whoYouAreError = '';
-  securityVettingError = '';
-  payError = '';
-  benefitsAndCultureError = '';
-  additionalInformationError = '';
+  responsibilitiesError = '';
+  howToApplyError = '';
+  workingDaysError = '';
+
 
   ngOnInit() {
     this.loadJobs();
@@ -72,8 +63,8 @@ export class CareerManagementComponent implements OnInit {
   get filteredJobs() {
     return this.jobs.filter(job => {
       const matchesSearch = job.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                           job.department.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                           job.location.toLowerCase().includes(this.searchTerm.toLowerCase());
+        job.company.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        job.location.toLowerCase().includes(this.searchTerm.toLowerCase());
       const matchesStatus = this.statusFilter === 'all' || job.status === this.statusFilter;
       return matchesSearch && matchesStatus;
     });
@@ -83,27 +74,17 @@ export class CareerManagementComponent implements OnInit {
     this.editingJob = job ? { ...job } : {
       id: 0,
       title: '',
-      department: '',
-      location: '',
+      company: 'Neeraali Digital',
+      location: 'Bengaluru (On-site)',
       type: 'full-time',
       experience: '',
-      description: '',
-      requirements: [],
-      status: 'inactive',
-      applications: 0,
-      shift_work: 'No',
-      career_area: 'General',
-      contractual_location: '',
-      term_of_employment: 'Permanent',
       job_description: '',
-      the_opportunity: '',
-      what_youll_be_doing: '',
-      your_work_location: '',
-      who_you_are: '',
-      security_vetting: '',
-      pay: '',
-      benefits_and_culture: '',
-      additional_information: ''
+      requirements: [],
+      status: 'active',
+      applications: 0,
+      responsibilities: '',
+      working_days_timings: '',
+      how_to_apply: ''
     };
     this.showModal = true;
     this.cdr.detectChanges();
@@ -119,26 +100,15 @@ export class CareerManagementComponent implements OnInit {
 
     // Reset validation errors
     this.titleError = '';
-    this.departmentError = '';
+    this.companyError = '';
     this.locationError = '';
     this.typeError = '';
     this.experienceError = '';
-    this.shiftWorkError = '';
-    this.careerAreaError = '';
-    this.contractualLocationError = '';
-    this.termOfEmploymentError = '';
     this.descriptionError = '';
     this.requirementsError = '';
     this.statusError = '';
-    this.jobDescriptionError = '';
-    this.theOpportunityError = '';
-    this.whatYoullBeDoingError = '';
-    this.yourWorkLocationError = '';
-    this.whoYouAreError = '';
-    this.securityVettingError = '';
-    this.payError = '';
-    this.benefitsAndCultureError = '';
-    this.additionalInformationError = '';
+    this.responsibilitiesError = '';
+    this.workingDaysError = '';
 
     // Validate required fields
     let isValid = true;
@@ -148,8 +118,8 @@ export class CareerManagementComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.editingJob.department || this.editingJob.department.trim() === '') {
-      this.departmentError = 'Department is required';
+    if (!this.editingJob.company || this.editingJob.company.trim() === '') {
+      this.companyError = 'Company is required';
       isValid = false;
     }
 
@@ -168,28 +138,8 @@ export class CareerManagementComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.editingJob.shift_work || this.editingJob.shift_work.trim() === '') {
-      this.shiftWorkError = 'Shift work is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.career_area || this.editingJob.career_area.trim() === '') {
-      this.careerAreaError = 'Career area is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.contractual_location || this.editingJob.contractual_location.trim() === '') {
-      this.contractualLocationError = 'Contractual location is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.term_of_employment || this.editingJob.term_of_employment.trim() === '') {
-      this.termOfEmploymentError = 'Term of employment is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.description || this.editingJob.description.trim() === '') {
-      this.descriptionError = 'Description is required';
+    if (!this.editingJob.job_description || this.editingJob.job_description.trim() === '') {
+      this.descriptionError = 'Job Description is required';
       isValid = false;
     }
 
@@ -203,48 +153,14 @@ export class CareerManagementComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.editingJob.job_description || this.editingJob.job_description.trim() === '') {
-      this.jobDescriptionError = 'Job description is required';
+    // Optional validations but assuming required per user request "display only..."
+    if (!this.editingJob.responsibilities || this.editingJob.responsibilities.trim() === '') {
+      this.responsibilitiesError = 'Responsibilities are required';
       isValid = false;
     }
 
-    if (!this.editingJob.the_opportunity || this.editingJob.the_opportunity.trim() === '') {
-      this.theOpportunityError = 'The opportunity is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.what_youll_be_doing || this.editingJob.what_youll_be_doing.trim() === '') {
-      this.whatYoullBeDoingError = 'What you\'ll be doing is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.your_work_location || this.editingJob.your_work_location.trim() === '') {
-      this.yourWorkLocationError = 'Your work location is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.who_you_are || this.editingJob.who_you_are.trim() === '') {
-      this.whoYouAreError = 'Who you are is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.security_vetting || this.editingJob.security_vetting.trim() === '') {
-      this.securityVettingError = 'Security vetting is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.pay || this.editingJob.pay.trim() === '') {
-      this.payError = 'Pay is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.benefits_and_culture || this.editingJob.benefits_and_culture.trim() === '') {
-      this.benefitsAndCultureError = 'Benefits and culture is required';
-      isValid = false;
-    }
-
-    if (!this.editingJob.additional_information || this.editingJob.additional_information.trim() === '') {
-      this.additionalInformationError = 'Additional information is required';
+    if (!this.editingJob.working_days_timings || this.editingJob.working_days_timings.trim() === '') {
+      this.workingDaysError = 'Working days & timings are required';
       isValid = false;
     }
 

@@ -15,146 +15,112 @@
       </button>
 
       <div class="text-center flex flex-col justify-center items-center gap-3">
-        <img src="../../../assets/logo4.png" alt="log" class="md:h-24">
-        <h1 class="text-3xl md:text-6xl font-black mb-6" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
+        <!-- Optional Logo -->
+        <!-- <img src="../../../assets/logo4.png" alt="log" class="md:h-24"> -->
+        <h1 class="text-3xl md:text-6xl font-black mb-2" style="font-family: 'Oswald', sans-serif; letter-spacing: 0.05em;">
           {{ job.title }}
         </h1>
+        <p class="text-xl md:text-2xl opacity-90" style="font-family: 'Poppins', sans-serif;">{{ job.company }}</p>
       </div>
     </div>
   </section>
 
   <!-- Job Detail Section -->
-  <section class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-5">
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-5">
+      
+      <!-- Key Details Grid -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <div>
+            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Location</span>
+            <span class="text-gray-800 font-medium">{{ job.location }}</span>
+         </div>
+         <div>
+            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Employment Type</span>
+            <span class="text-gray-800 font-medium">{{ job.type | titlecase }}</span>
+         </div>
+         <div>
+            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Experience</span>
+            <span class="text-gray-800 font-medium">{{ job.experience }}</span>
+         </div>
+         <div *ngIf="job.created_at">
+            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Posted On</span>
+            <span class="text-gray-800 font-medium">{{ job.created_at | date:'mediumDate' }}</span>
+         </div>
+          <div *ngIf="job.working_days_timings">
+            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Working Days & Timings</span>
+            <span class="text-gray-800 font-medium">{{ job.working_days_timings }}</span>
+         </div>
+      </div>
+
       <div class="grid lg:grid-cols-3 gap-8">
-        <!-- Left Side -->
-        <div class="lg:col-span-2">
+        <!-- Left Side: Content -->
+        <div class="lg:col-span-2 space-y-8">
+          
           <!-- Job Description -->
-          <div class="mb-8" *ngIf="job.job_description">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Job Description</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.job_description }}</p>
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8" *ngIf="job.job_description">
+            <h3 class="text-xl font-bold text-brand-800 mb-4 border-b border-gray-100 pb-2" style="font-family: 'Oswald', sans-serif;">Job Description</h3>
+            <div class="prose max-w-none text-gray-600 leading-relaxed font-light" style="font-family: 'Poppins', sans-serif;">
+                {{ job.job_description }}
+            </div>
           </div>
 
-          <!-- The Opportunity -->
-          <div class="mb-8" *ngIf="job.the_opportunity">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">The Opportunity</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.the_opportunity }}</p>
+          <!-- Responsibilities -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8" *ngIf="job.responsibilities">
+            <h3 class="text-xl font-bold text-brand-800 mb-4 border-b border-gray-100 pb-2" style="font-family: 'Oswald', sans-serif;">Responsibilities</h3>
+             <div class="prose max-w-none text-gray-600 leading-relaxed font-light" style="font-family: 'Poppins', sans-serif;">
+                {{ job.responsibilities }}
+            </div>
           </div>
 
-          <!-- What You'll Be Doing -->
-          <div class="mb-8" *ngIf="job.what_youll_be_doing">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">What You'll Be Doing</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.what_youll_be_doing }}</p>
+          <!-- Skills Required -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8" *ngIf="job.requirements && job.requirements.length > 0">
+            <h3 class="text-xl font-bold text-brand-800 mb-4 border-b border-gray-100 pb-2" style="font-family: 'Oswald', sans-serif;">Skills Required</h3>
+            <ul class="space-y-2">
+                <li *ngFor="let skill of job.requirements" class="flex items-start">
+                    <span class="material-icons text-primary text-sm mr-2 mt-1">check_circle</span>
+                    <span class="text-gray-700 font-light">{{ skill }}</span>
+                </li>
+            </ul>
           </div>
 
-          <!-- Your Work Location -->
-          <div class="mb-8" *ngIf="job.your_work_location">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Your Work Location</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.your_work_location }}</p>
-          </div>
 
-          <!-- Who You Are -->
-          <div class="mb-8" *ngIf="job.who_you_are">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Who You Are</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.who_you_are }}</p>
-          </div>
-
-          <!-- Security Vetting -->
-          <div class="mb-8" *ngIf="job.security_vetting">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Security Vetting</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.security_vetting }}</p>
-          </div>
-
-          <!-- Pay -->
-          <div class="mb-8" *ngIf="job.pay">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Pay</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.pay }}</p>
-          </div>
-
-          <!-- Benefits and Culture -->
-          <div class="mb-8" *ngIf="job.benefits_and_culture">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Benefits and Culture</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.benefits_and_culture }}</p>
-          </div>
-
-          <!-- Additional Information -->
-          <div class="mb-8" *ngIf="job.additional_information">
-            <h3 class="text-lg font-bold text-gray-700 mb-3" style="font-family: 'Poppins', sans-serif;">Additional Information</h3>
-            <p class="text-sm text-gray-500 leading-relaxed" style="font-family: 'Poppins', sans-serif;">{{ job.additional_information }}</p>
-          </div>
         </div>
 
-        <!-- Right Side -->
+        <!-- Right Side: Action Card -->
         <div class="lg:col-span-1">
           <div class="sticky top-8">
-            <!-- Job Details Card -->
-            <div class="bg-white p-6 mb-6 shadow-sm border border-gray-200">
-              <h4 class="text-lg font-bold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">Job Details</h4>
-              <div class="space-y-3">
-                <div>
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Location:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.location }}</p>
-                </div>
-                <div>
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Type:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.type }}</p>
-                </div>
-                <div *ngIf="job.shift_work">
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Shift Work:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.shift_work }}</p>
-                </div>
-                <div *ngIf="job.career_area">
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Career Area:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.career_area }}</p>
-                </div>
-                <div *ngIf="job.contractual_location">
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Contractual Location:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.contractual_location }}</p>
-                </div>
-                <div *ngIf="job.term_of_employment">
-                  <span class="text-sm font-semibold text-gray-600" style="font-family: 'Poppins', sans-serif;">Term of Employment:</span>
-                  <p class="text-sm text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.term_of_employment }}</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="bg-white p-6 mb-6 shadow-sm border border-gray-200">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <h4 class="text-lg font-bold text-gray-800 mb-6 text-center" style="font-family: 'Poppins', sans-serif;">Interested?</h4>
+              
               <div class="space-y-4">
-                <button (click)="onInterested()" class="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                  I am interested
+                <button (click)="onInterested()" class="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md font-semibold tracking-wide">
+                  Apply Now
                 </button>
-                <button (click)="referFriend()" class="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                  Refer a friend
+                 <button (click)="referFriend()" class="w-full bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white py-4 px-6 rounded-lg transition-all duration-300 font-semibold tracking-wide">
+                  Refer a Friend
                 </button>
               </div>
-            </div>
 
-            <!-- Social Media Share -->
-            <div class="bg-white p-6 shadow-sm border border-gray-200">
-              <h4 class="text-lg font-bold text-gray-800 mb-4" style="font-family: 'Poppins', sans-serif;">Share this job</h4>
-              <div class="flex space-x-4">
-                <button (click)="shareOnSocial('whatsapp')" class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors" title="Share on WhatsApp">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                  </svg>
-                </button>
-                <button (click)="shareOnSocial('linkedin')" class="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors" title="Share on LinkedIn">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </button>
-                <button (click)="shareOnSocial('twitter')" class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors" title="Share on X (Twitter)">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </button>
-                <button (click)="shareOnSocial('facebook')" class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors" title="Share on Facebook">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </button>
-              </div>
+               <!-- Social Media Share -->
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-xs font-bold text-gray-400 uppercase text-center mb-4">Share this job</p>
+                    <div class="flex justify-center space-x-3 items-center">
+                        <button (click)="shareOnSocial('whatsapp')" class="w-10 h-10 hover:opacity-90 transition-opacity flex items-center justify-center">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-full h-full object-cover scale-110" alt="WhatsApp">
+                        </button>
+                        <button (click)="shareOnSocial('linkedin')" class="w-10 h-10 bg-[#0077b5] text-white rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                             <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="w-5 h-5 filter brightness-0 invert" alt="LinkedIn">
+                        </button>
+                        <button (click)="shareOnSocial('twitter')" class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                            <span class="text-xs font-bold">X</span>
+                        </button>
+                         <button (click)="shareOnSocial('facebook')" class="w-10 h-10 hover:opacity-90 transition-opacity flex items-center justify-center">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" class="w-full h-full object-cover" alt="Facebook">
+                        </button>
+                    </div>
+                </div>
+
             </div>
           </div>
         </div>

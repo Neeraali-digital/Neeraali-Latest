@@ -58,29 +58,31 @@
         <div *ngFor="let job of filteredJobs" (click)="viewJobDetail(job.id)" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md hover:border-primary/30 transition-all duration-200 cursor-pointer group">
           <div class="flex items-center justify-between">
             <div class="flex-1">
-              <div class="flex items-center mb-2">
-                <span class="material-icons text-primary mr-3 text-xl">work_outline</span>
-                <h3 class="text-lg font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.title }}</h3>
+              <div class="flex flex-col mb-2">
+                <div class="flex items-center">
+                    <span class="material-icons text-primary mr-3 text-xl">work_outline</span>
+                    <h3 class="text-lg font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.title }}</h3>
+                </div>
+                <p class="text-sm text-gray-500 ml-8" style="font-family: 'Poppins', sans-serif;">{{ job.company }}</p>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600" style="font-family: 'Poppins', sans-serif;">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-600 mt-3" style="font-family: 'Poppins', sans-serif;">
                 <div class="flex items-center">
                   <span class="material-icons text-gray-400 mr-2 text-base">location_on</span>
                   <span>{{ job.location }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class="material-icons text-gray-400 mr-2 text-base">schedule</span>
-                  <span>{{ job.type }} • {{ job.shift_work }}</span>
+                  <span>{{ job.type }}</span>
                 </div>
                 <div class="flex items-center">
-                  <span class="material-icons text-gray-400 mr-2 text-base">business_center</span>
-                  <span>{{ job.career_area }}</span>
+                    <span class="material-icons text-gray-400 mr-2 text-base">school</span>
+                    <span>{{ job.experience }}</span>
                 </div>
-              </div>
-
-              <div class="flex items-center gap-3 mt-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">{{ job.contractual_location }}</span>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent">{{ job.term_of_employment }}</span>
+                 <div class="flex items-center" *ngIf="job.created_at">
+                    <span class="material-icons text-gray-400 mr-2 text-base">calendar_today</span>
+                    <span>Posted: {{ job.created_at | date:'mediumDate' }}</span>
+                </div>
               </div>
             </div>
 

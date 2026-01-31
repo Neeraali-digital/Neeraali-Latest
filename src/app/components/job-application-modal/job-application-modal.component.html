@@ -11,7 +11,7 @@
 
     <div *ngIf="job" class="mb-6 p-4 bg-gray-50 rounded-lg">
       <h4 class="font-semibold text-gray-800" style="font-family: 'Poppins', sans-serif;">{{ job.title }}</h4>
-      <p class="text-sm text-gray-600" style="font-family: 'Poppins', sans-serif;">{{ job.department }} • {{ job.location }}</p>
+      <p class="text-sm text-gray-600" style="font-family: 'Poppins', sans-serif;">{{ job.company }} • {{ job.location }}</p>
     </div>
 
     <form (ngSubmit)="onSubmit()" class="space-y-6">
