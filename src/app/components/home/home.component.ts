@@ -57,6 +57,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     '../assets/clientLogos/18.png',
     '../assets/clientLogos/19.png',
     // '../assets/clientLogos/20.png',
+    '../assets/clientLogos/21.png',
+    '../assets/clientLogos/22.png',
+    '../assets/clientLogos/23.png',
+    '../assets/clientLogos/24.png',
+    '../assets/clientLogos/25.png',
   ];
 
   clientReviews = [
