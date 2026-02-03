@@ -23,17 +23,55 @@ export class JobDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private publicDataService: PublicDataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const jobId = params['id'];
-      if (jobId) {
-        this.loadJobDetail(+jobId);
+      const idOrSlug = params['id'];
+      if (idOrSlug) {
+        // Check if it's a number (ID) or string (Slug)
+        if (!isNaN(+idOrSlug)) {
+          this.loadJobDetail(+idOrSlug);
+        } else {
+          this.loadJobBySlug(idOrSlug);
+        }
       } else {
         this.router.navigate(['/career']);
       }
     });
+  }
+
+  loadJobBySlug(slug: string) {
+    this.loading = true;
+    this.error = null;
+
+    this.publicDataService.getJobs().subscribe({
+      next: (jobs) => {
+        const job = jobs.find(j => this.toSlug(j.title) === slug);
+        if (job) {
+          // Found the job, now load full details using its ID
+          this.loadJobDetail(job.id);
+        } else {
+          this.error = 'Job not found';
+          this.loading = false;
+          // Optional: navigate back after delay?
+        }
+      },
+      error: (error) => {
+        this.error = 'Failed to load jobs';
+        console.error('Jobs loading error:', error);
+        this.loading = false;
+      }
+    });
+  }
+
+  private toSlug(text: string): string {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
   }
 
   loadJobDetail(jobId: number) {
@@ -73,10 +111,10 @@ export class JobDetailComponent implements OnInit {
   }
 
   onApplicationSubmitted() {
-    this.successMessage = this.applicationType === 'referral' 
+    this.successMessage = this.applicationType === 'referral'
       ? 'Thank you for referring your friend! We will review the application and get in touch soon.'
       : 'Thank you for your application! We will review it and get back to you soon.';
-    
+
     // Clear success message after 5 seconds
     setTimeout(() => {
       this.successMessage = '';

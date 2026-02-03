@@ -46,8 +46,22 @@ export class CareerComponent implements OnInit {
     });
   }
 
-  viewJobDetail(jobId: number) {
-    this.router.navigate(['/career', jobId]);
+  viewJobDetail(job: PublicJob) {
+    if (job && job.title) {
+      const slug = this.toSlug(job.title);
+      // Pass both slug and id to ensure we can find it? 
+      // User asked "instead of showing the job id... display the job title".
+      this.router.navigate(['/career', slug]);
+    }
+  }
+
+  private toSlug(text: string): string {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
   }
 
   filterJobs() {

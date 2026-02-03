@@ -55,7 +55,7 @@
       </div>
 
       <div class="space-y-3 max-w-4xl mx-auto">
-        <div *ngFor="let job of filteredJobs" (click)="viewJobDetail(job.id)" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md hover:border-primary/30 transition-all duration-200 cursor-pointer group">
+        <div *ngFor="let job of filteredJobs" (click)="viewJobDetail(job)" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md hover:border-primary/30 transition-all duration-200 cursor-pointer group">
           <div class="flex items-center justify-between">
             <div class="flex-1">
               <div class="flex flex-col mb-2">
