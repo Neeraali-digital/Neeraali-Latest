@@ -42,6 +42,7 @@ export class FooterComponent {
   contactInfo = {
     phone: '+91 99458 83333',
     email: 'connect@neeraali.com',
-    address: 'Kirloskar Business Park, Hebbal, Bengaluru 560024'
+    address1: 'Kirloskar Business Park, Hebbal, Bengaluru 560024',
+    address2: 'No 1, 2nd floor, Leena mansion, MSR Road Marhikere, Bengaluru Karnataka. 560054'
   };
 }
