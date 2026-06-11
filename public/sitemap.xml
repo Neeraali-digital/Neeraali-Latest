@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--  Homepage  -->
+<url>
+<loc>https://www.neeraali.com/</loc>
+<lastmod>2026-06-01</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+</url>
+<!--  About / Who We Are  -->
+<url>
+<loc>https://www.neeraali.com/about</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Services Overview  -->
+<url>
+<loc>https://www.neeraali.com/what-we-do</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<!--  Service: Brand Identity  -->
+<url>
+<loc>https://www.neeraali.com/services/brand-identity</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Service: Digital Marketing  -->
+<url>
+<loc>https://www.neeraali.com/services/digital-marketing</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Service: Performance Marketing / Paid Ads  -->
+<url>
+<loc>https://www.neeraali.com/services/performance-marketing</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Service: Social Media Marketing  -->
+<url>
+<loc>https://www.neeraali.com/services/social-media-marketing</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Service: Creative Design Services  -->
+<url>
+<loc>https://www.neeraali.com/services/creative-design</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Service: Web Solutions  -->
+<url>
+<loc>https://www.neeraali.com/services/web-solutions</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<!--  Portfolio / Work  -->
+<url>
+<loc>https://www.neeraali.com/portfolio</loc>
+<lastmod>2026-05-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<!--  Blog / Insights  -->
+<url>
+<loc>https://www.neeraali.com/blog</loc>
+<lastmod>2026-06-01</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<!--  Careers  -->
+<url>
+<loc>https://www.neeraali.com/careers</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<!--  Contact  -->
+<url>
+<loc>https://www.neeraali.com/contact</loc>
+<lastmod>2026-05-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.8</priority>
+</url>
+</urlset>
