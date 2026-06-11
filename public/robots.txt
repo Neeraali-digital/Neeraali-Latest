@@ -11,15 +11,9 @@ Allow: /
 # Block non-indexable & low-value paths
 # -----------------------------------------------
 Disallow: /admin/
-Disallow: /wp-admin/
-Disallow: /wp-login.php
-Disallow: /wp-json/
-Disallow: /wp-cron.php
-Disallow: /xmlrpc.php
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /private/
-Disallow: /includes/
 Disallow: /cache/
 
 # Block search result pages (no SEO value)
@@ -35,22 +29,10 @@ Disallow: /*?ref=
 Disallow: /*?fbclid=
 Disallow: /*?gclid=
 
-# Block duplicate/utility WordPress paths
-Disallow: /feed/
-Disallow: /*/feed/
-Disallow: /tag/
-Disallow: /page/
-Disallow: /author/
-Disallow: /comments/
-Disallow: /trackback/
-Disallow: /wp-content/plugins/
-Disallow: /wp-includes/
-
 # -----------------------------------------------
 # Allow important assets for rendering
 # -----------------------------------------------
-Allow: /wp-content/uploads/
-Allow: /wp-content/themes/
+Allow: /assets/
 
 # -----------------------------------------------
 # Specific bot rules
@@ -62,21 +44,17 @@ Allow: /
 
 # Google Image Bot
 User-agent: Googlebot-Image
-Allow: /wp-content/uploads/
+Allow: /assets/
 
 # Block AI training crawlers
 User-agent: GPTBot
 Disallow: /
-
 User-agent: ChatGPT-User
 Disallow: /
-
 User-agent: CCBot
 Disallow: /
-
 User-agent: anthropic-ai
 Disallow: /
-
 User-agent: Claude-Web
 Disallow: /
 
